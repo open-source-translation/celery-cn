@@ -10,6 +10,16 @@ Celery是一款消息队列工具，可用于处理实时数据以及任务调�
 
 Celery拥有大量的用户和贡献者社区，您可以通过IRC或邮件列表加入我们。
 
-Celery是根据[BSD License](https://opensource.org/licenses/BSD-3-Clause)进行开源的。  
+Celery是根据[BSD License](https://opensource.org/licenses/BSD-3-Clause)进行开源的。
 
+### 捐赠
+
+这个项目依赖于您的慷慨捐赠。
+
+如果您在商业产品中使用了Celery，请考虑[支持](https://opencollective.com/celery#backer)或[赞助](https://opencollective.com/celery#sponsor)我们，以确保Celery未来的发展。
+
+### 入门
+
+* 如果您是第一次使用Celery，可以按照Celery的第一部教程开始学习。
+* 您还可以查看常见问题解答。
 
