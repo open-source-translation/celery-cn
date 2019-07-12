@@ -6,5 +6,7 @@
 
 ## 入门
 
-* [Celery简介](ru-men/celery-jian-jie.md)
+* [Celery 简介](ru-men/celery-jian-jie.md)
+* [中间人（Brokers）](ru-men/zhong-jian-ren-brokers/README.md)
+  * [使用RabbitMQ](ru-men/zhong-jian-ren-brokers/shi-yong-rabbitmq.md)
 

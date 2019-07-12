@@ -2,9 +2,9 @@
 description: Celery简介
 ---
 
-# Celery简介
+# Celery 简介
 
-### 什么是任务队列
+## 什么是任务队列
 
 任务队列一般用于线程或计算机之间分配工作的一种机制。
 
@@ -20,13 +20,13 @@ Celery 是用 Python 编写的，但协议可以用任何语言实现。出了Py
 
  还有通过其它的开发语言来通过，暴露的HTTP端口来请求任务信息进行实现。
 
-### 我们需要什么？
+## 我们需要什么？
 
 Celery需要消息中间件来进行发送和接收消息。RabbitMQ和Redis中间人的功能比较齐全，但也支持其它的实验性的解决方案，其中包括SQLite进行本地开发。
 
 Celery可以在一台机器上运行，也可以在多台机器上运行，甚至可以跨数据中心运行。
 
-#### 版本要求
+### 版本要求
 
 Celery4.0运行：
 
@@ -43,14 +43,14 @@ Celery4.0运行：
 
 Celery是一个资金最少的项目，因此我们不支持Microsoft Windows。请不要打开与该平台相关的任何问题。
 
-### 开始
+## 开始
 
 如果您是第一次使用Celery，或您使用的是3.1之前的版本，建议您阅读入门教程：
 
 * 第一次使用Clery
 * 下一步
 
-### Celery 是...
+## Celery 是...
 
 * 简单
 
@@ -80,7 +80,7 @@ def hello():
 
 Celery的每个部分几乎都可以自定义扩展和单独使用，例如自定义连接池、序列化方式、压缩方式、日志记录方式、任务调度、生产者、消费者、中间人（Broker）等。
 
-#### 它支持
+### 它支持
 
 * 中间人
   * RabbitMQ
@@ -100,7 +100,7 @@ Celery的每个部分几乎都可以自定义扩展和单独使用，例如自�
   * zlib、bzip2 compression
   * Cryptographic message signing
 
-### 功能
+## 功能
 
 * 监控
 
@@ -128,7 +128,7 @@ Celery的每个部分几乎都可以自定义扩展和单独使用，例如自�
 
 开发者可以定制化每一个职程（Worker）以及额外的组件。职程（Worker）是用 “bootsteps” 构建的-一个依赖关系图，可以对职程（Worker）的内部进行细粒度控制。
 
-### 框架集成
+## 框架集成
 
 Celery可以快速的集成一些常用的Web框架，详细如下：
 
@@ -145,9 +145,9 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 
 集成包并不是必须安全的，但使用它们可以更加快速和方便的开发，有时它们会在fork\(2\)中添加例如数据库关闭连接的回调。
 
-### 快速跳转
+## 快速跳转
 
-#### 我想要 --&gt; 
+### 我想要 --&gt; 
 
 * 获取任务执行返回值
 * 查看任务存放的队列
@@ -174,7 +174,7 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 * 运行时修改职程（Worker）的队列
 * 获取当前执行的任务ID
 
-#### 跳转 --&gt;
+### 跳转 --&gt;
 
 * 中间人（Broker）
 * 职程（Worker）
@@ -193,7 +193,7 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 * Django（Django）
 * API接口（API Reference）
 
-### 安装
+## 安装
 
 您可以通过python的pip安装或通过源代码进行安装Celery。
 
@@ -203,7 +203,7 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 $ pip install -U Celery
 ```
 
-#### 捆绑
+### 捆绑
 
 Celery自定义了一组用于安装Celery和特定功能的依赖。
 
@@ -216,7 +216,7 @@ $ pip install "celery[librabbitmq,redis,auth,msgpack]"
 
 目前发行的如下：
 
-**序列化**
+#### 序列化
 
 * celery\[auth\]：使用auth保证程序的安全
 * celery\[msgpack\]：使用msgpack序列化
@@ -248,7 +248,7 @@ $ pip install "celery[librabbitmq,redis,auth,msgpack]"
 * celery\[consul\]：使用Consul.io Key/Value进行存储传输消息或后端结果存储（实验阶段）
 * celery\[django\]：支持比较低的Django版本，不建议您在项目中使用它，它仅供参考
 
-**下载源代码进行安装**
+### **下载源代码进行安装**
 
 从pypi下载最新版本的Celery：
 
@@ -265,9 +265,9 @@ $ python setup.py build
 
 如果您没有安装virtualenv，最后安装的命令必须使用管理员权限进行安装。
 
-**使用开发版本**
+### **使用开发版本**
 
-**pip**
+#### **pip**
 
 使用Celery的开发版本需要开发版本的[kombu](https://pypi.python.org/pypi/kombu/)、[amqp](https://pypi.python.org/pypi/amqp/)、[billiard](https://pypi.python.org/pypi/billiard/)和[vine](https://pypi.python.org/pypi/vine/)。
 
@@ -281,7 +281,7 @@ $ pip install https://github.com/celery/kombu/zipball/master#egg=kombu
 $ pip install https://github.com/celery/vine/zipball/master#egg=vine
 ```
 
-**git**
+#### **git**
 
 请查阅“贡献”部分。
 
