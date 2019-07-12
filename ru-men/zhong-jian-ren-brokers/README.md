@@ -8,9 +8,9 @@ Celery支持多种消息传输的方式。
 
 ## 中间人（Broker）使用指南
 
-* 使用RabbitMQ
-* 使用Redis
-* 使用Amazon SQS
+* 使用[RabbitMQ](shi-yong-rabbitmq.md)
+* 使用[Redis](shi-yong-redis.md)
+* 使用[Amazon SQS](shi-yong-amazon-sqs.md)
 
 ## 中间人（Broker）概况
 

@@ -47,8 +47,8 @@ Celery是一个资金最少的项目，因此我们不支持Microsoft Windows。
 
 如果您是第一次使用Celery，或您使用的是3.1之前的版本，建议您阅读入门教程：
 
-* 第一次使用Clery
-* 下一步
+* [第一次使用Clery](celery-chu-ci-shi-yong.md)
+* [下一步](celery-jin-jie-shi-yong.md)
 
 ## Celery 是...
 
