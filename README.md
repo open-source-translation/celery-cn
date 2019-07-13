@@ -26,8 +26,6 @@ R4v3zn 译
 
 Celery中文用户手册基于[Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/legalcode)许可证进行发行。
 
-## Celery 中文手册
-
 Celery中文手册被开源在GitHub中[Open Source Translation](https://github.com/open-source-translation)组织中的[celery-cn](https://github.com/open-source-translation/celery-cn)仓库中。
 
 Celery中文手册：[https://celery.j2ee.app/](https://celery.j2ee.app/)
