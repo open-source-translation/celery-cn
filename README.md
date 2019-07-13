@@ -10,7 +10,21 @@
 
 ## 我为什么要翻译
 
-Celery在国内，使用的人员很少，可能与Celery的文档相关。因为到目前为止，国内没有一个完整的翻译完毕Celery的技术使用文档。如果您有看到翻译问题或不足之处，请提交[Issue](https://github.com/open-source-translation/celery-cn/issues)给我。
+Celery在国内，使用的人员很少，可能与Celery的文档相关。因为到目前为止，国内没有一个完整的翻译完毕Celery的技术使用文档。
+
+## 问题与反馈
+
+如果您觉得本《Celery 中文手册》有翻译问题或不足之处请，请通过GitHub提交[Issue](https://github.com/open-source-translation/celery-cn/issues)给我，或者发邮件发给我woo0nise@gmail.com。
+
+## 关于翻译版权
+
+### Celery中文手册
+
+R4v3zn 译
+
+版权所有 © 2019 - , Yu Wang.
+
+Celery中文用户手册基于[Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/legalcode)许可证进行发行。
 
 ## Celery 中文手册
 
