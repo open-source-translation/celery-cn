@@ -83,9 +83,9 @@ Celery的每个部分几乎都可以自定义扩展和单独使用，例如自�
 ### 它支持
 
 * 中间人
-  * RabbitMQ
-  * Redis
-  * Amazon SQS
+  * [RabbitMQ](zhong-jian-ren-brokers/shi-yong-rabbitmq.md)
+  * [Redis](zhong-jian-ren-brokers/shi-yong-redis.md)
+  * [Amazon SQS](zhong-jian-ren-brokers/shi-yong-amazon-sqs.md)
 * 结果存储
   * AMQP、 Redis
   * Memcached
@@ -176,22 +176,22 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 
 ### 跳转 --&gt;
 
-* 中间人（Broker）
-* 职程（Worker）
-* 安全（Security）
-* 贡献（Contributing）
-* 应用（Applications）
-* 守护进程（Daemonizing）
-* 路由（Routing）
-* 信号（Signals）
-* 任务（Tasks）
-* 监控（Monitoring）
-* 配置（Configuration）
-* FAQ（FAQ）
-* 调用（Calling）
-* 优化（Optimizing）
-* Django（Django）
-* API接口（API Reference）
+* [中间人（Broker）](zhong-jian-ren-brokers/)
+* [职程（Worker）](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide.md)
+* [安全（Security）](../yong-hu-zhi-nan/an-quan-security.md)
+* [贡献（Contributing）](../qi-ta/gong-xian-contributing.md)
+* [应用（Applications）](../yong-hu-zhi-nan/ying-yong-application.md)
+* [守护进程（Daemonizing）](../yong-hu-zhi-nan/shou-hu-jin-cheng-daemonization.md)
+* [路由（Routing）](../yong-hu-zhi-nan/lu-you-ren-wu-routing-tasks.md)
+* [信号（Signals）](../yong-hu-zhi-nan/xin-hao-signals.md)
+* [任务（Tasks）](../yong-hu-zhi-nan/ren-wu-tasks.md)
+* [监控（Monitoring）](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)
+* [配置（Configuration）](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md)
+* [FAQ（FAQ）](../qi-ta/chang-jian-wen-ti-faqfrequently-asked-questions.md)
+* [调用（Calling）](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)
+* [优化（Optimizing）](../yong-hu-zhi-nan/you-hua-optimizing.md)
+* [Django（Django）](../qi-ta/django.md)
+* [API接口（API Reference）](../qi-ta/api-api-reference.md)
 
 ## 安装
 

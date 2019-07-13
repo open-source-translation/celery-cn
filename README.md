@@ -16,21 +16,25 @@ Celery在国内，使用的人员很少，可能与Celery的文档相关。因�
 
 如果您觉得本《Celery 中文手册》有翻译问题或不足之处请，请通过GitHub提交[Issue](https://github.com/open-source-translation/celery-cn/issues)给我，或者发邮件发给我woo0nise@gmail.com。
 
+Celery 中文手册在翻译的过程中，已经最大限度的保留原手册的英文术语，方便后续的问题排查。
+
+**Celery 中文手册仅限于技术参考。**
+
 ## 关于翻译版权
 
-### Celery中文手册
+### Celery 中文手册
 
 R4v3zn 译
 
-版权所有 © 2019 - , Yu Wang.
+版权所有 © 2019 - , Yu Wang
 
-Celery中文用户手册基于[Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/legalcode)许可证进行发行。
+Celery 中文用户手册基于[Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/legalcode)许可证进行发行。
 
-Celery中文手册被开源在GitHub中[Open Source Translation](https://github.com/open-source-translation)组织中的[celery-cn](https://github.com/open-source-translation/celery-cn)仓库中。
+Celery 中文手册被开源在GitHub中[Open Source Translation](https://github.com/open-source-translation)组织中的[celery-cn](https://github.com/open-source-translation/celery-cn)仓库中。
 
-Celery中文手册：[https://celery.j2ee.app/](https://celery.j2ee.app/)
+Celery 中文手册：[https://celery.j2ee.app/](https://celery.j2ee.app/)
 
-Celery中文手册Github：[https://github.com/open-source-translation/celery-cn](https://github.com/open-source-translation/celery-cn)
+Celery 中文手册Github：[https://github.com/open-source-translation/celery-cn](https://github.com/open-source-translation/celery-cn)
 
 Open Source Translation：[https://github.com/open-source-translation](https://github.com/open-source-translation)
 
