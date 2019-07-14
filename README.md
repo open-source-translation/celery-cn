@@ -20,6 +20,10 @@ Celery 中文手册在翻译的过程中，已经最大限度的保留原手册�
 
 **Celery 中文手册仅限于技术参考。**
 
+## 鼓励一下
+
+![&#x5FAE;&#x4FE1;&#x8D5E;&#x8D4F;&#x7801;](.gitbook/assets/wechatimg73.jpeg)
+
 ## 关于翻译版权
 
 ### Celery 中文手册
