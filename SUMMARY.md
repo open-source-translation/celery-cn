@@ -36,17 +36,17 @@
 * [配置和默认配置（Configuration and defaults）](yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md)
 * [使用Sphinx生成任务文档（Documenting Tasks with Sphinx）](yong-hu-zhi-nan/shi-yong-sphinx-sheng-cheng-ren-wu-wen-dang-documenting-tasks-with-sphinx.md)
 
-## 其它
+## 附录
 
-* [Django](qi-ta/django.md)
-* [贡献（Contributing）](qi-ta/gong-xian-contributing.md)
-* [社区资源（Community Resources）](qi-ta/she-qu-zi-yuan-community-resources.md)
-* [教程（Tutorials）](qi-ta/jiao-cheng-tutorials.md)
-* [常见问题FAQ（Frequently Asked Questions）](qi-ta/chang-jian-wen-ti-faqfrequently-asked-questions.md)
-* [更新历史（Change history）](qi-ta/geng-xin-li-shi-change-history.md)
-* [Celery 4.3.0的新功能（What’s new in Celery 4.3 \(rhubarb\)）](qi-ta/celery-4.3.0-de-xin-gong-neng-whats-new-in-celery-4.3-rhubarb.md)
-* [API（API Reference）](qi-ta/api-api-reference.md)
-* [Celery 内部模块（Internals）](qi-ta/celery-nei-bu-mo-kuai-internals.md)
-* [历史（History）](qi-ta/li-shi-history.md)
-* [专业词（Glossary）](qi-ta/zhuan-ye-ci-glossary.md)
+* [Django](fu-lu/django.md)
+* [贡献（Contributing）](fu-lu/gong-xian-contributing.md)
+* [社区资源（Community Resources）](fu-lu/she-qu-zi-yuan-community-resources.md)
+* [教程（Tutorials）](fu-lu/jiao-cheng-tutorials.md)
+* [常见问题FAQ（Frequently Asked Questions）](fu-lu/chang-jian-wen-ti-faqfrequently-asked-questions.md)
+* [更新历史（Change history）](fu-lu/geng-xin-li-shi-change-history.md)
+* [Celery 4.3.0的新功能（What’s new in Celery 4.3 \(rhubarb\)）](fu-lu/celery-4.3.0-de-xin-gong-neng-whats-new-in-celery-4.3-rhubarb.md)
+* [API（API Reference）](fu-lu/api-api-reference.md)
+* [Celery 内部模块（Internals）](fu-lu/celery-nei-bu-mo-kuai-internals.md)
+* [历史（History）](fu-lu/li-shi-history.md)
+* [专业词（Glossary）](fu-lu/zhuan-ye-ci-glossary.md)
 
