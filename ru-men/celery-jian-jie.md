@@ -33,7 +33,7 @@ Celery4.0运行：
 * Python❨2.7,3.4,3.5❩
 * PyPy❨5.4,5.5❩
 
-这是支持Python2.7的最后一个版本，从下一个版本Celery5.x开始，需要Python3.5或更高的版本。
+这是支持Python2.7的最后一个版本，从下一个版本Celery5.x开始，需要Python3.5或更高的版本。
 
 如果您的Python运行环境比较老，则需要使用旧版本的Celery：
 

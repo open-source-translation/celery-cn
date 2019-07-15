@@ -45,7 +45,7 @@ app.conf.broker_transport_options = {'master_name':'cluster1'}
 
 ### 可见性超时
 
-可见性超时为将消息重新下发给另外一个程序之前等待确认的任务秒数。一定要看下面的注意事项。
+可见性超时为将消息重新下发给另外一个程序之前等待确认的任务秒数。请注意查看下面的[注意事项](shi-yong-redis.md#zhu-yi-shi-xiang)。
 
 可以通过 broker\_transport\_options 选项进行修改：
 

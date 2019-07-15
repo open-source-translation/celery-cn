@@ -6,7 +6,7 @@
 
 当时的我对Celery一无所知，什么都不了解，查阅了大量的Celery的资料发现，这个东西简直就是神器。
 
-当我了解并且学习Celery之后，所有的项目、工具、脚本全部都是基于Celery进行开发，我发现我特喵的喜欢上了Celery，或许者就是Celery的魅力吧。
+当我了解并且学习Celery之后，所有的项目、工具、脚本全部都是基于Celery进行开发，我发现我特喵的喜欢上了Celery，或许这就是Celery的魅力吧。
 
 ## 我为什么要翻译
 
@@ -44,5 +44,5 @@ Open Source Translation：[https://github.com/open-source-translation](https://g
 
 GIthub：[https://github.com/0nise](https://github.com/0nise)
 
-博客小站：[https://www.j2ee.app/](https://www.j2ee.app/)
+博客小站：[https://www.r4v3zn.com](https://www.j2ee.app/)
 
