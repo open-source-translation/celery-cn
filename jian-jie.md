@@ -18,10 +18,10 @@ Celery 是根据 [BSD License](https://opensource.org/licenses/BSD-3-Clause) 进
 
 这个项目依赖于您的慷慨捐赠。
 
-如果您在商业产品中使用了Celery，请考虑 [支持](https://opencollective.com/celery#backer) 或 [赞助](https://opencollective.com/celery#sponsor) 我们，以确保 Celery 未来的发展。
+如果您在商业产品中使用了 Celery，请考虑 [支持](https://opencollective.com/celery#backer) 或 [赞助](https://opencollective.com/celery#sponsor) 我们，以确保 Celery 未来的发展。
 
 ## 入门
 
-* 如果您是第一次使用Celery，可以按照 Celery 的第一部教程开始学习。
+* 如果您是第一次使用 Celery，可以按照 Celery 的第一部教程开始学习。
 * 您还可以查看常见问题解答。
 

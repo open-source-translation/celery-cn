@@ -113,7 +113,7 @@ $ celery -A tasks worker --loglevel=info
 如果职程（Worker）没有正常启动，请查阅 “故障排除”相关分布。
 {% endhint %}
 
-在生产环境中，如果需要将职程（Worker）作为守护进程在后台运行，可以使用平台提供的工具来进行实现，或使用类似 supervisord 这样的工具来进行管理（详情：[守护进程（Daemonization）](../yong-hu-zhi-nan/shou-hu-jin-cheng-daemonization.md)部分）
+在生产环境中，如果需要将职程（Worker）作为守护进程在后台运行，可以使用平台提供的工具来进行实现，或使用类似 supervisord 这样的工具来进行管理（详情： [Daemonization ](../yong-hu-zhi-nan/shou-hu-jin-cheng-daemonization.md)部分）
 
 关于 Celery 可用的命令完整列表，可以通过以下命令进行查看：
 
@@ -131,7 +131,7 @@ $ celery help
 
 需要调用我们创建的实例任务，可以通过 delay\(\) 进行调用。
 
-delay\(\) 是 apply\_async\(\) 的快捷方法，可以更好的控制任务的执行（详情：[调用任务（Calling Tasks）](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)）：
+delay\(\) 是 apply\_async\(\) 的快捷方法，可以更好的控制任务的执行（详情：[Calling Tasks](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)）：
 
 ```bash
 >>> from tasks import add
@@ -202,11 +202,144 @@ False
 
 ## 配置
 
+Celery 像家用电器一样，不需要任何配置，开箱即用。它有一个输入和输出，输入端必须连接中间人（Broker），输出端可以连接到结果后端。如果仔细观察一些家用电器，会发现有很多到按钮，这就是配置。
+
+大多数情况下，使用默认的配置就可以满足，也可以按需配置。查看配置选项可以更加的熟悉 Celery 的配置信息，可以参考  [Configuration and defaults](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md) 章节阅读 Celery 的配置。
+
+可以直接在程序中进行配置，也可以通过配置模块进行专门配置。例如，通过 task\_serializer 选项可以指定序列化的方式：
+
+```python
+app.conf.task_serializer = 'json'
+```
+
+如果需要配置多个选项，可以通过 upate 进行配置：
+
+```python
+app.conf.update(
+    task_serializer='json',
+    accept_content=['json'],  # Ignore other content
+    result_serializer='json',
+    timezone='Europe/Oslo',
+    enable_utc=True,
+)
+```
+
+针对大型的项目，建议使用专用配置模块，进行针对 Celery 配置。不建议使用硬编码，建议将所有的配置项集中化配置。集中化配置可以像系统管理员一样，当系统发生故障时可针对其进行微调。
+
+可以通过 app.config\_from\_object\(\) 进行加载配置模块：
+
+```python
+app.config_from_object('celeryconfig')
+```
+
+其中 celeryconfig 为配置模块的名称，这个是可以自定义修改的、
+
+在上面的实例中，需要在同级目录下创建一个名为 celeryconfig.py 的文件，添加以下内容：
+
+{% code-tabs %}
+{% code-tabs-item title="celeryconfig.py" %}
+```python
+broker_url = 'pyamqp://'
+result_backend = 'rpc://'
+
+task_serializer = 'json'
+result_serializer = 'json'
+accept_content = ['json']
+timezone = 'Europe/Oslo'
+enable_utc = True
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+可以通过以下命令来进行验证配置模块是否配置正确：
+
+```bash
+$ python -m celeryconfig
+```
+
+有关实例的默认配置，详情参考 [Configuration and defaults](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md)。
+
+Celery 也可以设置任务执行错误时的专用队列中，这只是配置模块中一小部分，详细配置如下：
+
+{% code-tabs %}
+{% code-tabs-item title="celeryconfig.py" %}
+```python
+task_routes = {
+    'tasks.add': 'low-priority',
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+Celery 也可以针对任务进行限速，以下为每分钟内允许执行的10个任务的配置：
+
+{% code-tabs %}
+{% code-tabs-item title="celeryconfig.py" %}
+```python
+task_annotations = {
+    'tasks.add': {'rate_limit': '10/m'}
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+如果使用的是 RabbitMQ 或 Redis 的话，可以在运行时进行设置任务的速率：
+
+```bash
+$ celery -A tasks control rate_limit tasks.add 10/m
+worker@example.com: OK
+    new rate limit set successfully
+```
+
+有关远程控制以及监控职程（Worker），详情参阅 [Routing Tasks ](../yong-hu-zhi-nan/lu-you-ren-wu-routing-tasks.md)了解更多的任务路由以及 task\_annotations 有关的描述信息，或查阅 [Monitoring and Management Guide](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)。
+
 ## 接下来干什么
+
+如果想要了解更多的信息，请参阅 “[Celery 进阶使用](celery-jin-jie-shi-yong.md)“ 教程，然后阅读 “用户指南”章节。
 
 ## 故障处理
 
+“常见问题“中含有一部分故障排除信息。
+
 ### 职程（Worker）无法正常启动：权限错误
 
+* 如果使用系统是 Debian、Ubuntu 或其他基于 Debian 的发行版：
+
+  Debian 最近把 `/dev/shm/`重名 \`/run/shm\`。
+
+  使用软连接可以解决该问题：
+
+  ```bash
+  # ln -s /run/shm /dev/shm
+  ```
+
+* 其他：
+
+  如果设置了 `--pidfile` `--logfile` 或 `--statedb` 其中的一个参数，必须要保证职程（Worker）对指向的文件/目录可读可写。
+
 ### 任务总处于 PENDING （待处理）状态
+
+所有任务的状态默认都是 PENDING （待处理）状态，Celery 在下发任务时不会更换任务状态， 并且如果没有历史任务的都是会被任务待处理状态。
+
+1. 确认任务没有启用 ignore\_result
+
+   如果其中，会强制跳过任务更新状态。
+
+2. 确保 task\_ignore\_result 未启用。
+3. 确保没有旧的职程（Worker）正在运行。
+
+   启动多个职程（Worker）比较容易，在每次运行新的职程（Worker）之前需要确保之前的职程是否关闭。
+
+   未配置结果后端的职程（Worker）是否正在运行，可能会消费当前的任务消息。
+
+   `–pidfile` 参数设置为绝对路径，确保该情况不会出现。
+
+4. 确认客户是否配置正确。
+
+   可能由于某种场景，客户端与职程（Worker）的后端不配置不同，导致无法获取结果，所以需要确保配置是否正确：
+
+   ```bash
+   >>> result = task.delay(…)
+   >>> print(result.backend)
+   ```
 
