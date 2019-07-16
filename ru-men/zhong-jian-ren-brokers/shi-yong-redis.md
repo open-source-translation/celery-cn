@@ -2,7 +2,7 @@
 
 ## 安装
 
-如果使用Redis作为中间人（Broker）必须要安装Celery的依赖库，您可以通过celery\[redis\]进行安装：
+如果使用 Redis 作为中间人（Broker）必须要安装 Celery 的依赖库，您可以通过 celery\[redis\] 进行安装：
 
 ```bash
 $ pip install -U "celery[redis]"
@@ -10,33 +10,33 @@ $ pip install -U "celery[redis]"
 
 ## 配置
 
-Redis的配置非常的简单，只需要配置Redis的URL：
+Redis 的配置非常的简单，只需要配置 Redis 的 URL ：
 
 ```text
 app.conf.broker_url = 'redis://localhost:6379/0'
 ```
 
-URL的格式为：
+URL 的格式为：
 
 ```text
 redis://:password@hostname:port/db_number
 ```
 
-URL的所有配置都可以自定义配置的，默认使用的是localhost的6379端口中0数据库。（Redis默认有16个数据库）
+URL 的所有配置都可以自定义配置的，默认使用的是 localhost 的 6379 端口中 0 数据库。（ Redis 默认有 16 个数据库）
 
-可以通过Uninx套接字进行连接，URl格式如下：
+可以通过 Uninx 套接字进行连接，URl 格式如下：
 
 ```text
 redis+socket:///path/to/redis.sock
 ```
 
-可以通过设置virtual\_host参数添加到URL上进行指定使用时Uninx套接字连接的数据库编号：
+可以通过设置 virtual\_host参数添加到URL上进行指定使用时 Uninx 套接字连接的数据库编号：
 
 ```text
 redis+socket:///path/to/redis.sock?virtual_host=db_number
 ```
 
-Celery也可以连接Redis哨兵也是非常简单的：
+Celery 也可以连接 Redis 哨兵也是非常简单的：
 
 ```text
 app.conf.broker_url = 'sentinel://localhost:26379;sentinel://localhost:26380;sentinel://localhost:26381'
@@ -45,7 +45,7 @@ app.conf.broker_transport_options = {'master_name':'cluster1'}
 
 ### 可见性超时
 
-可见性超时为将消息重新下发给另外一个程序之前等待确认的任务秒数。请注意查看下面的[注意事项](shi-yong-redis.md#zhu-yi-shi-xiang)。
+可见性超时为将消息重新下发给另外一个程序之前等待确认的任务秒数。请注意查看下面的 [注意事项](shi-yong-redis.md#zhu-yi-shi-xiang)。
 
 可以通过 broker\_transport\_options 选项进行修改：
 
@@ -63,9 +63,9 @@ app.conf.broker_transport_options = {'visibility_timeout': 3600} # 一个小时
 app.conf.result_backend = 'redis://localhost:7379/0'
 ```
 
-有关Redis保存结果的完整选项列表，请查阅 Redis后端配置。
+有关 Redis 保存结果的完整选项列表，请查阅 Redis后端配置。
 
-如果您使用的是Redis哨兵默认是，则需要使用 result\_backend\_transport\_options 进行指定 master\_name：
+如果您使用的是 Redis 哨兵默认是，则需要使用 result\_backend\_transport\_options 进行指定  master\_name：
 
 ```text
 app.conf.result_backend_transport_options = {'master_name': "mymaster"}

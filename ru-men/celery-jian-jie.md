@@ -10,42 +10,42 @@ description: Celery简介
 
 任务队列的输入是一个称为任务的工作单元，有专门的工作进行不断的监视任务队列，进行执行新的任务工作。
 
-Celery通过消息机制进行通信，通常使用中间人（Broker）作为客户端和职程（Worker）调节。启动一个任务，客户端向消息队列发送一条消息，然后中间人（Broker）将消息传递给一个职程（Worker），最后由职程（Worker）进行执行中间人（Broker）分配的任务。
+Celery 通过消息机制进行通信，通常使用中间人（Broker）作为客户端和职程（Worker）调节。启动一个任务，客户端向消息队列发送一条消息，然后中间人（Broker）将消息传递给一个职程（Worker），最后由职程（Worker）进行执行中间人（Broker）分配的任务。
 
-Celery可以有多个职程（Worker）和中间人（Broker），用来提高Celery的高可用性以及横向扩展能力。
+Celery 可以有多个职程（Worker）和中间人（Broker），用来提高Celery的高可用性以及横向扩展能力。
 
-Celery是用Python编写的，但是协议可以通过任何语言进行实现。迄今，以及有Ruby实现的
+Celery 是用Python编写的，但是协议可以通过任何语言进行实现。迄今，以及有Ruby实现的
 
-Celery 是用 Python 编写的，但协议可以用任何语言实现。出了Python语言实现之外，还有Node.js的[node-celery](https://github.com/mher/node-celery)和php的[celery-php](https://github.com/gjedeer/celery-php)。
+Celery 是用 Python 编写的，但协议可以用任何语言实现。出了 Python 语言实现之外，还有Node.js的[node-celery](https://github.com/mher/node-celery)和php的[celery-php](https://github.com/gjedeer/celery-php)。
 
- 还有通过其它的开发语言来通过，暴露的HTTP端口来请求任务信息进行实现。
+可以通过暴露 HTTP 的方式进行，任务交互以及其它语言的集成开发。
 
 ## 我们需要什么？
 
-Celery需要消息中间件来进行发送和接收消息。RabbitMQ和Redis中间人的功能比较齐全，但也支持其它的实验性的解决方案，其中包括SQLite进行本地开发。
+Celery 需要消息中间件来进行发送和接收消息。 RabbitMQ 和 Redis 中间人的功能比较齐全，但也支持其它的实验性的解决方案，其中包括 SQLite 进行本地开发。
 
-Celery可以在一台机器上运行，也可以在多台机器上运行，甚至可以跨数据中心运行。
+Celery 可以在一台机器上运行，也可以在多台机器上运行，甚至可以跨数据中心运行。
 
 ### 版本要求
 
-Celery4.0运行：
+Celery 4.0 运行：
 
-* Python❨2.7,3.4,3.5❩
-* PyPy❨5.4,5.5❩
+* Python ❨2.7,3.4,3.5❩
+* PyPy ❨5.4,5.5❩
 
-这是支持Python2.7的最后一个版本，从下一个版本Celery5.x开始，需要Python3.5或更高的版本。
+这是支持 Python2.7 的最后一个版本，从下一个版本Celery5.x开始，需要Python3.5或更高的版本。
 
-如果您的Python运行环境比较老，则需要使用旧版本的Celery：
+如果您的 Python 运行环境比较老，则需要使用旧版本的Celery：
 
-* Python 2.6：Celery3.1或更早版本。
-* Python 2.5：Celery 3.0或更早版本。
-* Python 2.4：Celery2.2或更早版本。
+* Python 2.6：Celery 3.1 或更早版本。
+* Python 2.5：Celery 3.0 或更早版本。
+* Python 2.4：Celery 2.2 或更早版本。
 
-Celery是一个资金最少的项目，因此我们不支持Microsoft Windows。请不要打开与该平台相关的任何问题。
+Celery 是一个资金最少的项目，因此我们不支持 Microsoft Windows。请不要打开与该平台相关的任何问题。
 
 ## 开始
 
-如果您是第一次使用Celery，或您使用的是3.1之前的版本，建议您阅读入门教程：
+如果您是第一次使用 Celery，或您使用的是 3.1 之前的版本，建议您阅读入门教程：
 
 * [第一次使用Clery](celery-chu-ci-shi-yong.md)
 * [下一步](celery-jin-jie-shi-yong.md)
@@ -54,11 +54,11 @@ Celery是一个资金最少的项目，因此我们不支持Microsoft Windows。
 
 * 简单
 
-Celery比较容易使用和维护，不需要配置文件就可以直接运行。
+Celery 上手比较简单，不需要配置文件就可以直接运行。
 
-它拥有一个庞大的社区，您可以在社区中进行交流问题，也可以通过IRC频道或[邮件列表](https://groups.google.com/group/celery-users)进行交流。
+它拥有一个庞大的社区，您可以在社区中进行交流问题，也可以通过 IRC 频道或[邮件列表](https://groups.google.com/group/celery-users)进行交流。
 
-这是一个简单的Demo：
+这是一个简单的 Demo：
 
 ```python
 from celery import Celery
@@ -74,11 +74,11 @@ def hello():
 
 * 快速
 
-单个Celery进行每分钟可以处理数以百万的任务，而且延迟仅为亚毫秒（使用RabbitMQ、librabbitmq在优化过后）。
+单个 Celery 进行每分钟可以处理数以百万的任务，而且延迟仅为亚毫秒（使用 RabbitMQ、 librabbitmq 在优化过后）。
 
 * 灵活
 
-Celery的每个部分几乎都可以自定义扩展和单独使用，例如自定义连接池、序列化方式、压缩方式、日志记录方式、任务调度、生产者、消费者、中间人（Broker）等。
+Celery 的每个部分几乎都可以自定义扩展和单独使用，例如自定义连接池、序列化方式、压缩方式、日志记录方式、任务调度、生产者、消费者、中间人（Broker）等。
 
 ### 它支持
 
@@ -141,9 +141,9 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 | [Tornado](http://www.tornadoweb.org/) | [tornado-celery](https://pypi.python.org/pypi/tornado-celery/) |
 | [Tryton](http://www.tryton.org/) | [celery\_tryton](https://pypi.python.org/pypi/celery_tryton/) |
 
-针对[Django](https://djangoproject.com/)，请参考Django的初次使用。
+针对 [Django](https://djangoproject.com/) ，请参考 Django 的初次使用。
 
-集成包并不是必须安全的，但使用它们可以更加快速和方便的开发，有时它们会在fork\(2\)中添加例如数据库关闭连接的回调。
+集成包并不是必须安全的，但使用它们可以更加快速和方便的开发，有时它们会在 fork\(2\) 中添加例如数据库关闭连接的回调。
 
 ## 快速跳转
 
@@ -195,7 +195,7 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 
 ## 安装
 
-您可以通过python的pip安装或通过源代码进行安装Celery。
+您可以通过 python 的 pip 安装或通过源代码进行安装 Celery 。
 
 使用pip进行安装
 
@@ -205,7 +205,7 @@ $ pip install -U Celery
 
 ### 捆绑
 
-Celery自定义了一组用于安装Celery和特定功能的依赖。
+Celery 自定义了一组用于安装Celery和特定功能的依赖。
 
 您可以在\[\]中加入您需要依赖，可以通过,进行安装多个依赖包。
 
@@ -224,8 +224,8 @@ $ pip install "celery[librabbitmq,redis,auth,msgpack]"
 
 **并发**
 
-* celery\[eventlet\]：基于[eventle](https://pypi.python.org/pypi/eventlet/\)的并发池
-* celery\[gevent\]：基于[gevent](https://pypi.python.org/pypi/gevent/)的并发池
+* celery\[eventlet\]：基于 [eventle](https://pypi.python.org/pypi/eventlet/\) 的并发池
+* celery\[gevent\]：基于 [gevent](https://pypi.python.org/pypi/gevent/) 的并发池
 
 **传输和后端**
 
@@ -250,7 +250,7 @@ $ pip install "celery[librabbitmq,redis,auth,msgpack]"
 
 ### **下载源代码进行安装**
 
-从pypi下载最新版本的Celery：
+从 pypi 下载最新版本的 Celery ：
 
 {% embed url="https://pypi.org/project/celery/" caption="PyPI Celery" %}
 
@@ -263,15 +263,15 @@ $ python setup.py build
 # python setup.py install
 ```
 
-如果您没有安装virtualenv，最后安装的命令必须使用管理员权限进行安装。
+如果您没有安装 virtualenv ，最后安装的命令必须使用管理员权限进行安装。
 
 ### **使用开发版本**
 
 #### **pip**
 
-使用Celery的开发版本需要开发版本的[kombu](https://pypi.python.org/pypi/kombu/)、[amqp](https://pypi.python.org/pypi/amqp/)、[billiard](https://pypi.python.org/pypi/billiard/)和[vine](https://pypi.python.org/pypi/vine/)。
+使用 Celery 的开发版本需要开发版本的 [kombu](https://pypi.python.org/pypi/kombu/)、[amqp](https://pypi.python.org/pypi/amqp/)、[billiard](https://pypi.python.org/pypi/billiard/) 和 [vine](https://pypi.python.org/pypi/vine/)。
 
-您可以通过pip来进行安装：
+您可以通过 pip 来进行安装：
 
 ```bash
 $ pip install https://github.com/celery/celery/zipball/master#egg=celery

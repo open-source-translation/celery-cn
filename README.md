@@ -2,19 +2,19 @@
 
 ## 我与Celery的缘分
 
-2018年8月进入仰望了2年的技术安全公司，进入公司之后拿到的第一个项目就是一个分布式的爬虫项目，其中的技术栈就包含Celery。
+2018年8月进入仰望了2年的技术安全公司，进入公司之后拿到的第一个项目就是一个分布式的爬虫项目，其中的技术栈就包含 Celery。
 
 当时的我对Celery一无所知，什么都不了解，查阅了大量的Celery的资料发现，这个东西简直就是神器。
 
-当我了解并且学习Celery之后，所有的项目、工具、脚本全部都是基于Celery进行开发，我发现我特喵的喜欢上了Celery，或许这就是Celery的魅力吧。
+当我了解并且学习 Celery 之后，所有的项目、工具、脚本全部都是基于 Celery 进行开发，我发现我特喵的喜欢上了 Celery ，或许这就是Celery的魅力吧。
 
 ## 我为什么要翻译
 
-Celery在国内，使用的人员很少，可能与Celery的文档相关。因为到目前为止，国内没有一个完整的翻译完毕Celery的技术使用文档。
+Celery 在国内，使用的人员很少，可能与 Celery 的文档相关。因为到目前为止，国内没有一个完整的翻译完毕 Celery 的技术使用文档。
 
 ## 问题与反馈
 
-如果您觉得本《Celery 中文手册》有翻译问题或不足之处请，请通过GitHub提交[Issue](https://github.com/open-source-translation/celery-cn/issues)给我，或者发邮件发给我woo0nise@gmail.com。
+如果您觉得本《Celery 中文手册》有翻译问题或不足之处，请通过 GitHub 提交[Issue](https://github.com/open-source-translation/celery-cn/issues)给我，或者发邮件发给我 woo0nise@gmail.com。
 
 Celery 中文手册在翻译的过程中，已经最大限度的保留原手册的英文术语，方便后续的问题排查。
 
@@ -28,7 +28,7 @@ Celery 中文手册在翻译的过程中，已经最大限度的保留原手册�
 
 微信交流群
 
-![](.gitbook/assets/wechatimg76.jpeg)
+![&#x5FAE;&#x4FE1;&#x7FA4;](.gitbook/assets/wx20190716-134746-2x.png)
 
 ## 关于翻译版权
 

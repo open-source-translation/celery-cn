@@ -1,55 +1,55 @@
 # Celery 初次使用
 
-Celery是一个包含一系列的消息任务队列。您可以不用了解内部的原理直接使用，它的使用时非常简单的。此外Celery可以快速与您的产品扩展与集成，以及Celery提供了一系列Celery可能会用到的工具和技术支持方案。
+Celery 是一个包含一系列的消息任务队列。您可以不用了解内部的原理直接使用，它的使用时非常简单的。此外 Celery 可以快速与您的产品扩展与集成，以及 Celery 提供了一系列 Celery 可能会用到的工具和技术支持方案。
 
-在本教程中，您将学习Celery的基础支持。
+在本教程中，您将学习 Celery 的基础支持。
 
 学习如下：
 
 * 选择并且安装一个消息中间件（Broker）
-* 安装Celery并且创建第一个任务
+* 安装 Celery 并且创建第一个任务
 * 运行职程（Worker）以及调用任务
 * 跟踪任务的情况以及返回值
 
-**译者：**我觉得Celery上手是非常简单的，看完本次教程。建议看看下一节的 Celery 的介绍，你可能会发现很多有趣的功能。
+**译者：**我觉得 Celery 上手是非常简单的，看完本次教程。建议看看下一节的 Celery 的介绍，你可能会发现很多有趣的功能。
 
 ## 选择中间人（Broker）
 
-Celery需要一个中间件来进行接收和发送消息，通常以独立的服务形式出现，成为 消息中间人（Broker）
+Celery 需要一个中间件来进行接收和发送消息，通常以独立的服务形式出现，成为 消息中间人（Broker）
 
 以下有几种选择：
 
 ### RabbitMQ
 
-[RabbitMQ](https://www.rabbitmq.com/)的功能比较齐全、稳定、便于安装。在生产环境来说是首选的，有关 Celery 中使用 RabbitMQ 的详细信息：
+[RabbitMQ](https://www.rabbitmq.com/) 的功能比较齐全、稳定、便于安装。在生产环境来说是首选的，有关 Celery 中使用 RabbitMQ 的详细信息：
 
 [使用RabbitMQ](zhong-jian-ren-brokers/shi-yong-rabbitmq.md)
 
-如果您使用的是Ubuntu或Debian，可以通过以下命令进行安装RabbitMQ：
+如果您使用的是 Ubuntu 或 Debian ，可以通过以下命令进行安装 RabbitMQ：
 
 ```bash
 $ sudo apt-get install rabbitmq-server
 ```
 
-如果在Docker中运行RabbitMQ，可以使用以下命令：
+如果在 Docker 中运行 RabbitMQ ，可以使用以下命令：
 
 ```bash
 $ docker run -d -p 5462:5462 rabbitmq
 ```
 
-命令执行完毕之后，中间人（Broker）会在后台继续运行，准备输出一条 _Starting rabbitmq-server: SUCCESS_ 的消息。
+命令执行完毕之后，中间人（Broker）会在后台继续运行，准备输出一条 _Starting rabbitmq-server: SUCCESS_  的消息。
 
-如果您没有Ubuntu或Debian，你可以访问官方网站查看其他操作系统（如：Windows）的安装方式：
+如果您没有 Ubuntu 或 Debian ，你可以访问官方网站查看其他操作系统（如：Windows）的安装方式：
 
 [http://www.rabbitmq.com/download.html](http://www.rabbitmq.com/download.html)
 
 ### Redis
 
-[Redis](https://redis.io/)功能比较全，但是如果突然停止运行或断电会造成数据丢失，有关 Celery 中使用 Redis 的详细信息：
+[Redis](https://redis.io/) 功能比较全，但是如果突然停止运行或断电会造成数据丢失，有关 Celery 中使用 Redis 的详细信息：
 
 [使用Redis](zhong-jian-ren-brokers/shi-yong-redis.md)
 
-在Docker中运行Redis，可以通过以下命令实现：
+在 Docker 中运行 Redis ，可以通过以下命令实现：
 
 ```bash
 $ docker run -d -p 6379:6379 redis
@@ -63,7 +63,7 @@ $ docker run -d -p 6379:6379 redis
 
 ## 安装 Celery
 
-Celery 在python的PyPI中管理，可以使用 pip 或 easy\_install 来进行安装：
+Celery 在 python 的 PyPI 中管理，可以使用 pip 或 easy\_install 来进行安装：
 
 ```bash
 $ pip install celery
@@ -71,9 +71,9 @@ $ pip install celery
 
 ## 应用
 
-创建第一个Celery实例程序，我们把创建Celery程序成为Celery 应用或直接简称 为 app，创建的第一个实例程序可能需要包含Celery中执行操作的所有入口点，例如创建任务、管理职程（Worker）等，所以必须要导入Celery模块。
+创建第一个 Celery 实例程序，我们把创建 Celery 程序成为 Celery 应用或直接简称 为 app，创建的第一个实例程序可能需要包含 Celery 中执行操作的所有入口点，例如创建任务、管理职程（Worker）等，所以必须要导入 Celery 模块。
 
-在本教程中将所有的内容，保存为一个app文件中。针对大型的项目，可能需要创建 独立的模块。
+在本教程中将所有的内容，保存为一个 app 文件中。针对大型的项目，可能需要创建 独立的模块。
 
 首先创建 tasks.py：
 
@@ -91,13 +91,13 @@ def add(x, y):
 
 第一个参数为当前模块的名称，只有在 \_\_main\_\_ 模块中定义任务时才会生产名称。
 
-第二个参数为中间人（Broker）的链接URL，实例中使用的RabbitMQ（Celery默认使用的也是RabbitMQ）。
+第二个参数为中间人（Broker）的链接 URL ，实例中使用的 RabbitMQ（Celery默认使用的也是RabbitMQ）。
 
-更多相关的Celery中间人（Broker）的选择方案，可查阅上面的中间人（Broker）。例如，对于 RabbitMQ 可以写为 amqp://localhost ，使用 Redis 可以写为 redis://localhost。
+更多相关的 Celery 中间人（Broker）的选择方案，可查阅上面的中间人（Broker）。例如，对于 RabbitMQ 可以写为 amqp://localhost ，使用 Redis 可以写为 redis://localhost。
 
-创建了一个名称为add的任务，返回的俩个数字的和。
+创建了一个名称为 add 的任务，返回的俩个数字的和。
 
-**译者：**我比较喜欢使用Redis作为中间人（Broker），对于新上手的建议使用Redis作为中间人（Broker），因为我觉得Redis比RabbitMQ好用一点。
+**译者：**我比较喜欢使用 Redis 作为中间人（Broker），对于新上手的建议使用 Redis 作为中间人（Broker），因为我觉得 Redis 比 RabbitMQ 好用一点。
 
 ## 运行 Celery 职程（Worker）服务
 
@@ -146,7 +146,7 @@ delay\(\) 是 apply\_async\(\) 的快捷方法，可以更好的控制任务的�
 
 如果您需要跟踪任务的状态，Celery 需要在某处存储任务的状态信息。Celery 内置了一些后端结果：[SQLAlchemy/Django](https://www.sqlalchemy.org/) ORM、[Memcached](http://memcached.org/)、[Redis](https://redis.io/)、 RPC \([RabbitMQ](https://www.rabbitmq.com/)/AMQP\)以及自定义的后端结果存储中间件。
 
-针对本次实例，我们使用RPC作为结果后端，将状态信息作为临时消息回传。后端通过 backend 参数指定给 Celery（或者通过配置模块中的 result\_backend 选项设定）：
+针对本次实例，我们使用 RPC 作为结果后端，将状态信息作为临时消息回传。后端通过 backend 参数指定给 Celery（或者通过配置模块中的 result\_backend 选项设定）：
 
 ```text
 app = Celery('tasks', backend='rpc://', broker='pyamqp://')

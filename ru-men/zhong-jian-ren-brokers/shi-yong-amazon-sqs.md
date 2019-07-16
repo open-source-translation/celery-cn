@@ -2,7 +2,7 @@
 
 ##  安装
 
-使用Amazon SQS作为中间人（Broker）必须安全一些依赖库，使用 celery\[sqs\] 可以直接安装所有依赖库文件：
+使用 Amazon SQS 作为中间人（Broker）必须安全一些依赖库，使用 celery\[sqs\] 可以直接安装所有依赖库文件：
 
 ```bash
 $ pip install celery[sqs]
@@ -10,19 +10,19 @@ $ pip install celery[sqs]
 
 ## 配置
 
-使用Amazon SQS 作为作为中间人的URL为：
+使用 Amazon SQS 作为作为中间人的URL为：
 
 ```text
 broker_url = 'sqs://ABCDEFGHIJKLMNOPQRST:ZYXK7NiynGlTogH8Nj+P9nlE73sq3@'
 ```
 
-URL格式为：
+URL 格式为：
 
 ```text
 sqs://aws_access_key_id:aws_secret_access_key@
 ```
 
-**注意**：URL最后必须追加 @ 标识符，URL才能够正常解析，例如：
+**注意**：URL 最后必须追加 @ 标识符，URL 才能够正常解析，例如：
 
 ```text
 from kombu.utils.url import quote
@@ -67,7 +67,7 @@ Amazon Web Services 区域的详细概述：
 broker_transport_options = {'visibility_timeout': 3600}  # 1 小时
 ```
 
-默认的可见性超时为30分钟。
+默认的可见性超时为 30 分钟。
 
 ### 轮训间隔时间
 
@@ -83,7 +83,7 @@ broker_transport_options = {'polling_interval': 0.3}
 
 ### 队列前缀
 
-默认情况下，Celery不会设置任务的前缀，可以通过设置 broker\_transport\_options 选项进行设置前缀名称：
+默认情况下，Celery 不会设置任务的前缀，可以通过设置 broker\_transport\_options 选项进行设置前缀名称：
 
 ```text
  broker_transport_options = {'queue_name_prefix': 'celery-'}
@@ -97,7 +97,7 @@ broker_transport_options = {'polling_interval': 0.3}
 
   因此您必须要增加可见性超时时间用于用于匹配最长的执行时间。
 
-  **注意：**Celery会在职程（Worker）关闭的重新分配消息，如果可见性超时时间过长在断电或者强制终止职程（Worker）的情况会“丢失“重新分配的任务。
+  **注意：**Celery 会在职程（Worker）关闭的重新分配消息，如果可见性超时时间过长在断电或者强制终止职程（Worker）的情况会“丢失“重新分配的任务。
 
   定期执行任务不会被可见性超时影响，因为这是俩个不同的概念。 
 
