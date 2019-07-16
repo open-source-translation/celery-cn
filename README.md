@@ -42,7 +42,7 @@ Celery 中文用户手册基于[Attribution-ShareAlike 4.0 International](https:
 
 Celery 中文手册被开源在GitHub中[Open Source Translation](https://github.com/open-source-translation)组织中的[celery-cn](https://github.com/open-source-translation/celery-cn)仓库中。
 
-Celery 中文手册：[https://celery.j2ee.app/](https://celery.j2ee.app/)
+Celery 中文手册：[https://www.celerycn.io/](https://www.celerycn.io/)
 
 Celery 中文手册Github：[https://github.com/open-source-translation/celery-cn](https://github.com/open-source-translation/celery-cn)
 
