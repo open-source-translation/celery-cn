@@ -1,2 +1,2 @@
-# 历史（History）
+# 历史：History
 

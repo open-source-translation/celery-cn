@@ -1,2 +1,2 @@
-# 扩展和引导（Extensions and Bootsteps）
+# 扩展和引导：Extensions and Bootsteps
 

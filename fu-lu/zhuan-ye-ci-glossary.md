@@ -1,2 +1,2 @@
-# 专业词（Glossary）
+# 专业词：Glossary
 

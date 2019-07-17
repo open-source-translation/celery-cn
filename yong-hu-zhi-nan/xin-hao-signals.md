@@ -1,2 +1,2 @@
-# 信号（Signals）
+# 信号：Signals
 

@@ -1,2 +1,2 @@
-# 教程（Tutorials）
+# 教程：Tutorials
 

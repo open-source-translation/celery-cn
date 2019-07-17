@@ -1,2 +1,2 @@
-# 并发（Concurrency）
+# 并发：Concurrency
 

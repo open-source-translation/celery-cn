@@ -1,2 +1,2 @@
-# Celery 内部模块（Internals）
+# Celery 内部模块：Internals
 

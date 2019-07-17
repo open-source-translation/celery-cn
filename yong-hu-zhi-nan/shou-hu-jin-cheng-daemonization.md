@@ -1,2 +1,2 @@
-# 守护进程（Daemonization）
+# 守护进程：Daemonization
 

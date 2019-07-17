@@ -1,2 +1,2 @@
-# 更新历史（Change history）
+# 更新历史：Change history
 

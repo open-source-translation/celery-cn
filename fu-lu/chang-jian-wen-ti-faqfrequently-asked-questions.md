@@ -1,2 +1,2 @@
-# 常见问题FAQ（Frequently Asked Questions）
+# 常见问题FAQ：Frequently Asked Questions
 
