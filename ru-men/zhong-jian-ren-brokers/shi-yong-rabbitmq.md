@@ -101,13 +101,13 @@ Status of node rabbit@myhost ...
 $ sudo rabbitmqctl-server
 ```
 
-也可以通过添加 -detached 参数在后台运行：
+也可以通过添加 `-detached` 参数在后台运行：
 
 ```bash
 $ sudo rabbitmqctl-server -detached
 ```
 
-永远不要通过 **kill** 命令来进行停止 RabbitMQ 运行，使用 rabbitmqctl 命令来进行停止 RabbitMQ ：
+永远不要通过 **kill** 命令来进行停止 RabbitMQ 运行，使用 `rabbitmqctl` 命令来进行停止 RabbitMQ ：
 
 ```bash
 $ sudo rabbitmqctl stop

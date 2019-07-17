@@ -22,7 +22,7 @@ URL 格式为：
 sqs://aws_access_key_id:aws_secret_access_key@
 ```
 
-**注意**：URL 最后必须追加 @ 标识符，URL 才能够正常解析，例如：
+**注意**：URL 最后必须追加 `@` 标识符，URL 才能够正常解析，例如：
 
 ```text
 from kombu.utils.url import quote
@@ -43,7 +43,7 @@ broker_url = "sqs://{aws_access_key}:{aws_secret_key}@".format(
 
 ### 区域
 
-默认区域为 us-east-1 ，可以通过 broker\_transport\_options 进行自定义区域：
+默认区域为 us-east-1 ，可以通过 `broker_transport_options` 进行自定义区域：
 
 ```text
  broker_transport_options = {'region': 'eu-west-1'}
@@ -59,9 +59,9 @@ Amazon Web Services 区域的详细概述：
 
 ### 可见性超时
 
-可见性超时为将消息重新下发给另外一个程序之前等待确认的任务秒数。请注意查看下面的[注意事项](shi-yong-amazon-sqs.md#zhu-yi-shi-xiang)。
+可见性超时为将消息重新下发给另外一个程序之前等待确认的任务秒数。请注意查看下面的[`注意事项`](shi-yong-amazon-sqs.md#zhu-yi-shi-xiang)。
 
-可以通过 broker\_transport\_options 选项进行修改：
+可以通过 `broker_transport_options` 选项进行修改：
 
 ```text
 broker_transport_options = {'visibility_timeout': 3600}  # 1 小时
@@ -73,7 +73,7 @@ broker_transport_options = {'visibility_timeout': 3600}  # 1 小时
 
 轮训间隔时间为在没有消息的情况获取获取消息的间隔时间，默认值为1秒。值的类型可以为 int 和 float。
 
-可以通过 broker\_transport\_options 选项进行更改默认设置：
+可以通过 `broker_transport_options` 选项进行更改默认设置：
 
 ```text
 broker_transport_options = {'polling_interval': 0.3}
@@ -83,7 +83,7 @@ broker_transport_options = {'polling_interval': 0.3}
 
 ### 队列前缀
 
-默认情况下，Celery 不会设置任务的前缀，可以通过设置 broker\_transport\_options 选项进行设置前缀名称：
+默认情况下，Celery 不会设置任务的前缀，可以通过设置 `broker_transport_options` 选项进行设置前缀名称：
 
 ```text
  broker_transport_options = {'queue_name_prefix': 'celery-'}

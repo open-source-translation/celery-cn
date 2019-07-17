@@ -2,7 +2,7 @@
 description: "Release:\t4.3"
 ---
 
-# 中间人（Brokers）
+# 中间人：Brokers
 
 Celery 支持多种消息传输的方式。
 

@@ -23,5 +23,5 @@ Celery 是根据 [BSD License](https://opensource.org/licenses/BSD-3-Clause) 进
 ## 入门
 
 * 如果您是第一次使用 Celery，可以按照 Celery 的第一部教程开始学习。
-* 您还可以查看常见问题解答。
+* 您还可以查看[`常见问题解答`](fu-lu/chang-jian-wen-ti-faqfrequently-asked-questions.md)。
 

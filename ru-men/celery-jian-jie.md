@@ -176,22 +176,22 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 
 ### 跳转 --&gt;
 
-* [中间人（Broker）](zhong-jian-ren-brokers/)
-* [职程（Worker）](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide.md)
-* [安全（Security）](../yong-hu-zhi-nan/an-quan-security.md)
-* [贡献（Contributing）](../fu-lu/gong-xian-contributing.md)
-* [应用（Applications）](../yong-hu-zhi-nan/ying-yong-application.md)
-* [守护进程（Daemonizing）](../yong-hu-zhi-nan/shou-hu-jin-cheng-daemonization.md)
-* [路由（Routing）](../yong-hu-zhi-nan/lu-you-ren-wu-routing-tasks.md)
-* [信号（Signals）](../yong-hu-zhi-nan/xin-hao-signals.md)
-* [任务（Tasks）](../yong-hu-zhi-nan/ren-wu-tasks.md)
-* [监控（Monitoring）](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)
-* [配置（Configuration）](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md)
-* [FAQ（FAQ）](../fu-lu/chang-jian-wen-ti-faqfrequently-asked-questions.md)
-* [调用（Calling）](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)
-* [优化（Optimizing）](../yong-hu-zhi-nan/you-hua-optimizing.md)
-* [Django（Django）](../fu-lu/django.md)
-* [API接口（API Reference）](../fu-lu/api-api-reference.md)
+* [中间人：Broker](zhong-jian-ren-brokers/)
+* [职程：Worker](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide.md)
+* [安全：Security](../yong-hu-zhi-nan/an-quan-security.md)
+* [贡献：Contributing](../fu-lu/gong-xian-contributing.md)
+* [应用：Applications](../yong-hu-zhi-nan/ying-yong-application.md)
+* [守护进程：Daemonizing](../yong-hu-zhi-nan/shou-hu-jin-cheng-daemonization.md)
+* [路由：Routing](../yong-hu-zhi-nan/lu-you-ren-wu-routing-tasks.md)
+* [信号：Signals](../yong-hu-zhi-nan/xin-hao-signals.md)
+* [任务：Tasks](../yong-hu-zhi-nan/ren-wu-tasks.md)
+* [监控：Monitoring](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)
+* [配置：Configuration](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md)
+* [FAQ：FAQ](../fu-lu/chang-jian-wen-ti-faqfrequently-asked-questions.md)
+* [调用：Calling](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)
+* [优化：Optimizing](../yong-hu-zhi-nan/you-hua-optimizing.md)
+* [Django：Django](../fu-lu/django.md)
+* [API接口：API Reference](../fu-lu/api-api-reference.md)
 
 ## 安装
 
@@ -205,7 +205,7 @@ $ pip install -U Celery
 
 ### 捆绑
 
-Celery 自定义了一组用于安装Celery和特定功能的依赖。
+Celery 自定义了一组用于安装 Celery 和特定功能的依赖。
 
 您可以在\[\]中加入您需要依赖，可以通过,进行安装多个依赖包。
 
@@ -283,5 +283,5 @@ $ pip install https://github.com/celery/vine/zipball/master#egg=vine
 
 #### **git**
 
-请查阅“贡献”部分。
+请查阅“[贡献：Contributing](../fu-lu/gong-xian-contributing.md)”部分。
 

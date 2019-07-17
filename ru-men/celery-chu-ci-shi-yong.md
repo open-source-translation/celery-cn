@@ -59,7 +59,7 @@ $ docker run -d -p 6379:6379 redis
 
 除以上提到的中间人（Broker）之外，还有处于实验阶段的中间人（Broker），其中包含[ Amazon SQS](zhong-jian-ren-brokers/shi-yong-amazon-sqs.md)。
 
-相关完整的中间人（Broker）列表，请查阅[中间人（Broker）概况](zhong-jian-ren-brokers/#zhong-jian-ren-broker-gai-kuang)。
+相关完整的中间人（Broker）列表，请查阅[`中间人：Broker`](zhong-jian-ren-brokers/#zhong-jian-ren-broker-gai-kuang)。
 
 ## 安装 Celery
 
@@ -113,7 +113,7 @@ $ celery -A tasks worker --loglevel=info
 如果职程（Worker）没有正常启动，请查阅 “故障排除”相关分布。
 {% endhint %}
 
-在生产环境中，如果需要将职程（Worker）作为守护进程在后台运行，可以使用平台提供的工具来进行实现，或使用类似 supervisord 这样的工具来进行管理（详情： [Daemonization ](../yong-hu-zhi-nan/shou-hu-jin-cheng-daemonization.md)部分）
+在生产环境中，如果需要将职程（Worker）作为守护进程在后台运行，可以使用平台提供的工具来进行实现，或使用类似 supervisord 这样的工具来进行管理（详情： [`守护进程：Daemonization` ](../yong-hu-zhi-nan/shou-hu-jin-cheng-daemonization.md)部分）
 
 关于 Celery 可用的命令完整列表，可以通过以下命令进行查看：
 
@@ -129,9 +129,9 @@ $ celery help
 
 ## 调用任务
 
-需要调用我们创建的实例任务，可以通过 delay\(\) 进行调用。
+需要调用我们创建的实例任务，可以通过 `delay()` 进行调用。
 
-delay\(\) 是 apply\_async\(\) 的快捷方法，可以更好的控制任务的执行（详情：[Calling Tasks](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)）：
+`delay()` 是 `apply_async()` 的快捷方法，可以更好的控制任务的执行（详情：[`调用任务：Calling Tasks`](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)）：
 
 ```bash
 >>> from tasks import add
@@ -166,7 +166,7 @@ app = Celery('tasks', backend='redis://localhost', broker='pyamqp://')
 >>> result = add.delay(4, 4)
 ```
 
-ready\(\) 可以检测是否已经处理完毕：
+`ready()` 可以检测是否已经处理完毕：
 
 ```bash
 >>> result.ready()
@@ -180,7 +180,7 @@ False
 8
 ```
 
-如果任务出现异常，get\(\) 会再次引发异常，可以通过 propagate 参数进行覆盖：
+如果任务出现异常，`get()` 会再次引发异常，可以通过 propagate 参数进行覆盖：
 
 ```bash
 >>> result.get(propagate=False)
@@ -198,13 +198,13 @@ False
 如果后端使用资源进行存储结果，必须要针对调用任务后返回每一个 AsyncResult 实例调用 get\(\) 或 forget\(\) ，进行资源释放。
 {% endhint %}
 
-完整的结果对象，请参阅：celery.result。
+完整的结果对象，请参阅：`celery.result`。
 
 ## 配置
 
 Celery 像家用电器一样，不需要任何配置，开箱即用。它有一个输入和输出，输入端必须连接中间人（Broker），输出端可以连接到结果后端。如果仔细观察一些家用电器，会发现有很多到按钮，这就是配置。
 
-大多数情况下，使用默认的配置就可以满足，也可以按需配置。查看配置选项可以更加的熟悉 Celery 的配置信息，可以参考  [Configuration and defaults](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md) 章节阅读 Celery 的配置。
+大多数情况下，使用默认的配置就可以满足，也可以按需配置。查看配置选项可以更加的熟悉 Celery 的配置信息，可以参考  [`配置和默认配置：Configuration and defaults`](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md) 章节阅读 Celery 的配置。
 
 可以直接在程序中进行配置，也可以通过配置模块进行专门配置。例如，通过 task\_serializer 选项可以指定序列化的方式：
 
@@ -226,7 +226,7 @@ app.conf.update(
 
 针对大型的项目，建议使用专用配置模块，进行针对 Celery 配置。不建议使用硬编码，建议将所有的配置项集中化配置。集中化配置可以像系统管理员一样，当系统发生故障时可针对其进行微调。
 
-可以通过 app.config\_from\_object\(\) 进行加载配置模块：
+可以通过 `app.config_from_object()` 进行加载配置模块：
 
 ```python
 app.config_from_object('celeryconfig')
@@ -234,7 +234,7 @@ app.config_from_object('celeryconfig')
 
 其中 celeryconfig 为配置模块的名称，这个是可以自定义修改的、
 
-在上面的实例中，需要在同级目录下创建一个名为 celeryconfig.py 的文件，添加以下内容：
+在上面的实例中，需要在同级目录下创建一个名为 `celeryconfig.py` 的文件，添加以下内容：
 
 {% code-tabs %}
 {% code-tabs-item title="celeryconfig.py" %}
@@ -257,7 +257,7 @@ enable_utc = True
 $ python -m celeryconfig
 ```
 
-有关实例的默认配置，详情参考 [Configuration and defaults](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md)。
+有关实例的默认配置，详情参考 [`配置和默认配置：Configuration and defaults`](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md)。
 
 Celery 也可以设置任务执行错误时的专用队列中，这只是配置模块中一小部分，详细配置如下：
 
@@ -291,11 +291,11 @@ worker@example.com: OK
     new rate limit set successfully
 ```
 
-有关远程控制以及监控职程（Worker），详情参阅 [Routing Tasks ](../yong-hu-zhi-nan/lu-you-ren-wu-routing-tasks.md)了解更多的任务路由以及 task\_annotations 有关的描述信息，或查阅 [Monitoring and Management Guide](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)。
+有关远程控制以及监控职程（Worker），详情参阅 [`路由任务：Routing Tasks`](../yong-hu-zhi-nan/lu-you-ren-wu-routing-tasks.md)了解更多的任务路由以及 task\_annotations 有关的描述信息，或查阅 [`监控和管理手册：Monitoring and Management Guide`](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)。
 
 ## 接下来干什么
 
-如果想要了解更多的信息，请参阅 “[Celery 进阶使用](celery-jin-jie-shi-yong.md)“ 教程，然后阅读 “用户指南”章节。
+如果想要了解更多的信息，请参阅 [`Celery 进阶使用`](celery-jin-jie-shi-yong.md) 教程，然后阅读 “用户指南”章节。
 
 ## 故障处理
 
