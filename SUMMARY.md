@@ -17,7 +17,11 @@
 
 ## 用户指南
 
-* [应用：Application](yong-hu-zhi-nan/ying-yong-application.md)
+* [应用：Application](yong-hu-zhi-nan/ying-yong-application/README.md)
+  * [主名称：Main Name](yong-hu-zhi-nan/ying-yong-application/zhu-ming-cheng-main-name.md)
+  * [配置：Configuration](yong-hu-zhi-nan/ying-yong-application/pei-zhi-configuration.md)
+  * [过滤配置：Censored configuration](yong-hu-zhi-nan/ying-yong-application/guo-lv-pei-zhi-censored-configuration.md)
+  * [懒：Laziness](yong-hu-zhi-nan/ying-yong-application/lan-laziness.md)
 * [任务：Tasks](yong-hu-zhi-nan/ren-wu-tasks.md)
 * [调用任务：Calling Tasks](yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)
 * [Canvas：设计工作流程：Designing Work-flows](yong-hu-zhi-nan/canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows.md)
