@@ -23,6 +23,7 @@
   * [过滤配置：Censored configuration](yong-hu-zhi-nan/ying-yong-application/guo-lv-pei-zhi-censored-configuration.md)
   * [懒加载：Laziness](yong-hu-zhi-nan/ying-yong-application/lan-laziness.md)
   * [打破链式操作：Breaking the chain](yong-hu-zhi-nan/ying-yong-application/da-po-lian-shi-cao-zuo-breaking-the-chain.md)
+  * [抽象任务：Abstract Tasks](yong-hu-zhi-nan/ying-yong-application/chou-xiang-ren-wu-abstract-tasks.md)
 * [任务：Tasks](yong-hu-zhi-nan/ren-wu-tasks.md)
 * [调用任务：Calling Tasks](yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)
 * [Canvas：设计工作流程：Designing Work-flows](yong-hu-zhi-nan/canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows.md)
