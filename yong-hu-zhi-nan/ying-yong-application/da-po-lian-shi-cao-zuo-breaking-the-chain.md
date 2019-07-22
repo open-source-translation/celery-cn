@@ -36,3 +36,46 @@ class Scheduler(object):
 $ CELERY_TRACE_APP=1 celery worker -l info
 ```
 
+{% hint style="info" %}
+## API 发展
+
+
+
+从 Celery 诞生， 2009 年就是发生了很大的变化。 例如，可以在开始时调用任何可调用任务：
+
+```bash
+def hello(to):
+    return 'hello {0}'.format(to)
+
+>>> from celery.execute import apply_async
+
+>>> apply_async(hello, ('world!',))
+```
+
+也可以创建 Task 类来进行配置，覆盖其它行为：
+
+```python
+from celery.task import Task
+from celery.registry import tasks
+
+class Hello(Task):
+    queue = 'hipri'
+
+    def run(self, to):
+        return 'hello {0}'.format(to)
+tasks.register(Hello)
+
+>>> Hello.delay('world!')
+```
+
+后来，决定传递任意可调用的是一个反模式，因为它使得使用除pickle之外的序列化器非常困难，并且该功能在2.0中被删除，被任务装饰器取代：
+
+```python
+from celery.task import task
+
+@task(queue='hipri')
+def hello(to):
+    return 'hello {0}'.format(to)
+```
+{% endhint %}
+
