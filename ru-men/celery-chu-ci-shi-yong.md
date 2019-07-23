@@ -158,7 +158,7 @@ app = Celery('tasks', backend='rpc://', broker='pyamqp://')
 app = Celery('tasks', backend='redis://localhost', broker='pyamqp://')
 ```
 
-更多关于后端结果配置，请查阅[任务结果后端](../yong-hu-zhi-nan/ren-wu-tasks.md)。
+更多关于后端结果配置，请查阅[任务结果后端](../yong-hu-zhi-nan/ren-wu-tasks/)。
 
 现在已经配置结果后端，重新调用执行任务。会得到调用任务后返回的一个 AsyncResult 实例：
 

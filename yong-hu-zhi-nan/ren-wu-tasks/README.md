@@ -29,7 +29,7 @@ response = requests.get(URL, timeout=(connect_timeout, read_timeout))
 
 限制时间可以确保所有任务及时返回，但限制时间可能会强制终止任务，所以只使用它们来检测尚未使用手动超时的情况。
 
-默认的prefork池针对长时间的任务支持不是很好，如果任务运行时间有数分钟/小时，建议启用 Celery 的 -Ofair 命令参数。有关更多信息，以及长/短时间的任务路由和职程（Worker）的最佳性能配置，请参阅 [`优化：Optimizing`](you-hua-optimizing.md) 章节中的 `Prefork 池预配置`。
+默认的prefork池针对长时间的任务支持不是很好，如果任务运行时间有数分钟/小时，建议启用 Celery 的 -Ofair 命令参数。有关更多信息，以及长/短时间的任务路由和职程（Worker）的最佳性能配置，请参阅 [`优化：Optimizing`](../you-hua-optimizing.md) 章节中的 `Prefork 池预配置`。
 
  如果职程（Worker）被挂起，在提交问题之前最好先确认清楚运行的任务，很有可能是由于网络的原因造成。
 {% endhint %}

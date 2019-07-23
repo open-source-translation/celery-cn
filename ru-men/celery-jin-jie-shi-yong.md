@@ -320,7 +320,7 @@ PENDING -> STARTED -> SUCCESS
 PENDING -> STARTED -> RETRY -> STARTED -> RETRY -> STARTED -> SUCCESS
 ```
 
-更多任务状态信息可以查阅用户指南中的[`任务：Tasks`](../yong-hu-zhi-nan/ren-wu-tasks.md)章节的`State`部分内容。
+更多任务状态信息可以查阅用户指南中的[`任务：Tasks`](../yong-hu-zhi-nan/ren-wu-tasks/)章节的`State`部分内容。
 
 更多调用任务信息可以参阅[`调用任务：Calling Tasks`](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)。
 
