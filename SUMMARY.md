@@ -29,6 +29,7 @@
   * [名字：Names](yong-hu-zhi-nan/ren-wu-tasks/ming-zi-names.md)
   * [任务请求：Task Request](yong-hu-zhi-nan/ren-wu-tasks/ren-wu-qing-qiu-task-request.md)
   * [日志：Logging](yong-hu-zhi-nan/ren-wu-tasks/ri-zhi-logging.md)
+  * [重试：Retrying](yong-hu-zhi-nan/ren-wu-tasks/zhong-shi-retrying.md)
 * [调用任务：Calling Tasks](yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)
 * [Canvas：设计工作流程：Designing Work-flows](yong-hu-zhi-nan/canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows.md)
 * [职程（Worker）文档：Workers Guide](yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide.md)
