@@ -73,8 +73,6 @@ def process_rows():
 
 ## Handlers
 
-## Handlers
-
 **after\_return**\(self, status, retval, task\_id, args, kwargs, einfo\)
 
 任务返回后调用的处理程序
