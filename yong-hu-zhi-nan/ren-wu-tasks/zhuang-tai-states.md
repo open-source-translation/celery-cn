@@ -49,3 +49,56 @@ RPC 后端（`rpc://`）比较特殊，因为它实际上不存储状态信息�
 
   建议将其更改为 `READ-COMMITTED` 级别。
 
+## 内置状态
+
+### PENDING
+
+任务正在等待执行或未知。任何未知的任务 ID 都默认处于挂起状态。
+
+### STARTED
+
+任务已经开始。默认情况下不会记录，需要启用，请参阅 `app.Task.track_started.`。
+
+meta-data：正在执行任务的职程（Worker） pid 和主机名。
+
+### SUCCESS
+
+任务执行成功。
+
+meta-data：任务结果返回值 propagates：Yes ready: Yes
+
+### FAILURE
+
+任务执行失败。
+
+meta-data：执行异常时的任务信息，其中 traceback 包含引发错误的堆栈信息。 propagates：Yes
+
+### RETRY
+
+任务处于重试状态。
+
+meta-data：结果信息包含导致重试的异常信息，traceback 包含引发异常时堆栈的回溯。 propagates：No
+
+### REVOKED
+
+任务被撤销。
+
+propagates：Yes
+
+## 自定义状态
+
+只需要设置一个位置的名称，就可以轻松的自定义状态，状态名通常是大写的字符串。例如，您可以查看定义自定义中止状态的可中止任务。
+
+使用 `update_state()` 更新任务状态：
+
+```python
+@app.task(bind=True)
+def upload_files(self, filenames):
+    for i, file in enumerate(filenames):
+        if not self.request.called_directly:
+            self.update_state(state='PROGRESS',
+                meta={'current': i, 'total': len(filenames)})
+```
+
+在这里，创建了一个名称为“ `PROGRESS`”的状态，通过 `current` 和 `total` 作为元数据的一部分，计算任务当前正在进行状态的任何应用程序以及任务在进程中位置。可以通过该方法来创建任务进度条。
+
