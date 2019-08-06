@@ -71,3 +71,69 @@ def process_rows():
 
 `process_rows` 任务中的 `db` 属性在每个进程中始终保持不变。
 
+## Handlers
+
+## Handlers
+
+**after\_return**\(self, status, retval, task\_id, args, kwargs, einfo\)
+
+任务返回后调用的处理程序
+
+Parameters:
+
+* status – 当前任务状态
+* retval – 任务返回值/异常
+* task\_id – 唯一的任务ID
+* args – 返回任务的原始参数
+* kwargs – 返回任务的原始关键字
+
+Keyword Arguments:
+
+* einfo – 异常信息实例，包含 traceback （有的情况下）
+
+此处理程序的返回值将被忽略。
+
+**on\_failure**\(self, exc, task\_id, args, kwargs, einfo\)
+
+任务执行失败时，由职程（Worker）调用。
+
+Parameters:
+
+* exc – 任务引发的异常。
+* task\_id – 执行失败任务的唯一 ID。
+* args – 任务失败的原始参数。
+* kwargs – 任务失败的原始关键字。
+
+Keyword Arguments:
+
+* einfo – 异常信息实例，包含 traceback （有的情况下）。
+
+此处理程序的返回值将被忽略。
+
+**on\_retry**\(self, exc, task\_id, args, kwargs, einfo\)
+
+任务重试时，由职程（Worker）调用。
+
+Parameters:
+
+* exc – 发送给 `retry()` 函数的异常
+* task\_id – 任务重试唯一 ID。
+* args – 任务重试的原始参数。
+* kwargs – 任务重试的原始关键字。 Keyword Arguments:
+* einfo – 异常信息实例，包含 traceback （有的情况下）。
+
+此处理程序的返回值将被忽略。
+
+**on\_success**\(self, retval, task\_id, args, kwargs\)
+
+任务重试时，由职程（Worker）调用。
+
+Parameters:
+
+* retval – 任务的返回值
+* task\_id – 执行成功唯一 ID。
+* args – 任务执行成功时的原始参数。
+* kwargs – 任务执行成功时的原始关键字。
+
+此处理程序的返回值将被忽略。
+
