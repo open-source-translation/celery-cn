@@ -28,7 +28,7 @@ Celery 中文手册在翻译的过程中，已经最大限度的保留原手册�
 
 微信交流群
 
-![&#x5FAE;&#x4FE1;&#x7FA4;](.gitbook/assets/wx20190716-134746-2x.png)
+![](.gitbook/assets/wechatimg185.jpeg)
 
 ## 关于翻译版权
 
@@ -51,4 +51,8 @@ Open Source Translation：[https://github.com/open-source-translation](https://g
 GIthub：[https://github.com/0nise](https://github.com/0nise)
 
 博客小站：[https://www.r4v3zn.com](https://www.j2ee.app/)
+
+## 招聘
+
+![](.gitbook/assets/wechatimg933.jpeg)
 
