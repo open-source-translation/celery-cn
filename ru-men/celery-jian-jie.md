@@ -14,8 +14,6 @@ Celery 通过消息机制进行通信，通常使用中间人（Broker）作为�
 
 Celery 可以有多个职程（Worker）和中间人（Broker），用来提高Celery的高可用性以及横向扩展能力。
 
-Celery 是用Python编写的，但是协议可以通过任何语言进行实现。迄今，以及有Ruby实现的
-
 Celery 是用 Python 编写的，但协议可以用任何语言实现。出了 Python 语言实现之外，还有Node.js的[node-celery](https://github.com/mher/node-celery)和php的[celery-php](https://github.com/gjedeer/celery-php)。
 
 可以通过暴露 HTTP 的方式进行，任务交互以及其它语言的集成开发。
