@@ -27,7 +27,7 @@ Celery 支持多种消息传输的方式。
 
 缺少监控就意味着这个监控已经失效，因此相关的 Flower、Celery events、celerymon 和其他基于此功能的监控工具全部失效。
 
-远程管理控制可以通过 celery inspect 和 celery control（以及使用远程控制API的工具）在程序运行时排查和管理职程（Worker）的功能。
+远程管理控制是指可以通过 celery inspect 和 celery control（以及使用远程控制API的工具）在程序运行时检查和管理职程（Worker）的能力。
 
 
 
