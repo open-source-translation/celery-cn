@@ -14,9 +14,7 @@ Celery 通过消息机制进行通信，通常使用中间人（Broker）作为�
 
 Celery 可以有多个职程（Worker）和中间人（Broker），用来提高Celery的高可用性以及横向扩展能力。
 
-Celery 是用Python编写的，但是协议可以通过任何语言进行实现。迄今，以及有Ruby实现的
-
-Celery 是用 Python 编写的，但协议可以用任何语言实现。出了 Python 语言实现之外，还有Node.js的[node-celery](https://github.com/mher/node-celery)和php的[celery-php](https://github.com/gjedeer/celery-php)。
+Celery 是用 Python 编写的，但协议可以用任何语言实现。除了 Python 语言实现之外，还有Node.js的[node-celery](https://github.com/mher/node-celery)和php的[celery-php](https://github.com/gjedeer/celery-php)。
 
 可以通过暴露 HTTP 的方式进行，任务交互以及其它语言的集成开发。
 
@@ -41,11 +39,11 @@ Celery 4.0 运行：
 * Python 2.5：Celery 3.0 或更早版本。
 * Python 2.4：Celery 2.2 或更早版本。
 
-Celery 是一个资金最少的项目，因此我们不支持 Microsoft Windows。请不要打开与该平台相关的任何问题。
+Celery 是一个资金最少的项目，因此我们不支持 Microsoft Windows。请不要提出与该平台相关的任何问题。
 
 ## 开始
 
-如果您是第一次使用 Celery，或您使用的是 3.1 之前的版本，建议您阅读入门教程：
+如果您是第一次使用 Celery，或您使用的是 3.1 之前的版本，建议您阅读入门教程：
 
 * [第一次使用Clery](celery-chu-ci-shi-yong.md)
 * [下一步](celery-jin-jie-shi-yong.md)
@@ -104,7 +102,7 @@ Celery 的每个部分几乎都可以自定义扩展和单独使用，例如自�
 
 * 监控
 
-可以针对整个流程进行监控，内置的工具或可以实时说明当前集群的概况。更多......
+可以针对整个流程进行监控，内置的工具或可以实时说明当前集群的概况。[更多......](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)
 
 * 调度
 
@@ -207,14 +205,14 @@ $ pip install -U Celery
 
 Celery 自定义了一组用于安装 Celery 和特定功能的依赖。
 
-您可以在\[\]中加入您需要依赖，可以通过,进行安装多个依赖包。
+您可以在中括号加入您需要依赖，并可以通过逗号分割需要安装的多个依赖包。
 
 ```bash
 $ pip install "celery[librabbitmq]"
 $ pip install "celery[librabbitmq,redis,auth,msgpack]"
 ```
 
-目前发行的如下：
+目前发行的依赖包如下：
 
 #### 序列化
 
