@@ -11,34 +11,18 @@
 项目的结构：
 
 ```bash
-proj/__init__.py
-    /celery.py
-    /tasks.py
+proj/__init__.py    /celery.py    /tasks.py
 ```
 
 proj/celery.py
 
-{% code-tabs %}
-{% code-tabs-item title="proj/celery.py" %}
+{% tabs %}
+{% tab title="proj/celery.py" %}
 ```python
-from __future__ import absolute_import, unicode_literals
-from celery import Celery
-
-app = Celery('proj',
-             broker='amqp://',
-             backend='amqp://',
-             include=['proj.tasks'])
-
-# Optional configuration, see the application user guide.
-app.conf.update(
-    result_expires=3600,
-)
-
-if __name__ == '__main__':
-    app.start()
+from __future__ import absolute_import, unicode_literalsfrom celery import Celeryapp = Celery('proj',             broker='amqp://',             backend='amqp://',             include=['proj.tasks'])# Optional configuration, see the application user guide.app.conf.update(    result_expires=3600,)if __name__ == '__main__':    app.start()
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 在此程序中，创建了 Celery 实例（也称 `app`），如果需要使用 Celery，导入即可。
 
@@ -56,26 +40,13 @@ if __name__ == '__main__':
 
 proj/tasks.py
 
-{% code-tabs %}
-{% code-tabs-item title="proj/tasks.py" %}
+{% tabs %}
+{% tab title="proj/tasks.py" %}
 ```python
-from __future__ import absolute_import, unicode_literals
-from .celery import app
-
-@app.task
-def add(x, y):
-    return x + y
-
-@app.task
-def mul(x, y):
-    return x * y
-
-@app.task
-def xsum(numbers):
-    return sum(numbers)
+from __future__ import absolute_import, unicode_literalsfrom .celery import app@app.taskdef add(x, y):    return x + y@app.taskdef mul(x, y):    return x * y@app.taskdef xsum(numbers):    return sum(numbers)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 ### 运行职程（Worker）
 
@@ -88,19 +59,7 @@ $ celery -A proj worker -l info
 当职程（Worker）开始运行时，可以看到一部分日志消息：
 
 ```bash
--------------- celery@halcyon.local v4.0 (latentcall)
----- **** -----
---- * ***  * -- [Configuration]
--- * - **** --- . broker:      amqp://guest@localhost:5672//
-- ** ---------- . app:         __main__:0x1012d8590
-- ** ---------- . concurrency: 8 (processes)
-- ** ---------- . events:      OFF (enable -E to monitor this worker)
-- ** ----------
-- *** --- * --- [Queues]
--- ******* ---- . celery:      exchange:celery(direct) binding:celery
---- ***** -----
-
-[2012-06-08 16:23:51,078: WARNING/MainProcess] celery@halcyon.local has started.
+-------------- celery@halcyon.local v4.0 (latentcall)---- **** -------- * ***  * -- [Configuration]-- * - **** --- . broker:      amqp://guest@localhost:5672//- ** ---------- . app:         __main__:0x1012d8590- ** ---------- . concurrency: 8 (processes)- ** ---------- . events:      OFF (enable -E to monitor this worker)- ** ----------- *** --- * --- [Queues]-- ******* ---- . celery:      exchange:celery(direct) binding:celery--- ***** -----[2012-06-08 16:23:51,078: WARNING/MainProcess] celery@halcyon.local has started.
 ```
 
 * _broker_ 为 Celery 程序中指定的中间人（Broker）的连接URL，也可以通过 `-b` 选项在命令行进行设置其他的中间人（Broker）。
@@ -132,25 +91,13 @@ $ celery worker --help
 可以使用 `celery multi` 命令在后台启动一个或多个职程（Worker）：
 
 ```bash
-$ celery multi start w1 -A proj -l info
-celery multi v4.0.0 (latentcall)
-> Starting nodes...
-    > w1.halcyon.local: OK
+$ celery multi start w1 -A proj -l infocelery multi v4.0.0 (latentcall)> Starting nodes...    > w1.halcyon.local: OK
 ```
 
 也可以进行重启：
 
 ```bash
-$ celery  multi restart w1 -A proj -l info
-celery multi v4.0.0 (latentcall)
-> Stopping nodes...
-    > w1.halcyon.local: TERM -> 64024
-> Waiting for 1 node.....
-    > w1.halcyon.local: OK
-> Restarting node w1.halcyon.local: OK
-celery multi v4.0.0 (latentcall)
-> Stopping nodes...
-    > w1.halcyon.local: TERM -> 64052
+$ celery  multi restart w1 -A proj -l infocelery multi v4.0.0 (latentcall)> Stopping nodes...    > w1.halcyon.local: TERM -> 64024> Waiting for 1 node.....    > w1.halcyon.local: OK> Restarting node w1.halcyon.local: OKcelery multi v4.0.0 (latentcall)> Stopping nodes...    > w1.halcyon.local: TERM -> 64052
 ```
 
 停止运行：
@@ -174,17 +121,13 @@ $ celery multi stopwait w1 -A proj -l info
 默认情况下会在当前目录中创建pid文件和日志文件，为防止多个职程（Worker）干扰，建议将这些文件存放在专门的目录中：
 
 ```bash
-$ mkdir -p /var/run/celery
-$ mkdir -p /var/log/celery
-$ celery multi start w1 -A proj -l info --pidfile=/var/run/celery/%n.pid \
-                                        --logfile=/var/log/celery/%n%I.log
+$ mkdir -p /var/run/celery$ mkdir -p /var/log/celery$ celery multi start w1 -A proj -l info --pidfile=/var/run/celery/%n.pid \                                        --logfile=/var/log/celery/%n%I.log
 ```
 
 也可以使用 `multi` 命令启动多个职程（Worker），有一个强大的语法为不同职程（Worker）设置不同的参数：
 
 ```bash
-$ celery multi start 10 -A proj -l info -Q:1-3 images,video -Q:4,5 data \
-    -Q default -L:4,5 debug
+$ celery multi start 10 -A proj -l info -Q:1-3 images,video -Q:4,5 data \    -Q default -L:4,5 debug
 ```
 
 更多实例，可也参阅 `multi` API 模块。
@@ -228,8 +171,7 @@ $ celery multi start 10 -A proj -l info -Q:1-3 images,video -Q:4,5 data \
 上面的实例中，任务被下发到 `lopri` 队列中，任务下发之后会在最早10秒内执行。 直接调用任务函数进行执行任务，不会发送任何任务消息：
 
 ```bash
->>> add(2, 2)
-4
+>>> add(2, 2)4
 ```
 
 `delay()` `apply_async()` 以及 `apply(__call__)` 为 Celery 调用的API，也可以用于签名。 
@@ -245,57 +187,41 @@ $ celery multi start 10 -A proj -l info -Q:1-3 images,video -Q:4,5 data \
  如果配置了结果后端，可以获取任务的返回值：
 
 ```bash
->>> res = add.delay(2, 2)
->>> res.get(timeout=1)
-4
+>>> res = add.delay(2, 2)>>> res.get(timeout=1)4
 ```
 
 也可以通过 `id` 属性进行获取任务的ID：
 
 ```bash
->>> res.id
-d6b3aea2-fb9b-4ebc-8da4-848818db9114
+>>> res.idd6b3aea2-fb9b-4ebc-8da4-848818db9114
 ```
 
 如果任务执行引发异常，可以进行检查异常以及溯源，默认情况下 `result.get()` 会抛出异常：
 
 ```bash
->>> res = add.delay(2)
->>> res.get(timeout=1)
+>>> res = add.delay(2)>>> res.get(timeout=1)
 ```
 
 ```bash
-Traceback (most recent call last):
-File "<stdin>", line 1, in <module>
-File "/opt/devel/celery/celery/result.py", line 113, in get
-    interval=interval)
-File "/opt/devel/celery/celery/backends/rpc.py", line 138, in wait_for
-    raise meta['result']
-TypeError: add() takes exactly 2 arguments (1 given)
+Traceback (most recent call last):File "<stdin>", line 1, in <module>File "/opt/devel/celery/celery/result.py", line 113, in get    interval=interval)File "/opt/devel/celery/celery/backends/rpc.py", line 138, in wait_for    raise meta['result']TypeError: add() takes exactly 2 arguments (1 given)
 ```
 
 如果不希望 Celery 抛出异常，可以通过设置 `propagate` 来进行禁用：
 
 ```bash
->>> res.get(propagate=False)
-TypeError('add() takes exactly 2 arguments (1 given)',)
+>>> res.get(propagate=False)TypeError('add() takes exactly 2 arguments (1 given)',)
 ```
 
 在这种情况下，他可以返回引发错误的实例，需要检查任务是否执行成功还是失败，可以通过在结果实例中使用对应的方法：
 
 ```bash
->>> res.failed()
-True
-
->>> res.successful()
-False
+>>> res.failed()True>>> res.successful()False
 ```
 
 如何知道任务是否执行失败？可以通过查看任务的 state 进行查看：
 
 ```bash
->>> res.state
-'FAILURE'
+>>> res.state'FAILURE'
 ```
 
 一个任务只能有当前只能有一个状态，但他的执行过程可以为多个状态，一个典型的阶段是：
@@ -307,11 +233,7 @@ PENDING -> STARTED -> SUCCESS
 启动状态是一种比较特殊的状态，仅在 `task_track_started` 启用设置或 `@task(track_started=True)`的情况下才会进行记录。 挂起状态实际上不是记录状态，而是未知任务ID的默认状态，可以从此实例中看到：
 
 ```bash
->>> from proj.celery import app
-
->>> res = app.AsyncResult('this-id-does-not-exist')
->>> res.state
-'PENDING'
+>>> from proj.celery import app>>> res = app.AsyncResult('this-id-does-not-exist')>>> res.state'PENDING'
 ```
 
 重试任务比较复杂，为了证明，一个任务会重试两次，任务的阶段为：
@@ -335,15 +257,13 @@ PENDING -> STARTED -> RETRY -> STARTED -> RETRY -> STARTED -> SUCCESS
 可以将 add 使用的参数作为任务创建的签名，倒计时为 10 秒，如下所示（2,2）：
 
 ```bash
->>> add.signature((2, 2), countdown=10)
-tasks.add(2, 2)
+>>> add.signature((2, 2), countdown=10)tasks.add(2, 2)
 ```
 
 也可以通过一个快捷的方式进行操作：
 
 ```bash
->>> add.s(2, 2)
-tasks.add(2, 2)
+>>> add.s(2, 2)tasks.add(2, 2)
 ```
 
 ### 再次调用API ...
@@ -351,33 +271,25 @@ tasks.add(2, 2)
 签名实例支持调用API：这就意味着可以使用 `delay` 和 `apply_async` 方法。 但区别就在于签名实例已经指定了参数签名，该 add 任务有两个参数，需要指定两个参数的签名才能够成一个完整的签名实例：
 
 ```bash
->>> s1 = add.s(2, 2)
->>> res = s1.delay()
->>> res.get()
-4
+>>> s1 = add.s(2, 2)>>> res = s1.delay()>>> res.get()4
 ```
 
 也可以创建不完整的签名来进行创建，我称之为 `partials` 的内容：
 
 ```bash
-# incomplete partial: add(?, 2)
->>> s2 = add.s(2)
+# incomplete partial: add(?, 2)>>> s2 = add.s(2)
 ```
 
 s2 为一个不完整的签名，需要另外一个参数，可以通过调用签名解决：
 
 ```bash
-# resolves the partial: add(8, 2)
->>> res = s2.delay(8)
->>> res.get()
-10
+# resolves the partial: add(8, 2)>>> res = s2.delay(8)>>> res.get()10
 ```
 
 在这里，设置了设置了参数值为 8，它位于参数值为 2 的签名，形成了完整的 add\(8,2\) 签名。 也可以设置新的参值，新设置的参数会覆盖原有的参数值：
 
 ```bash
->>> s3 = add.s(2, 2, debug=True)
->>> s3.delay(debug=False)   # debug is now False.
+>>> s3 = add.s(2, 2, debug=True)>>> s3.delay(debug=False)   # debug is now False.
 ```
 
 如上所述，签名支持调用API：
@@ -411,19 +323,13 @@ s2 为一个不完整的签名，需要另外一个参数，可以通过调用�
 一个 group 并行调用任务列表，返回一个特殊的结果实例，可以将结果作为一个列表进行查看，并且通过索引进去获取返回值。
 
 ```bash
->>> from celery import group
->>> from proj.tasks import add
-
->>> group(add.s(i, i) for i in xrange(10))().get()
-[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+>>> from celery import group>>> from proj.tasks import add>>> group(add.s(i, i) for i in xrange(10))().get()[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 ```
 
 * Partial group
 
 ```bash
->>> g = group(add.s(i) for i in xrange(10))
->>> g(10).get()
-[10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+>>> g = group(add.s(i) for i in xrange(10))>>> g(10).get()[10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
 ```
 
 
@@ -433,28 +339,19 @@ s2 为一个不完整的签名，需要另外一个参数，可以通过调用�
 可以将任务链接在一起，在一个人返回后进行调用另外一个任务：
 
 ```bash
->>> from celery import chain
->>> from proj.tasks import add, mul
-
-# (4 + 4) * 8
->>> chain(add.s(4, 4) | mul.s(8))().get()
-64
+>>> from celery import chain>>> from proj.tasks import add, mul# (4 + 4) * 8>>> chain(add.s(4, 4) | mul.s(8))().get()64
 ```
 
 或 partial chain
 
 ```bash
->>> # (? + 4) * 8
->>> g = chain(add.s(4) | mul.s(8))
->>> g(4).get()
-64
+>>> # (? + 4) * 8>>> g = chain(add.s(4) | mul.s(8))>>> g(4).get()64
 ```
 
 链也可以这样写：
 
 ```bash
->>> (add.s(4, 4) | mul.s(8))().get()
-64
+>>> (add.s(4, 4) | mul.s(8))().get()64
 ```
 
 #### 和弦：Chords
@@ -462,28 +359,19 @@ s2 为一个不完整的签名，需要另外一个参数，可以通过调用�
 和弦是一个带有回调的组：
 
 ```bash
->>> from celery import chain
->>> from proj.tasks import add, mul
-
-# (4 + 4) * 8
->>> chain(add.s(4, 4) | mul.s(8))().get()
-64
+>>> from celery import chain>>> from proj.tasks import add, mul# (4 + 4) * 8>>> chain(add.s(4, 4) | mul.s(8))().get()64
 ```
 
 或 partial chain
 
 ```bash
->>> # (? + 4) * 8
->>> g = chain(add.s(4) | mul.s(8))
->>> g(4).get()
-64
+>>> # (? + 4) * 8>>> g = chain(add.s(4) | mul.s(8))>>> g(4).get()64
 ```
 
 链接到其他任务的组将自动转换为和弦：
 
 ```bash
->>> (group(add.s(i, i) for i in xrange(10)) | xsum.s())().get()
-90
+>>> (group(add.s(i, i) for i in xrange(10)) | xsum.s())().get()90
 ```
 
 这些原语都是签名的类型，可以根据需要进行组合，例如：
@@ -501,18 +389,13 @@ Celery 支持 AMQP 中提供的所有路由，可以将消息发送到指定的�
 通过 `task_routes` 可以设置一个按名称分配的路由任务队列，将所有的内容集中存放在一个位置：
 
 ```bash
-app.conf.update(
-    task_routes = {
-        'proj.tasks.add': {'queue': 'hipri'},
-    },
-)
+app.conf.update(    task_routes = {        'proj.tasks.add': {'queue': 'hipri'},    },)
 ```
 
 可以在程序是使用 queue 参数进行指定队列：
 
 ```bash
->>> from proj.tasks import add
->>> add.apply_async((2, 2), queue='hipri')
+>>> from proj.tasks import add>>> add.apply_async((2, 2), queue='hipri')
 ```
 
 可以通过设置运行职程（Worker）时指定职程（Worker）从某个队列中进行消费（`celery worker -Q`）：

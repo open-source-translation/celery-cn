@@ -92,12 +92,7 @@ propagates：Yes
 使用 `update_state()` 更新任务状态：
 
 ```python
-@app.task(bind=True)
-def upload_files(self, filenames):
-    for i, file in enumerate(filenames):
-        if not self.request.called_directly:
-            self.update_state(state='PROGRESS',
-                meta={'current': i, 'total': len(filenames)})
+@app.task(bind=True)def upload_files(self, filenames):    for i, file in enumerate(filenames):        if not self.request.called_directly:            self.update_state(state='PROGRESS',                meta={'current': i, 'total': len(filenames)})
 ```
 
 在这里，创建了一个名称为“ `PROGRESS`”的状态，通过 `current` 和 `total` 作为元数据的一部分，计算任务当前正在进行状态的任何应用程序以及任务在进程中位置。可以通过该方法来创建任务进度条。
@@ -113,22 +108,7 @@ Python 的异常必须要符合一些简单规则，才能被 `pickle` 模块支
 让我们来看一些有用的例子，还有一个不适用的例子：
 
 ```python
-# OK:
-class HttpError(Exception):
-    pass
-
-# BAD:
-class HttpError(Exception):
-
-    def __init__(self, status_code):
-        self.status_code = status_code
-
-# OK:
-class HttpError(Exception):
-
-    def __init__(self, status_code):
-        self.status_code = status_code
-        Exception.__init__(self, status_code)  # <-- REQUIRED
+# OK:class HttpError(Exception):    pass# BAD:class HttpError(Exception):    def __init__(self, status_code):        self.status_code = status_code# OK:class HttpError(Exception):    def __init__(self, status_code):        self.status_code = status_code        Exception.__init__(self, status_code)  # <-- REQUIRED
 ```
 
 所以规则是：对于任何支持自定义参数 `*args` 的异常，都必须使用 `Exception.__init__(self, *args)`。
@@ -136,13 +116,6 @@ class HttpError(Exception):
 关键资产没有特殊支持，如果需要保存关键字参数，当异常被 unpickled 时，需要将它们作为普通的参数进行传递：
 
 ```python
-class HttpError(Exception):
-
-    def __init__(self, status_code, headers=None, body=None):
-        self.status_code = status_code
-        self.headers = headers
-        self.body = body
-
-        super(HttpError, self).__init__(status_code, headers, body)
+class HttpError(Exception):    def __init__(self, status_code, headers=None, body=None):        self.status_code = status_code        self.headers = headers        self.body = body        super(HttpError, self).__init__(status_code, headers, body)
 ```
 

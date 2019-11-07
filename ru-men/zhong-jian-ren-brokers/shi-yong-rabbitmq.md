@@ -27,10 +27,7 @@ broker_url = 'amqp://myuser:mypassword@localhost:5672/myvhost'
 要使用 Celery，需要创一个RabbitMQ账户：
 
 ```bash
-$ sudo rabbitmqctl add_user myuser mypassword
-$ sudo rabbitmqctl add_vhost myvhost
-$ sudo rabbitmqctl set_user_tags myuser mytag
-$ sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
+$ sudo rabbitmqctl add_user myuser mypassword$ sudo rabbitmqctl add_vhost myvhost$ sudo rabbitmqctl set_user_tags myuser mytag$ sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
 ```
 
 修改myuser、mypassword、myvhost为自己配置的配置信息。
@@ -78,17 +75,7 @@ $ sudo scutil --set HostName myhost.local
 如果您的 rabbitmq-server 已经在运行，您的节点名称现在应该是 rabbit@myhost ，可以通过 rabbitmqctl 进行验证查看：
 
 ```bash
-$ sudo rabbitmqctl status
-Status of node rabbit@myhost ...
-[{running_applications,[{rabbit,"RabbitMQ","1.7.1"},
-                    {mnesia,"MNESIA  CXC 138 12","4.4.12"},
-                    {os_mon,"CPO  CXC 138 46","2.2.4"},
-                    {sasl,"SASL  CXC 138 11","2.1.8"},
-                    {stdlib,"ERTS  CXC 138 10","1.16.4"},
-                    {kernel,"ERTS  CXC 138 10","2.13.4"}]},
-{nodes,[rabbit@myhost]},
-{running_nodes,[rabbit@myhost]}]
-...done.
+$ sudo rabbitmqctl statusStatus of node rabbit@myhost ...[{running_applications,[{rabbit,"RabbitMQ","1.7.1"},                    {mnesia,"MNESIA  CXC 138 12","4.4.12"},                    {os_mon,"CPO  CXC 138 46","2.2.4"},                    {sasl,"SASL  CXC 138 11","2.1.8"},                    {stdlib,"ERTS  CXC 138 10","1.16.4"},                    {kernel,"ERTS  CXC 138 10","2.13.4"}]},{nodes,[rabbit@myhost]},{running_nodes,[rabbit@myhost]}]...done.
 ```
 
 如果 DHCP 给您分配主机名称是以IP地址（如：23.10.112.31.comcast.net），RabbitMQ将尝试用 raabit@23 ：非法的用户名。

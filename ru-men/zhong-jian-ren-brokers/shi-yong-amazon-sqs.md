@@ -25,14 +25,7 @@ sqs://aws_access_key_id:aws_secret_access_key@
 **注意**：URL 最后必须追加 `@` 标识符，URL 才能够正常解析，例如：
 
 ```text
-from kombu.utils.url import quote
-
-aws_access_key = quote("ABCDEFGHIJKLMNOPQRST")
-aws_secret_key = quote("ZYXK7NiynGlTogH8Nj+P9nlE73sq3")
-
-broker_url = "sqs://{aws_access_key}:{aws_secret_key}@".format(
-    aws_access_key=aws_access_key, aws_secret_key=aws_secret_key,
-)
+from kombu.utils.url import quoteaws_access_key = quote("ABCDEFGHIJKLMNOPQRST")aws_secret_key = quote("ZYXK7NiynGlTogH8Nj+P9nlE73sq3")broker_url = "sqs://{aws_access_key}:{aws_secret_key}@".format(    aws_access_key=aws_access_key, aws_secret_key=aws_secret_key,)
 ```
 
 也可以使用环境变量进行设置 AWS\_ACCESS\_KEY\_ID 和 AWS\_SECRET\_ACCESS\_KEY ，在这种情况下中间人（Broker）的配置URL为 sqs:// 。

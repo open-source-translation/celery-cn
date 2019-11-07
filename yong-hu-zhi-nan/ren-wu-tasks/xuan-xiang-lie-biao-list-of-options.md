@@ -41,9 +41,7 @@
 例如：
 
 ```python
-@task(throws=(KeyError, HttpNotFound)):
-def get_foo():
-    something()
+@task(throws=(KeyError, HttpNotFound)):def get_foo():    something()
 ```
 
 错误类型：

@@ -7,8 +7,7 @@
 可以通过配置几个选项来进行配置 Celery，该配置通过直接在程序实例中配置，也可以通过专用的配置模块进行配置。 配置如下 `app.conf`：
 
 ```bash
->>> app.conf.timezone
-'Europe/London'
+>>> app.conf.timezone'Europe/London'
 ```
 
 也可以直接设置对应的值:
@@ -20,10 +19,7 @@
 也可以通过 `update` 进行一次设置多个键值：
 
 ```bash
->>> app.conf.update(
-...     enable_utc=True,
-...     timezone='Europe/London',
-...)
+>>> app.conf.update(...     enable_utc=True,...     timezone='Europe/London',...)
 ```
 
 配置对象由多个字典组成，按以下顺序进行查询:
@@ -51,22 +47,18 @@
 `app.config_from_object()` 可以从一个 python 模块中（包含属性名称）进行加载，例如：`celeryconfig` 、`myproj.config.celery` 或 `myproj.config:CeleryConfig`：
 
 ```python
-from celery import Celery
-
-app = Celery()
-app.config_from_object('celeryconfig')
+from celery import Celeryapp = Celery()app.config_from_object('celeryconfig')
 ```
 
 其中 `celeryconfig` 模块内容如下： 
 
-{% code-tabs %}
-{% code-tabs-item title="celeryconfig.py" %}
+{% tabs %}
+{% tab title="celeryconfig.py" %}
 ```python
-enable_utc = True
-timezone = 'Europe/London'
+enable_utc = Truetimezone = 'Europe/London'
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 导入 celeryconfig 程序就可以应用。
 
@@ -81,28 +73,13 @@ timezone = 'Europe/London'
 {% endhint %}
 
 ```python
-import celeryconfig
-
-from celery import Celery
-
-app = Celery()
-app.config_from_object(celeryconfig)
+import celeryconfigfrom celery import Celeryapp = Celery()app.config_from_object(celeryconfig)
 ```
 
 ### 案例3：使用配置类/对象
 
 ```python
-from celery import Celery
-
-app = Celery()
-
-class Config:
-    enable_utc = True
-    timezone = 'Europe/London'
-
-app.config_from_object(Config)
-# or using the fully qualified name of the object:
-#   app.config_from_object('module:Config')
+from celery import Celeryapp = Celery()class Config:    enable_utc = True    timezone = 'Europe/London'app.config_from_object(Config)# or using the fully qualified name of the object:#   app.config_from_object('module:Config')
 ```
 
 ## config\_from\_envvar
@@ -110,14 +87,7 @@ app.config_from_object(Config)
 `app.config_from_envvar()` 可以从环境变量获取信息进行配置， 例如，从名称为 `CELERY_CONFIG_MODULE` 的环境变量中加载配置：
 
 ```python
-import os
-from celery import Celery
-
-#: Set default configuration module name
-os.environ.setdefault('CELERY_CONFIG_MODULE', 'celeryconfig')
-
-app = Celery()
-app.config_from_envvar('CELERY_CONFIG_MODULE')
+import osfrom celery import Celery#: Set default configuration module nameos.environ.setdefault('CELERY_CONFIG_MODULE', 'celeryconfig')app = Celery()app.config_from_envvar('CELERY_CONFIG_MODULE')
 ```
 
 然后通过指定的环境变量进行配置使用的配置模块：
