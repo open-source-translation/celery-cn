@@ -80,7 +80,11 @@ $ pip install celery
 {% tabs %}
 {% tab title="tasks.py" %}
 ```python
-from celery import Celeryapp = Celery('tasks', broker='amqp://guest@localhost//')@app.taskdef add(x, y):    return x + y
+from celery import Celery
+app = Celery('tasks', broker='amqp://guest@localhost//')
+@app.task
+def add(x, y):
+    return x + y
 ```
 {% endtab %}
 {% endtabs %}
@@ -130,7 +134,8 @@ $ celery help
 `delay()` 是 `apply_async()` 的快捷方法，可以更好的控制任务的执行（详情：[`调用任务：Calling Tasks`](../yong-hu-zhi-nan/tiao-yong-ren-wu-calling-tasks.md)）：
 
 ```bash
->>> from tasks import add>>> add.delay(4, 4)
+>>> from tasks import add
+>>> add.delay(4, 4)
 ```
 
 该任务已经有职程（Worker）开始处理，可以通过控制台输出的日志进行查看执行情况。
@@ -164,13 +169,15 @@ app = Celery('tasks', backend='redis://localhost', broker='pyamqp://')
 `ready()` 可以检测是否已经处理完毕：
 
 ```bash
->>> result.ready()False
+>>> result.ready()
+False
 ```
 
 整个任务执行过程为异步的，如果一直等待任务完成，会将异步调用转换为同步调用：
 
 ```bash
->>> result.get(timeout=1)8
+>>> result.get(timeout=1)
+8
 ```
 
 如果任务出现异常，`get()` 会再次引发异常，可以通过 propagate 参数进行覆盖：
@@ -208,7 +215,13 @@ app.conf.task_serializer = 'json'
 如果需要配置多个选项，可以通过 upate 进行配置：
 
 ```python
-app.conf.update(    task_serializer='json',    accept_content=['json'],  # Ignore other content    result_serializer='json',    timezone='Europe/Oslo',    enable_utc=True,)
+app.conf.update(
+    task_serializer='json',
+    accept_content=['json'],  # Ignore other content
+    result_serializer='json',
+    timezone='Europe/Oslo',
+    enable_utc=True,
+)
 ```
 
 针对大型的项目，建议使用专用配置模块，进行针对 Celery 配置。不建议使用硬编码，建议将所有的配置项集中化配置。集中化配置可以像系统管理员一样，当系统发生故障时可针对其进行微调。
@@ -226,7 +239,14 @@ app.config_from_object('celeryconfig')
 {% tabs %}
 {% tab title="celeryconfig.py" %}
 ```python
-broker_url = 'pyamqp://'result_backend = 'rpc://'task_serializer = 'json'result_serializer = 'json'accept_content = ['json']timezone = 'Europe/Oslo'enable_utc = True
+broker_url = 'pyamqp://'
+result_backend = 'rpc://'
+
+task_serializer = 'json'
+result_serializer = 'json'
+accept_content = ['json']
+timezone = 'Europe/Oslo'
+enable_utc = True
 ```
 {% endtab %}
 {% endtabs %}
@@ -244,7 +264,9 @@ Celery 也可以设置任务执行错误时的专用队列中，这只是配置�
 {% tabs %}
 {% tab title="celeryconfig.py" %}
 ```python
-task_routes = {    'tasks.add': 'low-priority',}
+task_routes = {
+    'tasks.add': 'low-priority',
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -254,7 +276,9 @@ Celery 也可以针对任务进行限速，以下为每分钟内允许执行的1
 {% tabs %}
 {% tab title="celeryconfig.py" %}
 ```python
-task_annotations = {    'tasks.add': {'rate_limit': '10/m'}}
+task_annotations = {
+    'tasks.add': {'rate_limit': '10/m'}
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -262,7 +286,9 @@ task_annotations = {    'tasks.add': {'rate_limit': '10/m'}}
 如果使用的是 RabbitMQ 或 Redis 的话，可以在运行时进行设置任务的速率：
 
 ```bash
-$ celery -A tasks control rate_limit tasks.add 10/mworker@example.com: OK    new rate limit set successfully
+$ celery -A tasks control rate_limit tasks.add 10/m
+worker@example.com: OK
+    new rate limit set successfully
 ```
 
 有关远程控制以及监控职程（Worker），详情参阅 [`路由任务：Routing Tasks`](../yong-hu-zhi-nan/lu-you-ren-wu-routing-tasks.md)了解更多的任务路由以及 task\_annotations 有关的描述信息，或查阅 [`监控和管理手册：Monitoring and Management Guide`](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)。
@@ -313,6 +339,7 @@ $ celery -A tasks control rate_limit tasks.add 10/mworker@example.com: OK    new
    可能由于某种场景，客户端与职程（Worker）的后端不配置不同，导致无法获取结果，所以需要确保配置是否正确：
 
    ```bash
-   >>> result = task.delay(…)>>> print(result.backend)
+   >>> result = task.delay(…)
+   >>> print(result.backend)
    ```
 

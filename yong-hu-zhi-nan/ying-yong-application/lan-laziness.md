@@ -12,7 +12,21 @@
 该实例会显示，在使用任务或访问属性之前，是如何创建任务的：
 
 ```bash
->>> @app.task>>> def add(x, y):...    return x + y>>> type(add)<class 'celery.local.PromiseProxy'>>>> add.__evaluated__()False>>> add        # <-- causes repr(add) to happen<@task: __main__.add>>>> add.__evaluated__()True
+>>> @app.task
+>>> def add(x, y):
+...    return x + y
+
+>>> type(add)
+<class 'celery.local.PromiseProxy'>
+
+>>> add.__evaluated__()
+False
+
+>>> add        # <-- causes repr(add) to happen
+<@task: __main__.add>
+
+>>> add.__evaluated__()
+True
 ```
 
 应用程序的终结可以通过调用 `app.finalize()` 显式执行，也可以通过访问 `app.tasks` 属性隐式执行。 完成创建对象将：

@@ -23,7 +23,8 @@
 一直阻塞的任务可能会导致其他的职程（Worker）无法执行其他的任务。 如果您的任务操作了 I/O ，建议设置超时，例如使用 `requests` 发送请求时设置超时时间：
 
 ```python
-connect_timeout, read_timeout = 5.0, 30.0response = requests.get(URL, timeout=(connect_timeout, read_timeout))
+connect_timeout, read_timeout = 5.0, 30.0
+response = requests.get(URL, timeout=(connect_timeout, read_timeout))
 ```
 
 限制时间可以确保所有任务及时返回，但限制时间可能会强制终止任务，所以只使用它们来检测尚未使用手动超时的情况。

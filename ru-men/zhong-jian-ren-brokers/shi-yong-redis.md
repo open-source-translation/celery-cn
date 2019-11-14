@@ -39,7 +39,8 @@ redis+socket:///path/to/redis.sock?virtual_host=db_number
 Celery 也可以连接 Redis 哨兵也是非常简单的：
 
 ```text
-app.conf.broker_url = 'sentinel://localhost:26379;sentinel://localhost:26380;sentinel://localhost:26381'app.conf.broker_transport_options = {'master_name':'cluster1'}
+app.conf.broker_url = 'sentinel://localhost:26379;sentinel://localhost:26380;sentinel://localhost:26381'
+app.conf.broker_transport_options = {'master_name':'cluster1'}
 ```
 
 ### 可见性超时
@@ -125,7 +126,8 @@ app.conf.broker_yransport_options = {'visibility_timeout': 432000}
 可能会出现已经错误问题：
 
 ```text
-InconsistencyError: Probably the key ('_kombu.binding.celery') has beenremoved from the Redis database.
+InconsistencyError: Probably the key ('_kombu.binding.celery') has been
+removed from the Redis database.
 ```
 
 您可以在Redis服务器的 time\_out 参数设置为0进行避免key被驱逐。

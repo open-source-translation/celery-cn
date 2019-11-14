@@ -39,7 +39,10 @@
 访问上下文访问信息的一个任务案例：
 
 ```python
-@app.task(bind=True)def dump_context(self, x, y):    print('Executing task id {0.id}, args: {0.args!r} kwargs: {0.kwargs!r}'.format(            self.request))
+@app.task(bind=True)
+def dump_context(self, x, y):
+    print('Executing task id {0.id}, args: {0.args!r} kwargs: {0.kwargs!r}'.format(
+            self.request))
 ```
 
 _bind_ 参数表示该函数绑是一个绑定方法，可以通过访问任务类型实例中的属性和方法。
