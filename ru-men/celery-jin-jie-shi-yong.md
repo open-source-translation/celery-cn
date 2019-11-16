@@ -115,7 +115,7 @@ $ celery -A proj worker -l info
 $ celery worker --help
 ```
 
-[`职程（Worker）文档：Workers Guide`](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide.md) 章节中详细描述了配置项的使用。
+[`职程（Worker）文档：Workers Guide`](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide/) 章节中详细描述了配置项的使用。
 
 ### 停止职程（Worker）
 
@@ -488,7 +488,7 @@ s2 为一个不完整的签名，需要另外一个参数，可以通过调用�
 >>> upload_document.s(file) | group(apply_filter.s() for filter in filters)
 ```
 
-有关更多工作流信息，请参阅用户指南中[ Canvas](../yong-hu-zhi-nan/canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows.md) 章节。
+有关更多工作流信息，请参阅用户指南中[ Canvas](../yong-hu-zhi-nan/canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows/) 章节。
 
 ## 路由
 

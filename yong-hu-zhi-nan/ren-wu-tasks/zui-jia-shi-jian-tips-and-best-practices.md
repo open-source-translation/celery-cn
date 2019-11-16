@@ -89,7 +89,7 @@ def store_page_info(info, url):
     PageInfo.objects.create(url=url, info=info)
 ```
 
-将不同任务的signature进行链接，组成任务链来达成目的。您可以在[Canvas: 设计工作流程](../canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows.md)中了解任务链和其他强大的结构。
+将不同任务的signature进行链接，组成任务链来达成目的。您可以在[Canvas: 设计工作流程](../canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows/)中了解任务链和其他强大的结构。
 
 默认情况下，Celery不允许您在任务中运行同步子任务，但是在极少数或极端情况下您可能需要这么做。警告：强烈不建议在任务中运行同步子任务。
 

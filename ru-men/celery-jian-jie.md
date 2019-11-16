@@ -175,7 +175,7 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 ### 跳转 --&gt;
 
 * [中间人：Broker](zhong-jian-ren-brokers/)
-* [职程：Worker](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide.md)
+* [职程：Worker](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide/)
 * [安全：Security](../yong-hu-zhi-nan/an-quan-security.md)
 * [贡献：Contributing](../fu-lu/gong-xian-contributing.md)
 * [应用：Applications](../yong-hu-zhi-nan/ying-yong-application/)
