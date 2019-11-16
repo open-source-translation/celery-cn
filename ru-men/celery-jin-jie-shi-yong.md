@@ -18,8 +18,7 @@ proj/__init__.py
 
 proj/celery.py
 
-{% tabs %}
-{% tab title="proj/celery.py" %}
+{% code title="proj/celery.py" %}
 ```python
 from __future__ import absolute_import, unicode_literals
 from celery import Celery
@@ -37,8 +36,7 @@ app.conf.update(
 if __name__ == '__main__':
     app.start()
 ```
-{% endtab %}
-{% endtabs %}
+{% endcode %}
 
 在此程序中，创建了 Celery 实例（也称 `app`），如果需要使用 Celery，导入即可。
 
@@ -56,8 +54,7 @@ if __name__ == '__main__':
 
 proj/tasks.py
 
-{% tabs %}
-{% tab title="proj/tasks.py" %}
+{% code title="proj/tasks.py" %}
 ```python
 from __future__ import absolute_import, unicode_literals
 from .celery import app
@@ -74,8 +71,7 @@ def mul(x, y):
 def xsum(numbers):
     return sum(numbers)
 ```
-{% endtab %}
-{% endtabs %}
+{% endcode %}
 
 ### 运行职程（Worker）
 

@@ -26,8 +26,7 @@ __main__.add
 
 tasks.py
 
-{% tabs %}
-{% tab title="tasks.py" %}
+{% code title="tasks.py" %}
 ```python
 from celery import Celery
 app = Celery()
@@ -38,8 +37,7 @@ def add(x, y): return x + y
 if __name__ == '__main__':
     app.worker_main()
 ```
-{% endtab %}
-{% endtabs %}
+{% endcode %}
 
 当模块执行时，任务名以 `__main__` 开头，被另外一个模块导入时，例如调用一个任务时，任务的名称将以 `tasks` （模块真实的名称）进行开头命名：
 
