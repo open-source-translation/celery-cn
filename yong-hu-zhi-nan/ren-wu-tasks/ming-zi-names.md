@@ -30,15 +30,13 @@
 
 tasks.py：
 
-{% code-tabs %}
-{% code-tabs-item title="tasks.py" %}
+{% code title="tasks.py" %}
 ```python
 @app.task
 def add(x, y):
     return x + y
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ```bash
 >>> from tasks import add

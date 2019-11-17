@@ -59,14 +59,12 @@ app.config_from_object('celeryconfig')
 
 其中 `celeryconfig` 模块内容如下： 
 
-{% code-tabs %}
-{% code-tabs-item title="celeryconfig.py" %}
+{% code title="celeryconfig.py" %}
 ```python
 enable_utc = True
 timezone = 'Europe/London'
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 导入 celeryconfig 程序就可以应用。
 

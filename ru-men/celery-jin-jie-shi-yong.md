@@ -18,8 +18,7 @@ proj/__init__.py
 
 proj/celery.py
 
-{% code-tabs %}
-{% code-tabs-item title="proj/celery.py" %}
+{% code title="proj/celery.py" %}
 ```python
 from __future__ import absolute_import, unicode_literals
 from celery import Celery
@@ -37,8 +36,7 @@ app.conf.update(
 if __name__ == '__main__':
     app.start()
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 在此程序中，创建了 Celery 实例（也称 `app`），如果需要使用 Celery，导入即可。
 
@@ -56,8 +54,7 @@ if __name__ == '__main__':
 
 proj/tasks.py
 
-{% code-tabs %}
-{% code-tabs-item title="proj/tasks.py" %}
+{% code title="proj/tasks.py" %}
 ```python
 from __future__ import absolute_import, unicode_literals
 from .celery import app
@@ -74,8 +71,7 @@ def mul(x, y):
 def xsum(numbers):
     return sum(numbers)
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### 运行职程（Worker）
 
@@ -119,7 +115,7 @@ $ celery -A proj worker -l info
 $ celery worker --help
 ```
 
-[`职程（Worker）文档：Workers Guide`](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide.md) 章节中详细描述了配置项的使用。
+[`职程（Worker）文档：Workers Guide`](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide/) 章节中详细描述了配置项的使用。
 
 ### 停止职程（Worker）
 
@@ -492,7 +488,7 @@ s2 为一个不完整的签名，需要另外一个参数，可以通过调用�
 >>> upload_document.s(file) | group(apply_filter.s() for filter in filters)
 ```
 
-有关更多工作流信息，请参阅用户指南中[ Canvas](../yong-hu-zhi-nan/canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows.md) 章节。
+有关更多工作流信息，请参阅用户指南中[ Canvas](../yong-hu-zhi-nan/canvas-she-ji-gong-zuo-liu-cheng-canvas-designing-workflows/) 章节。
 
 ## 路由
 

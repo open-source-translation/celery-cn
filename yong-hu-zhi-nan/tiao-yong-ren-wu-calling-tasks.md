@@ -1,31 +1,30 @@
 # 调用任务：Calling Tasks
 
-## 基础
+### 基础入门
 
-本文档介绍了任务实例和 [canvas]() 对 Celery 统一的 `Calling API`。
+本文档介绍了任务实例和 [canvas]() 对 Celery 统一的调用接口。
 
-该 API 定义了三种方法，以及一系列的标准执行选项：
+这些 API 定义了标准的执行选项集，也就是下面这三个方法：
 
-* `apply_async(args[, kwargs[, …]])`
+* apply\_async\(args\[, kwargs\[, ...\]\]\)
 
-  发送任务消息
+  发送一个任务消息。
 
-* `delay(*args, **kwargs)`
+* delay\(\*args, \*\*kwargs\)
 
-  发送任务消息的快捷方式, 但是不支持执行选项
+  直接发送一个任务消息,但是不支持运行参数。
 
-* `calling (__call__)`
+* calling\(**\_\_call\_\_**\)
 
-  支持直接调用 API（例如 add(2, 2)）， 意味着任务将不会由 worker 执行，而是在当前进程中执行(不会发送消息)。
+  应用一个支持调用接口\(例如,add\(2,2\)\)的对象,意味着任务不会被一个 worker 执行,但是会在当前线程中“执行”，\(但是消息不会被发送\)。
 
-备忘单:
+#### 速查表
 
 * `T.delay(arg, kwarg=value)`
 
-   调用 apply_async 的快捷方式（.delay(*args, **kwargs)等价于调用 .apply_async(args, kwargs)）。
+  调用 apply_async 的快捷方式（.delay(*args, **kwargs)等价于调用 .apply_async(args, kwargs)）。
 
 * `T.apply_async((arg,), {'kwarg': value})`
-
 * `T.apply_async(countdown=10)`
 
   从现在起, 十秒内执行。
@@ -36,49 +35,53 @@
 
 * `T.apply_async(countdown=60, expires=120)`
 
-  从现在起一分钟执行，但在两分钟后过期。
+    从现在起一分钟执行，但在两分钟后过期。
 
 * `T.apply_async(expires=now + timedelta(days=2))`
 
-  两天内过期，使用datetime对象。
+    两天内过期，使用datetime对象。
 
-例子：
+### 例子
 
-`delay()` 方法很方便，因为它看起来像调用常规函数。
-```py
+`delay()` 方法就像一个很规则的函数，很方便去调用它：
+
+```python
 task.delay(arg1, arg2, kwarg1='x', kwarg2='y')
 ```
 
-使用 `apply_async()` 相反，你必须写：
-```py
+用 `apply_async()` 替代你写的：
+
+```python
 task.apply_async(args=[arg1, arg2], kwargs={'kwarg1': 'x', 'kwarg2': 'y'})
 ```
 
-显然 `delay()` 更方便，但是如果你需要添加额外的执行选项，你必须使用 `apply_async()`
+尽管运行十分方便，但是如果像设置额外的行参数，你必须用 `apply_async`。
 
-```
-技巧
+### 小技巧
 
-如果任务没有在当前进程中注册，你可以使用 send_task() 指定名称调用任务。
-```
+如果任务在当前线程没有注册,你可以通过名字替代的方法使用 send\_task\(\) 去调用这个任务。
 
-本文剩下的部分将会详细介绍任务执行选项，所有的用例都使用一个名为 add 的任务，并返回两个参数的和。
-```py
+接下来我们着重的任务参数详情（task excution options），所有的例子都基于一个任务add,返回两个参数之和：
+
+```python
 @app.task
 def add(x, y):
     return x + y
 ```
 
-还有另一种方法：
+#### 还有其他的方式...
 
-你将在稍后阅读 [Canvas]() 进一步了解相关内容，`signature`'s 对象用于传递任务调用的签名（例如通过网络发送），并且它们都支持 `Calling API`。
-```py
+你也多了解下一章将会讲到的Canvas,签名的对象用来传递任务的签名（例如,通过网络发送），它们还支持API调用：
+
+```python
 task.s(arg1, arg2, kwarg1='x', kwargs2='y').apply_async()
 ```
 
-## 连接(回调/错误回调)
-Celery 支持将任务连接在一起，以便一个任务紧随另一个任务。回调任务将使用父任务的结果作为部分的调用参数。
-```py
+### Linking\(callbacks/errbacks\)
+
+Celery支持将任务链，一个任务在另一个任务之后。回调任务将用父任务的结果作为一部分参数:
+
+```python
 res = add.apply_async((2, 2), link=add.s(16))
 
 # 译者注
@@ -86,16 +89,13 @@ res = add.apply_async((2, 2), link=add.s(16))
 # res.children[0].get() --> 20
 ```
 
-第一个任务的结果（ 4 ），将会发送给新任务，新任务将会将先前的结果与16相加，形成的表达式为: `(2 + 2) + 16 = 20`
+第一个任务的结果（4）会被发送下一个新的任务的参数去加上16，可以这样表达 `(2+2)+16=20`。
 
-`add.s`调用被称为签名，如果你还不了解这是什么，你应该在[canvas指南]()中阅读它们。在这里，你还可以了解到[任务链]()：将任务连接在一起的更简单的方法。
+如果task引发异常（errback），您还可以使异常的回调，但这与常规回调的行为不同，因为它将被传递父任务的ID，而不是结果。这是因为抛出序列化引发的异常，因此错误回调需要启用backend，并且任务必须检索任务的结果。
 
-在实践中`link`执行选项被任务是内部原语，你可能不会直接使用它，而是使用`任务链`
+这是一个错误回调的例子：
 
-如果任务抛出异常，你也可以使用回调，但是这与常规的回调行为不同，因为它将传递父任务的 ID（而不是结果）给回调任务。这是因为并不是总能将异常序列化，因此错误回调需要启用 backend。
-
-这是一个错误回调示例：
-```py
+```python
 @app.task
 def error_handler(uuid):
     result = AsyncResult(uuid)
@@ -104,23 +104,25 @@ def error_handler(uuid):
           uuid, exc, result.traceback))
 ```
 
-可以使用 `link_error` 执行选项，给任务添加错误回调。
-```py
+可以使用 `link_error` 执行选项将其添加到任务中：
+
+```python
 add.apply_async((2, 2), link_error=error_handler.s())
 ```
 
-此外，`link` 和 `link_error` 都可以作为一个列表：
-```py
+此外，`link` 和 `link_error` 选项都可以是list：
+
+```python
 add.apply_async((2, 2), link=[add.s(16), other_task.s()])
 ```
 
-父任务的结果将作为部分参数来分别调用所有的回调。
+然后将依次调用回调/错误返回，并且将使用父任务的返回值作为部分参数来调用所有回调。
 
-## On Message
-Celery通过 `on_message` 回调可以捕获所有的状态变更。
+### On Message
 
-例如，长时间运行的任务发送任务进度，可以这样做：
-```py
+Celery 可以通过消息回调获取所有状态的改变。例如对于长时任务发送人任务进程，你可以这样做：
+
+```python
 @app.task(bind=True)
 def hello(self, a, b):
     time.sleep(1)
@@ -131,16 +133,17 @@ def hello(self, a, b):
     return 'hello world: %i' % (a+b)
 ```
 
-```py
+```python
 def on_raw_message(body):
     print(body)
 
-r = hello.apply_async(args=[5, 5])
+r = hello.apply_async(4, 6)
 print(r.get(on_message=on_raw_message, propagate=False))
 ```
 
-将阻塞，并生成如下的输出：
-```py
+将生成如下输出：
+
+```python
 {'task_id': '5660d3a3-92b8-40df-8ccc-33a5d1d680d7',
  'result': {'progress': 50},
  'children': [],
@@ -159,28 +162,32 @@ print(r.get(on_message=on_raw_message, propagate=False))
 hello world: 10
 ```
 
-## ETA和倒计时
-通过 ETA（estimated time of arrival, 预计到底时间）你可以设定一个特定的时间，这是最早执行任务的时间。`倒计时`是一种以秒为单位设置ETA的快捷方式。
-```py
+### ETA and Countdown
+
+ETA（estimated time of arrival, 预计到底时间）让你设置一个日期和时间，在这个时间之前任务将被执行。countdown 是一种以秒为单位设置ETA的快捷方式。
+
+```python
 >>> result = add.apply_async((2, 2), countdown=3)
 >>> result.get()    # this takes at least 3 seconds to return
 20
 ```
 
-承诺任务在指定的日期时间后执行，并不保证在指定的时间一定执行。在截止时间后运行的原因可能是许多任务在队列中等待，或者严重的网络延时。为了确保你的任务能够及时执行，你应该监视队列中的任务拥塞情况。使用Munin或者其他类似工具来接收报警，因此可以采用合适的行为来减轻负担。见[Munin]()
+确保任务在指定的日期和时间之后的某个时间执行，但不一定在该时间执行。可能原因可能包括许多项目在队列中等待，或者严重的网络延迟。为了确保您的任务及时执行，你应该监视队列中的拥塞情况。使用Munin或类似工具来接收警报，因此可以采取适当的措施来减轻负载。点击查看[Munin](https://docs.celeryproject.org/en/4.0/userguide/monitoring.html#monitoring-munin)。
 
-虽然`倒计时`是一个整数，但是ETA必须是一个 `datetime` 对象，指定确切的日期和时间（包括毫秒精度和时区信息）：
-```py
+尽管 `countdown` 是整数，但eta必须是一个 `datetime` 对象，并指定确切的日期和时间（包括毫秒精度和时区信息）：
+
+```text
 >>> from datetime import datetime, timedelta
 
 >>> tomorrow = datetime.utcnow() + timedelta(days=1)
 >>> add.apply_async((2, 2), eta=tomorrow)
 ```
 
-## 过期
-`expires` 参数定义了一个可选的过期时间，即可以通过整数指定倒计时（秒），也可以通过datetime指定日期时间。
+### Expiration
 
-```py
+`expries` 参数定义了一个可选的到期时间，既可以作为任务之后秒发布，或在特定日期和时间使用 `datetime`：
+
+```python
 >>> # Task expires after one minute from now.
 >>> add.apply_async((10, 10), expires=60)
 
@@ -190,44 +197,47 @@ hello world: 10
 ...                 expires=datetime.now() + timedelta(days=1)
 ```
 
-当工作进程收到一个过期的任务，会将任务标记为 [REVOKED]()（[TaskRevokedError]()）
+当 `worker` 收到过期的任务时，它将任务标记为REVOKED（[TaskRevokedError](https://docs.celeryproject.org/en/4.0/reference/celery.exceptions.html#celery.exceptions.TaskRevokedError)）。
 
-## 消息发送重试
-当连接失败时，Celery将会自动重试发送消息，并且可以配置重试行为（例如重试频率、最大重试次数），或者禁用。
+### 消息重发 \(Message Sending Retry\)
 
-要想禁用重试，可以配置retry执行参数为False。
-```py
+当连接失败时，Celery会自动重试发送消息，并且可以配置重试行为（例如重试频率或最大重试次数）或全部禁用。
+
+```text
 add.apply_async((2, 2), retry=False)
 ```
 
-相关设置:
+相关设定
 * [task_publish_retry]()
 * [task_publish_retry_policy]()
 
-### 重试策略
-重试策略是一种控制重试行为的方式，可以包含以下的关键参数：
-* max_retries
+### 重试策略 \(Retry Plicy \)
 
-  在放弃前的最大重试次数，在这种场景下，将抛出重试失败的异常。
-  
-  值为 None，表示永远进行重试。
-  
+重试策略是一种控制重试行为的映射，可以包含以下键：
+
+* max\_retries
+
+  最大重试次数，在这种情况下，将抛出重试失败的异常。
+
+  值为None意味着它将永远重试。
+
   默认值为重试3次。
 
-* interval_start
+* interval\_start
 
-  定义两次重试之间的间隔（秒）。默认值是0（首次重试是瞬的）。
+  定义两次重试之间要等待的秒数（浮点数或整数）。默认值为0（第一次重试是瞬时的）。
 
-* interval_step
+* interval\_step
 
-  在每次连续重试时，该值将会添加到重试延时中（整数和浮点数）。默认值为0.2。
+  在每次连续重试时，此数字将被添加到重试延迟中（浮点数或整数）。默认值为0.2。
 
-* interval_max
+* interval\_max
 
-  两次重试之间的最大等待时间（秒）。默认值为0.2秒。
+  重试之间等待的最大秒数（浮点数或整数）。默认值为0.2。
 
-例如，默认的重试策略配置如下：
-```py
+  例如，默认策略与以下内容相关：
+
+```text
 add.apply_async((2, 2), retry=True, retry_policy={
     'max_retries': 3,
     'interval_start': 0,
@@ -236,15 +246,13 @@ add.apply_async((2, 2), retry=True, retry_policy={
 })
 ```
 
-重试的最长时间是0.4秒。默认情况下，应该把时间设置的相对较短，如果 broker 连接断开，将会导致一系列的因为连接失败的重试。例如，大量的WebServer进程等待重试，阻塞其他的输入请求。
+重试的最长时间为 0.4 秒。默认情况下将其设置为相对较短，因为如果代理连接断开，连接失败可能导致重试堆效应–例如，许多 Web 服务器进程正在等待重试，从而阻止了其他传入请求。
 
-**译者：**重试将会阻塞任务发送函数（delay/apply_async）。
+### 连接错误处理\(Connection Error Handling\)
 
-## 连接错误处理
-When you send a task and the message transport connection is lost, or the connection cannot be initiated, an OperationalError error will be raised:
+当您发送任务并且传输连接丢失或无法启动连接时，将引发 `OperationalError` 错误：
 
-当你发送一个任务时，消息传输丢失或者连接初始化失败，将会抛出 `OperationalError` 错误：
-```py
+```python
 >>> from proj.tasks import add
 >>> add.delay(2, 2)
 Traceback (most recent call last):
@@ -268,11 +276,11 @@ Traceback (most recent call last):
   kombu.exceptions.OperationalError: [Errno 61] Connection refused
 ```
 
-如果启用了重试，这将会在重试用尽后，或者禁用后才发生。
+如果启用了[重试](https://docs.celeryproject.org/en/4.0/userguide/calling.html#calling-retry)，则只有在重试用尽后或立即禁用后才发生。
 
-你也能捕获这个失败：
+您也可以处理此错误：
 
-```py
+```python
 >>> from celery.utils.log import get_logger
 >>> logger = get_logger(__name__)
 
@@ -282,16 +290,26 @@ Traceback (most recent call last):
 ...     logger.exception('Sending task raised: %r', exc)
 ```
 
-## 序列化
-客户端和工作进程之间数据传输需要序列化，因此每条信息在Celery中都有一个 `content_type` 头，用于描述消息编码的序列化方法。
+### 序列化 \(Serializers\)
 
-默认的序列化工具是 `JSON`，但是你可以通过使用配置 `task_serializer` 变更序列化方式，或者针对每个任务，甚至每条消息进行更改。
+在客户端和工作人员之间传输的数据需要进行序列化，因此Celery中的每条消息都有一个content\_type标头，该标头描述了用于对其进行编码的序列化方法。
 
-Celery内置支持 *JSON*, [pickle](), *YAML*以及*msgpack*，并且你也可以通过Kombu序列化注册表，添加自定义序列化方式。
+默认的序列化器是JSON，但是您可以使用[task\_serializer](https://docs.celeryproject.org/en/4.0/userguide/configuration.html#std:setting-task_serializer)设置更改此设置，或者针对每个任务，甚至针对每条消息进行更改。
 
-Kombu用户指南中的[消息序列化](https://kombu.readthedocs.io/en/master/userguide/serialization.html#guide-serialization)
+有内置的支持JSON，[pickle](https://docs.python.org/dev/library/pickle.html#module-pickle)，YAML 和msgpack，你也可以通过他们登记到 Kombu 注册表中添加自己的自定义序列化
 
-每个选项都有其优点和缺点：
+#### 安全
+
+pickle模块允许执行任意功能，请参阅安全指南。
+
+Celery还带有一个特殊的序列化程序，该序列化程序使用加密技术对您的消息进行签名。
+
+#### 也可以看看
+
+Kombu 中的[消息序列化](http://kombu.readthedocs.io/en/master/userguide/serialization.html#guide-serialization)的用户指南。
+
+每个序列化器都有其优点和缺点：
+
 * json - JSON 被大多数的编程语言支持，并且现在是 Python 标准的一部分（自2.6开始），并且现代 Python 库（例如 [simplejson](https://pypi.python.org/pypi/simplejson/)）具有非常快的 json 解析速度。
 
   JSON 的缺点是会限制你使用如下的数据类型：字符串、Unicode、字典和列表。小数和日期明显缺失。
@@ -299,6 +317,8 @@ Kombu用户指南中的[消息序列化](https://kombu.readthedocs.io/en/master/
   二进制数据使用 Base64 编码进行传输，这与支持纯二进制传输的相比，数据传输量增长了34%。
 
   但如果你的数据满足上述限制，并且你需要跨语言支持，则 JSON 可能是你的最佳选择。
+
+  有关更多信息，请参见 [http://json.org](http://json.org)。
 
 * pickle - 如果你除了 Python 外，并不需要支持其他语言，那么使用 pickle 编码将让你获得对所有 Python 内建类型的支持（类实例除外）。相比 JSON，使用 pickle 序列化的二进制文件更小，传输速度更快。
 
@@ -308,11 +328,11 @@ Kombu用户指南中的[消息序列化](https://kombu.readthedocs.io/en/master/
 
   如果你需要更具表现能力的数据集合，则 YMAL 比上面的序列化方式更适合。
 
-  有关更多信息，请参见http://yaml.org/。
+  有关更多信息，请参见 [http://yaml.org/](http://yaml.org/)。
 
-* msgpack - msgpack 是一种接近 JSON 的二进制序列化格式。它还不够稳定，因此应该将其视为实验性的。
+* msgpack - msgpack 是一种接近 JSON 的二进制序列化格式。但是，它还很年轻，因此此时应该将支持视为实验性的
 
-  有关更多信息，请参见http://msgpack.org/。
+  有关更多信息，请参见 [http://msgpack.org/](http://msgpack.org/)。
 
 编码类型可以用作消息头，因此 workers 知道如何反序列化所有的任务。如果你使用自定义序列方案，则该序列化必须被 workers 支持。
 
@@ -322,11 +342,12 @@ Kombu用户指南中的[消息序列化](https://kombu.readthedocs.io/en/master/
 * 3.[task_serializer]() 属性。
 
 为单个任务调用设置序列化方式：
-```py
+```python
 >>> add.apply_async((10, 10), serializer='json')
 ```
 
-## 压缩
+### 压缩 \(Compression\)
+
 Celery 可以使用以下内建方案压缩消息。
 
 * brotli
@@ -421,14 +442,21 @@ Celery 可以使用以下内建方案压缩消息。
 * 3.task_compression 属性。
 
 任务调用时指定压缩方法的示例：
-```py
+```python
 >>> add.apply_async((2, 2), compression='zlib')
 ```
 
-## 连接
-你可以通过创建一个发布者来手动处理连接：
+### 连接\(Connections\)
 
-```py
+#### 自动池支持
+
+* 从2.3版开始，支持自动连接池，因此您不必手动处理连接和发布者即可重用连接。
+* 从2.5版开始，默认情况下启用连接池。
+* 有关broker\_pool\_limit更多信息，请参见设置。
+
+您可以通过创建发布者来手动处理连接：
+
+```python
 results = []
 with add.app.pool.acquire(block=True) as connection:
     with add.get_publisher(connection) as publisher:
@@ -439,11 +467,9 @@ with add.app.pool.acquire(block=True) as connection:
 print([res.get() for res in results])
 ```
 
-**自动池支持** 从2.3版开始，支持自动连接池，因此你不必手动处理连接和发布者即可重用连接。从2.5版开始，默认情况下启用连接池。有关[broker_pool_limit]() 更多信息，请参见设置。
+尽管这是个特定示例，但是可以更好的展现一组：
 
-这个特定的示例可以通过 group 更好的表示：
-
-```py
+```python
 >>> from celery import group
 
 >>> numbers = [(2, 2), (4, 4), (8, 8), (16, 16)]
@@ -453,53 +479,42 @@ print([res.get() for res in results])
 [4, 8, 16, 32]
 ```
 
-## 路由选项
-Celery 可以路由任务到不同的队列。
+### 路由选择 \(Routing options\)
 
-使用 `queue` 执行选项，可以完成简单的路由。
+Celery 可以将任务路由到不同的队列。
 
-```py
+使用以下 queue 可以完成简单的路由\(name &lt;-&gt; name\)：
+
+```text
 add.apply_async(queue='priority.high')
 ```
 
-你可以通过使用 workers 的 `-Q` 参数，将 workers 分配给队列 `priority.high`。
+然后，您可以指派 workers 给 priority.high 的队列,使用 worker -Q 参数将分配给队列：
 
-```
+```text
 $ celery -A proj worker -l info -Q celery,priority.high
 ```
 
-不建议对队列名称使用硬编码，最好的方式是使用 routers 配置（[task_routes]()）。要了解有关路由的更多信息，请看[路由任务]()
+### 也可以看看
 
-## 结果选项
-你可以通过使用 [task_ignore_result ]() 设置或 `ignore_result` 执行选项，开启或禁用对任务结果的存储。
+不建议用代码对队列名称进行硬编码，最佳做法是使用配置路由器（[task\_routes](https://docs.celeryproject.org/en/4.0/userguide/configuration.html#std:setting-task_routes)）。
 
-```py
->>> result = add.apply_async(1, 2, ignore_result=True)
->>> result.get()
-None
-
->>> # Do not ignore result (default)
-...
->>> result = add.apply_async(1, 2, ignore_result=False)
->>> result.get()
-3
-```
-
-如果你希望在 backend 中存储关于任务的额外元数据，可以将`result_extended`设置为True。
-
-更多关于任务的信息，请参见[任务](ren-wu-tasks/README.md)
+要了解有关路由的更多信息，请参阅“[路由任务\(Routing Tasks\)](https://docs.celeryproject.org/en/4.0/userguide/routing.html#guide-routing)”。
 
 ### 高级选项
-这些选项适用于想要使用AMQP完整路由功能的高级用户。有兴趣的人士可以阅读[路由指南]()。
 
-* exchange
+这些选项适用于想要使用AMQP完整路由功能的高级用户。有兴趣的人士可以阅读[路由指南](https://docs.celeryproject.org/en/4.0/userguide/routing.html#guide-routing)。
 
-  名称交换
+* 交换\(exchange\)
 
-* routing_key
+  发送信息的 exchange\(或者 kombu.entity.Exchange\) 的名称。
 
-  用于确定 Routing Key。
+* routing\_key
 
-* priority
+  用于确定路由的密钥。
 
-  0～255之间的数字，255是最高优先级。支持 RabbitMQ，Redis（优先级颠倒，0是最高优先级）。
+* 优先\(priority\)
+
+  0～255 之间的数字，其中255是最高优先级。
+
+  支持：RabbitMQ，Redis（优先级颠倒，最高为0）。

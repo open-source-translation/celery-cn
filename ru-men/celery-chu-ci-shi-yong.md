@@ -77,8 +77,7 @@ $ pip install celery
 
 首先创建 tasks.py：
 
-{% code-tabs %}
-{% code-tabs-item title="tasks.py" %}
+{% code title="tasks.py" %}
 ```python
 from celery import Celery
 app = Celery('tasks', broker='amqp://guest@localhost//')
@@ -86,8 +85,7 @@ app = Celery('tasks', broker='amqp://guest@localhost//')
 def add(x, y):
     return x + y
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 第一个参数为当前模块的名称，只有在 \_\_main\_\_ 模块中定义任务时才会生产名称。
 
@@ -236,8 +234,7 @@ app.config_from_object('celeryconfig')
 
 在上面的实例中，需要在同级目录下创建一个名为 `celeryconfig.py` 的文件，添加以下内容：
 
-{% code-tabs %}
-{% code-tabs-item title="celeryconfig.py" %}
+{% code title="celeryconfig.py" %}
 ```python
 broker_url = 'pyamqp://'
 result_backend = 'rpc://'
@@ -248,8 +245,7 @@ accept_content = ['json']
 timezone = 'Europe/Oslo'
 enable_utc = True
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 可以通过以下命令来进行验证配置模块是否配置正确：
 
@@ -261,27 +257,23 @@ $ python -m celeryconfig
 
 Celery 也可以设置任务执行错误时的专用队列中，这只是配置模块中一小部分，详细配置如下：
 
-{% code-tabs %}
-{% code-tabs-item title="celeryconfig.py" %}
+{% code title="celeryconfig.py" %}
 ```python
 task_routes = {
     'tasks.add': 'low-priority',
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 Celery 也可以针对任务进行限速，以下为每分钟内允许执行的10个任务的配置：
 
-{% code-tabs %}
-{% code-tabs-item title="celeryconfig.py" %}
+{% code title="celeryconfig.py" %}
 ```python
 task_annotations = {
     'tasks.add': {'rate_limit': '10/m'}
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 如果使用的是 RabbitMQ 或 Redis 的话，可以在运行时进行设置任务的速率：
 
