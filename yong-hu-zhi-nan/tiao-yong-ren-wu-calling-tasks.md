@@ -16,7 +16,7 @@
 
 * calling\(**\_\_call\_\_**\)
 
-  应用一个支持调用接口\(例如,add\(2,2\)\)的对象,意味着任务不会被一个 worker 执行,但是会在当前线程中“执行”，\(但是消息不会被发送\)。
+  应用一个支持调用接口（例如，add\(2,2\)）的对象,意味着任务不会被一个 worker 执行,但是会在当前线程中执行\(但是消息不会被发送\)。
 
 #### 速查表
 
@@ -69,7 +69,7 @@ def add(x, y):
     return x + y
 ```
 
-#### 还有其他的方式...
+#### 还有其他的方式......
 
 你也多了解下一章将会讲到的Canvas,签名的对象用来传递任务的签名（例如,通过网络发送），它们还支持API调用：
 
@@ -79,7 +79,7 @@ task.s(arg1, arg2, kwarg1='x', kwargs2='y').apply_async()
 
 ### Linking\(callbacks/errbacks\)
 
-Celery支持将任务链，一个任务在另一个任务之后。回调任务将用父任务的结果作为一部分参数:
+Celery支持将任务链，一个任务在另一个任务之后。回调任务将用父任务的结果作为一部分参数：
 
 ```python
 res = add.apply_async((2, 2), link=add.s(16))
@@ -176,7 +176,7 @@ ETA（estimated time of arrival, 预计到底时间）让你设置一个日期�
 
 尽管 `countdown` 是整数，但eta必须是一个 `datetime` 对象，并指定确切的日期和时间（包括毫秒精度和时区信息）：
 
-```text
+```python
 >>> from datetime import datetime, timedelta
 
 >>> tomorrow = datetime.utcnow() + timedelta(days=1)
@@ -201,9 +201,9 @@ ETA（estimated time of arrival, 预计到底时间）让你设置一个日期�
 
 ### 消息重发 \(Message Sending Retry\)
 
-当连接失败时，Celery会自动重试发送消息，并且可以配置重试行为（例如重试频率或最大重试次数）或全部禁用。
+当连接失败时，Celery 会自动重试发送消息，并且可以配置重试行为（例如重试频率或最大重试次数）或全部禁用。
 
-```text
+```python
 add.apply_async((2, 2), retry=False)
 ```
 
@@ -246,7 +246,7 @@ add.apply_async((2, 2), retry=True, retry_policy={
 })
 ```
 
-重试的最长时间为 0.4 秒。默认情况下将其设置为相对较短，因为如果代理连接断开，连接失败可能导致重试堆效应–例如，许多 Web 服务器进程正在等待重试，从而阻止了其他传入请求。
+重试的最长时间为0.4秒。默认情况下将其设置为相对较短，因为如果代理连接断开，连接失败可能导致重试堆效应–例如，许多 Web 服务器进程正在等待重试，从而阻止了其他传入请求。
 
 ### 连接错误处理\(Connection Error Handling\)
 
@@ -292,17 +292,17 @@ Traceback (most recent call last):
 
 ### 序列化 \(Serializers\)
 
-在客户端和工作人员之间传输的数据需要进行序列化，因此Celery中的每条消息都有一个content\_type标头，该标头描述了用于对其进行编码的序列化方法。
+在客户端和工作人员之间传输的数据需要进行序列化，因此 Celery 中的每条消息都有一个 content\_type 标头，该标头描述了用于对其进行编码的序列化方法。
 
-默认的序列化器是JSON，但是您可以使用[task\_serializer](https://docs.celeryproject.org/en/4.0/userguide/configuration.html#std:setting-task_serializer)设置更改此设置，或者针对每个任务，甚至针对每条消息进行更改。
+默认的序列化器是JSON，但是您可以使用 [task\_serializer](https://docs.celeryproject.org/en/4.0/userguide/configuration.html#std:setting-task_serializer) 设置更改此设置，或者针对每个任务，甚至针对每条消息进行更改。
 
 有内置的支持JSON，[pickle](https://docs.python.org/dev/library/pickle.html#module-pickle)，YAML 和msgpack，你也可以通过他们登记到 Kombu 注册表中添加自己的自定义序列化
 
 #### 安全
 
-pickle模块允许执行任意功能，请参阅安全指南。
+pickle 模块允许执行任意功能，请参阅安全指南。
 
-Celery还带有一个特殊的序列化程序，该序列化程序使用加密技术对您的消息进行签名。
+Celery 还带有一个特殊的序列化程序，该序列化程序使用加密技术对您的消息进行签名。
 
 #### 也可以看看
 
@@ -435,7 +435,6 @@ Celery 可以使用以下内建方案压缩消息。
 
 你还可以创建自己的压缩方式，并在[kumbo压缩注册]()中注册它们。
 
-
 发送任务时的压缩方案配置优先级如下（从高到低）：
 * 1.`compression` 执行选项。
 * 2.Task.compression 属性。
@@ -452,7 +451,7 @@ Celery 可以使用以下内建方案压缩消息。
 
 * 从2.3版开始，支持自动连接池，因此您不必手动处理连接和发布者即可重用连接。
 * 从2.5版开始，默认情况下启用连接池。
-* 有关broker\_pool\_limit更多信息，请参见设置。
+* 有关 [broker_pool_limit](https://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_pool_limit) 更多信息，请参见设置。
 
 您可以通过创建发布者来手动处理连接：
 
