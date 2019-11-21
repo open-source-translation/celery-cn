@@ -14,6 +14,8 @@ Celery 中文手册在翻译的过程中，已经最大限度的保留原手册�
 
 ## 鼓励一下
 
+所有的赞赏钱钱全部捐献给公益事业以及域名续费，[资金流向](zi-jin-liu-xiang.md)为具体的资金情况。
+
 ![&#x5FAE;&#x4FE1;&#x8D5E;&#x8D4F;&#x7801;](.gitbook/assets/wechatimg73.jpeg)
 
 ## 交流
