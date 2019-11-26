@@ -237,7 +237,7 @@ add.apply_async((2, 2), retry=False)
 
   例如，默认策略与以下内容相关：
 
-```text
+```python
 add.apply_async((2, 2), retry=True, retry_policy={
     'max_retries': 3,
     'interval_start': 0,
@@ -484,7 +484,7 @@ Celery 可以将任务路由到不同的队列。
 
 使用以下 queue 可以完成简单的路由\(name &lt;-&gt; name\)：
 
-```text
+```python
 add.apply_async(queue='priority.high')
 ```
 
