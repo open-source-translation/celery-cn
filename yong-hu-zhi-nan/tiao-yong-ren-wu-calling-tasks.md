@@ -1,8 +1,8 @@
 # 调用任务：Calling Tasks
 
-### 基础入门
+## 基础入门
 
-本文档介绍了任务实例和 [canvas]() 对 Celery 统一的调用接口。
+本文档介绍了任务实例和 [canvas](tiao-yong-ren-wu-calling-tasks.md) 对 Celery 统一的调用接口。
 
 这些 API 定义了标准的执行选项集，也就是下面这三个方法：
 
@@ -18,11 +18,11 @@
 
   应用一个支持调用接口（例如，add\(2,2\)）的对象,意味着任务不会被一个 worker 执行,但是会在当前线程中执行\(但是消息不会被发送\)。
 
-#### 速查表
+### 速查表
 
 * `T.delay(arg, kwarg=value)`
 
-  调用 apply_async 的快捷方式（.delay(*args, **kwargs)等价于调用 .apply_async(args, kwargs)）。
+  调用 apply\_async 的快捷方式（.delay\(_args, \*_kwargs\)等价于调用 .apply\_async\(args, kwargs\)）。
 
 * `T.apply_async((arg,), {'kwarg': value})`
 * `T.apply_async(countdown=10)`
@@ -35,13 +35,13 @@
 
 * `T.apply_async(countdown=60, expires=120)`
 
-    从现在起一分钟执行，但在两分钟后过期。
+  从现在起一分钟执行，但在两分钟后过期。
 
 * `T.apply_async(expires=now + timedelta(days=2))`
 
-    两天内过期，使用datetime对象。
+  两天内过期，使用datetime对象。
 
-### 例子
+## 例子
 
 `delay()` 方法就像一个很规则的函数，很方便去调用它：
 
@@ -57,7 +57,7 @@ task.apply_async(args=[arg1, arg2], kwargs={'kwarg1': 'x', 'kwarg2': 'y'})
 
 尽管运行十分方便，但是如果像设置额外的行参数，你必须用 `apply_async`。
 
-### 小技巧
+## 小技巧
 
 如果任务在当前线程没有注册,你可以通过名字替代的方法使用 send\_task\(\) 去调用这个任务。
 
@@ -69,7 +69,7 @@ def add(x, y):
     return x + y
 ```
 
-#### 还有其他的方式......
+### 还有其他的方式......
 
 你也多了解下一章将会讲到的Canvas,签名的对象用来传递任务的签名（例如,通过网络发送），它们还支持API调用：
 
@@ -77,7 +77,7 @@ def add(x, y):
 task.s(arg1, arg2, kwarg1='x', kwargs2='y').apply_async()
 ```
 
-### Linking\(callbacks/errbacks\)
+## Linking\(callbacks/errbacks\)
 
 Celery支持将任务链，一个任务在另一个任务之后。回调任务将用父任务的结果作为一部分参数：
 
@@ -118,7 +118,7 @@ add.apply_async((2, 2), link=[add.s(16), other_task.s()])
 
 然后将依次调用回调/错误返回，并且将使用父任务的返回值作为部分参数来调用所有回调。
 
-### On Message
+## On Message
 
 Celery 可以通过消息回调获取所有状态的改变。例如对于长时任务发送人任务进程，你可以这样做：
 
@@ -162,7 +162,7 @@ print(r.get(on_message=on_raw_message, propagate=False))
 hello world: 10
 ```
 
-### ETA and Countdown
+## ETA and Countdown
 
 ETA（estimated time of arrival, 预计到底时间）让你设置一个日期和时间，在这个时间之前任务将被执行。countdown 是一种以秒为单位设置ETA的快捷方式。
 
@@ -183,7 +183,7 @@ ETA（estimated time of arrival, 预计到底时间）让你设置一个日期�
 >>> add.apply_async((2, 2), eta=tomorrow)
 ```
 
-### Expiration
+## Expiration
 
 `expries` 参数定义了一个可选的到期时间，既可以作为任务之后秒发布，或在特定日期和时间使用 `datetime`：
 
@@ -199,7 +199,7 @@ ETA（estimated time of arrival, 预计到底时间）让你设置一个日期�
 
 当 `worker` 收到过期的任务时，它将任务标记为REVOKED（[TaskRevokedError](https://docs.celeryproject.org/en/4.0/reference/celery.exceptions.html#celery.exceptions.TaskRevokedError)）。
 
-### 消息重发 \(Message Sending Retry\)
+## 消息重发 \(Message Sending Retry\)
 
 当连接失败时，Celery 会自动重试发送消息，并且可以配置重试行为（例如重试频率或最大重试次数）或全部禁用。
 
@@ -208,10 +208,11 @@ add.apply_async((2, 2), retry=False)
 ```
 
 相关设定
-* [task_publish_retry]()
-* [task_publish_retry_policy]()
 
-### 重试策略 \(Retry Plicy \)
+* [task\_publish\_retry](tiao-yong-ren-wu-calling-tasks.md)
+* [task\_publish\_retry\_policy](tiao-yong-ren-wu-calling-tasks.md)
+
+## 重试策略 \(Retry Plicy \)
 
 重试策略是一种控制重试行为的映射，可以包含以下键：
 
@@ -248,7 +249,7 @@ add.apply_async((2, 2), retry=True, retry_policy={
 
 重试的最长时间为0.4秒。默认情况下将其设置为相对较短，因为如果代理连接断开，连接失败可能导致重试堆效应–例如，许多 Web 服务器进程正在等待重试，从而阻止了其他传入请求。
 
-### 连接错误处理\(Connection Error Handling\)
+## 连接错误处理\(Connection Error Handling\)
 
 当您发送任务并且传输连接丢失或无法启动连接时，将引发 `OperationalError` 错误：
 
@@ -290,7 +291,7 @@ Traceback (most recent call last):
 ...     logger.exception('Sending task raised: %r', exc)
 ```
 
-### 序列化 \(Serializers\)
+## 序列化 \(Serializers\)
 
 在客户端和工作人员之间传输的数据需要进行序列化，因此 Celery 中的每条消息都有一个 content\_type 标头，该标头描述了用于对其进行编码的序列化方法。
 
@@ -298,13 +299,13 @@ Traceback (most recent call last):
 
 有内置的支持JSON，[pickle](https://docs.python.org/dev/library/pickle.html#module-pickle)，YAML 和msgpack，你也可以通过他们登记到 Kombu 注册表中添加自己的自定义序列化
 
-#### 安全
+### 安全
 
 pickle 模块允许执行任意功能，请参阅安全指南。
 
 Celery 还带有一个特殊的序列化程序，该序列化程序使用加密技术对您的消息进行签名。
 
-#### 也可以看看
+### 也可以看看
 
 Kombu 中的[消息序列化](http://kombu.readthedocs.io/en/master/userguide/serialization.html#guide-serialization)的用户指南。
 
@@ -337,75 +338,84 @@ Kombu 中的[消息序列化](http://kombu.readthedocs.io/en/master/userguide/se
 编码类型可以用作消息头，因此 workers 知道如何反序列化所有的任务。如果你使用自定义序列方案，则该序列化必须被 workers 支持。
 
 发送任务时的序列化配置优先级如下（从高到低）：
+
 * 1.`serializer` 执行选项。
-* 2.[Task.serializer]() 属性。
-* 3.[task_serializer]() 属性。
+* 2.[Task.serializer](tiao-yong-ren-wu-calling-tasks.md) 属性。
+* 3.[task\_serializer](tiao-yong-ren-wu-calling-tasks.md) 属性。
 
 为单个任务调用设置序列化方式：
+
 ```python
 >>> add.apply_async((10, 10), serializer='json')
 ```
 
-### 压缩 \(Compression\)
+## 压缩 \(Compression\)
 
 Celery 可以使用以下内建方案压缩消息。
 
 * brotli
 
   brotli 针对 web 进行了优化，尤其是小型文档。该压缩对诸如字体、html页面等静态内容最有效。
-  
+
   要使用 brotli，请用以下命令进行安装。
-  ```
+
+  ```text
   $ pip install celery[brotli]
   ```
 
 * bzip2
 
   bzip2 创建的文件比 gzip 小，但是压缩和解压的速度明显慢于 gzip。
-  
+
   要使用 bzip2，请确保 bzip2 已经编译到你的 Python 可执行文件中。
-  
+
   如果你得到以下错误 [ImportError](https://docs.python.org/dev/library/exceptions.html#ImportError)
-  ```
+
+  ```text
   >>> import bz2
   Traceback (most recent call last):
     File "<stdin>", line 1, in <module>
   ImportError: No module named 'bz2'
   ```
+
   这意味着你应该重新编译支持 bzip2 的 Python 版本。
 
 * gzip
 
   gzip 适用于内存占用较小的系统，因此 gzip 非常适合内存有限的系统。该压缩常用语生成带有 “.tar.gz” 后缀的文件。
-  ```
+
+  ```text
   要使用 gzip，请确保 gzip 已经编译到你的 Python 可执行文件中。
-  
+
   如果你得到以下错误[ImportError](https://docs.python.org/dev/library/exceptions.html#ImportError)
   >>> import gzip
   Traceback (most recent call last):
     File "<stdin>", line 1, in <module>
   ImportError: No module named 'gzip'
   ```
+
   这意味着你应该重新编译支持 gzip 的 Python 版本。
 
 * lzma
 
   lzma 具有较好的压缩效率以及压缩解压速度，但内存消耗更大。
-  
+
   要使用 lzma，请确保 gzip 已经编译到你的 Python 可执行文件中，并且你的 Python 版本为3.3或更高版本。
-  
+
   如果你得到以下错误 [ImportError](https://docs.python.org/dev/library/exceptions.html#ImportError)
-  ```
+
+  ```text
   >>> import lzma
   Traceback (most recent call last):
     File "<stdin>", line 1, in <module>
   ImportError: No module named 'lzma'
   ```
-  
+
   这意味着你应该重新编译支持 lzam 的 Python 版本。
-  
+
   也可以通过以下的方式进行安装：
-  ```
+
+  ```text
   $ pip install celery[lzma]
   ```
 
@@ -416,12 +426,14 @@ Celery 可以使用以下内建方案压缩消息。
   要使用 zlib，请确保 zlib 已经编译到你的 Python 可执行文件中。
 
   如果你得到以下错误 [ImportError](https://docs.python.org/dev/library/exceptions.html#ImportError)
-  ```
+
+  ```text
   >>> import zlib
   Traceback (most recent call last):
     File "<stdin>", line 1, in <module>
   ImportError: No module named 'zlib'
   ```
+
   这意味着你应该重新编译支持 zlib 的 Python 版本。
 
 * zstd
@@ -429,29 +441,32 @@ Celery 可以使用以下内建方案压缩消息。
   zstd是一个针对 zlib 的实时压缩方案，且有着更好的压缩效率。zstd 由 Huff0 和 FSE 库提供快速算法。
 
   要使用zstd，请用以下命令进行安装。
-  ```
+
+  ```text
   $ pip install celery[zstd]
   ```
 
-你还可以创建自己的压缩方式，并在[kumbo压缩注册]()中注册它们。
+你还可以创建自己的压缩方式，并在[kumbo压缩注册](tiao-yong-ren-wu-calling-tasks.md)中注册它们。
 
 发送任务时的压缩方案配置优先级如下（从高到低）：
+
 * 1.`compression` 执行选项。
 * 2.Task.compression 属性。
-* 3.task_compression 属性。
+* 3.task\_compression 属性。
 
 任务调用时指定压缩方法的示例：
+
 ```python
 >>> add.apply_async((2, 2), compression='zlib')
 ```
 
-### 连接\(Connections\)
+## 连接\(Connections\)
 
-#### 自动池支持
+### 自动池支持
 
 * 从2.3版开始，支持自动连接池，因此您不必手动处理连接和发布者即可重用连接。
 * 从2.5版开始，默认情况下启用连接池。
-* 有关 [broker_pool_limit](https://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_pool_limit) 更多信息，请参见设置。
+* 有关 [broker\_pool\_limit](https://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_pool_limit) 更多信息，请参见设置。
 
 您可以通过创建发布者来手动处理连接：
 
@@ -478,7 +493,7 @@ print([res.get() for res in results])
 [4, 8, 16, 32]
 ```
 
-### 路由选择 \(Routing options\)
+## 路由选择 \(Routing options\)
 
 Celery 可以将任务路由到不同的队列。
 
@@ -494,13 +509,13 @@ add.apply_async(queue='priority.high')
 $ celery -A proj worker -l info -Q celery,priority.high
 ```
 
-### 也可以看看
+## 也可以看看
 
 不建议用代码对队列名称进行硬编码，最佳做法是使用配置路由器（[task\_routes](https://docs.celeryproject.org/en/4.0/userguide/configuration.html#std:setting-task_routes)）。
 
 要了解有关路由的更多信息，请参阅“[路由任务\(Routing Tasks\)](https://docs.celeryproject.org/en/4.0/userguide/routing.html#guide-routing)”。
 
-### 高级选项
+## 高级选项
 
 这些选项适用于想要使用AMQP完整路由功能的高级用户。有兴趣的人士可以阅读[路由指南](https://docs.celeryproject.org/en/4.0/userguide/routing.html#guide-routing)。
 
@@ -517,3 +532,4 @@ $ celery -A proj worker -l info -Q celery,priority.high
   0～255 之间的数字，其中255是最高优先级。
 
   支持：RabbitMQ，Redis（优先级颠倒，最高为0）。
+

@@ -3,6 +3,7 @@
 * [前言](README.md)
 * [简介](jian-jie.md)
 * [版权](ban-quan.md)
+* [资金流向](zi-jin-liu-xiang.md)
 
 ## 入门
 
