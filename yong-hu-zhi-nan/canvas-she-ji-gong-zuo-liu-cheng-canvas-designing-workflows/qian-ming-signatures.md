@@ -1,8 +1,8 @@
 # 签名：Signatures
 
-你刚刚在 [calling]() 指南中学习了如何通过 `delay` 方法来调用任务，并且这也是你经常需要的，但有时你可能希望传递任务调用的签名给别的进程，或者作为其他函数的参数。
+你刚刚在 [calling]() 指南中学习了如何通过 `delay` 方法来调用任务，并且这也是你常用的，但有时你可能希望传递任务签名给别的进程使用，或者作为其他函数的参数。
 
-[signature()]() 包装了任务调用的参数、关键词参数和执行选项，以便传递给函数，甚至可以序列化通过网络进行传输。
+[signature()]() 包装了任务调用的参数、关键词参数和执行选项，以便传递给函数，甚至可以序列化后通过网络进行传输。
 
 * 你可以创建签名，例如：
   ```python
@@ -91,9 +91,9 @@
 4
 ```
 
-指明 `delay`/`apply_async` 额外的参数、关键词参数或可执行选项，可以创建部分参数。
+可以指明 `delay`/`apply_async` 额外的参数、关键词参数或执行选项：
 
-* 任何参数都将在签名的参数前被添加：
+* 任何参数都将添加在签名参数前：
 
   ```python
   >>> partial = add.s(2)          # incomplete signature
@@ -101,15 +101,15 @@
   >>> partial.apply_async((4,))  # same
   ```
 
-* Any keyword arguments added will be merged with the kwargs in the signature, with the new keyword arguments taking precedence:
+* 被添加的关键词参数将会和签名中的关键词参数合并，新添加的关键词参数优先：
 
   ```python
-  >>> s = add.s(2, 2)
+  >>> s = add.s(2, 2, debug=False)
   >>> s.delay(debug=True)                    # -> add(2, 2, debug=True)
   >>> s.apply_async(kwargs={'debug': True})  # same
   ```
 
-* Any options added will be merged with the options in the signature, with the new options taking precedence:
+* 被添加的执行选项将会与签名中的执行选项合并，新添加的执行选项优先：
 
   ```python
   >>> s = add.signature((2, 2), countdown=10)
@@ -125,23 +125,23 @@ proj.tasks.add(2)
 proj.tasks.add(4, 2, debug=True)
 ```
 
-## Immutability
+## 不变性(Immutability)
 
-Partials are meant to be used with callbacks, any tasks linked, or chord callbacks will be applied with the result of the parent task. Sometimes you want to specify a callback that doesn’t take additional arguments, and in that case you can set the signature to be immutable:
+部分参数通常在回调中使用，父任务的结果将会作为参数传递给链接或chord的回调任务。有时你希望指明一个不需要参数的回调，这时你可以设置签名为不变的。
 
 ```python
 >>> add.apply_async((2, 2), link=reset_buffers.signature(immutable=True))
 ```
 
-The .si() shortcut can also be used to create immutable signatures:
+快捷方式 `.si()` 也能创建不变签名：
 
 ```python
 >>> add.apply_async((2, 2), link=reset_buffers.si())
 ```
 
-Only the execution options can be set when a signature is immutable, so it’s not possible to call the signature with partial args/kwargs.
+对于不变签名，只有执行选项可以进行设置，并无法使用部分参数和关键词参数。
 
-注意：In this tutorial I sometimes use the prefix operator ~ to signatures. You probably shouldn’t use it in your production code, but it’s a handy shortcut when experimenting in the Python shell:
+注意：在该教材中，我有时会使用前缀 ~ 来进行签名。你不应该在生产环境中使用这样的代码，这仅仅是在 Python Shell 中进行测试的关键方式。
 
 ```python
 >>> ~sig
@@ -152,31 +152,32 @@ Only the execution options can be set when a signature is immutable, so it’s n
 
 ## 回调
 
-Callbacks can be added to any task using the link argument to apply_async:
+任务可以使用 `apply_async` 的 link 参数来添加回调。
 
 ```python
 add.apply_async((2, 2), link=other_task.s())
 ```
 
-The callback will only be applied if the task exited successfully, and it will be applied with the return value of the parent task as argument.
+只有当任务成功退出，回调函数才能被执行，并且将父任务的结果作为参数传递给回调的任务。
 
-As I mentioned earlier, any arguments you add to a signature, will be prepended to the arguments specified by the signature itself!
+如前所述，新传递的参数将会添加在签名指定的参数前。
 
-If you have the signature:
+如果你有一个签名：
 
 ```python
 >>> sig = add.s(10)
 ```
 
-then sig.delay(result) becomes:
+接着 `sig.delay(result)` 将变为：
+
 ```python
 >>> add.apply_async(args=(result, 10))
 ```
 
-Now let’s call our add task with a callback using partial arguments:
 
+现在，让我们调用 `add` 任务，并链接回调。
 ```python
 >>> add.apply_async((2, 2), link=add.s(8))
 ```
 
-As expected this will first launch one task calculating 2 + 2, then another task calculating 4 + 8.
+正如预期，首先第一个任务将会计算 2 + 2，接着回调任务将会计算 4 + 8。
