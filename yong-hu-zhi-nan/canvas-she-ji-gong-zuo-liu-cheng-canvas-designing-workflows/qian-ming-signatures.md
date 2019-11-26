@@ -175,7 +175,7 @@ add.apply_async((2, 2), link=other_task.s())
 ```
 
 
-现在，让我们调用 `add` 任务，并链接回调。
+现在，让我们调用 `add` 任务，并设置回调。
 ```python
 >>> add.apply_async((2, 2), link=add.s(8))
 ```
