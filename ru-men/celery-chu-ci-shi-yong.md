@@ -315,7 +315,7 @@ worker@example.com: OK
 
 1. 确认任务没有启用 ignore\_result
 
-   如果其中，会强制跳过任务更新状态。
+   如果启用，会强制跳过任务更新状态。
 
 2. 确保 task\_ignore\_result 未启用。
 3. 确保没有旧的职程（Worker）正在运行。
