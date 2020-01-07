@@ -80,7 +80,7 @@ app.conf.result_backend_transport_options = {'master_name': "mymaster"}
 您必须为消息进行设置前缀，以便它们由仅活动的虚拟机接收：
 
 ```text
-app.conf.broker_transport_options = {'fanout_patterns': true}
+app.conf.broker_transport_options = {'fanout_prefix': true}
 ```
 
 注意：该选项仅是向后兼容的，老版本不支持。集群中所有的职程都必须要开启设置，否则无法进行通信。
