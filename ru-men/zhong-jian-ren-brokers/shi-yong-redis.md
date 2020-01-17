@@ -114,7 +114,7 @@ app.conf.broker_transport_options = {'fanout_patterns': true}
 您可以通过配置同名的配置选项来扩增可见性超时时间：
 
 ```text
-app.conf.broker_yransport_options = {'visibility_timeout': 432000}
+app.conf.broker_transport_options = {'visibility_timeout': 432000}
 ```
 
 对应的值必须为 int 类型。
