@@ -458,21 +458,11 @@ s2 为一个不完整的签名，需要另外一个参数，可以通过调用�
 和弦是一个带有回调的组：
 
 ```bash
->>> from celery import chain
->>> from proj.tasks import add, mul
+>>> from celery import chord
+>>> from proj.tasks import add, xsum
 
-# (4 + 4) * 8
->>> chain(add.s(4, 4) | mul.s(8))().get()
-64
-```
-
-或 partial chain
-
-```bash
->>> # (? + 4) * 8
->>> g = chain(add.s(4) | mul.s(8))
->>> g(4).get()
-64
+>>> chord((add.s(i, i) for i in xrange(10)), xsum.s())().get()
+90
 ```
 
 链接到其他任务的组将自动转换为和弦：
