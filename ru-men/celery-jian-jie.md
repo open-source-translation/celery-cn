@@ -147,9 +147,9 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 
 ### 我想要 --&gt;
 
-* 获取任务执行返回值
-* 查看任务存放的队列
-* 在任务中使用日志
+* [获取任务执行返回值](../yong-hu-zhi-nan/ren-wu-tasks/zhuang-tai-states.md)
+* [查看任务存放的队列](../yong-hu-zhi-nan/ren-wu-tasks/ren-wu-qing-qiu-task-request.md)
+* [在任务中使用日志](../yong-hu-zhi-nan/ren-wu-tasks/ri-zhi-logging.md)
 * 查看一个列表中运行的职程（Worker）
 * 最佳的学习实战
 * 清空所有任务消息
