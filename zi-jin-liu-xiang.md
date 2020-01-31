@@ -6,6 +6,8 @@
 
 查询方式可通过[韩红基金会](http://www.hhax.org/g.html?type=10&URLparamName=%E7%88%B1%E5%BF%83%E6%8D%90%E8%B5%A0)网址进行查询，捐赠人输入`Open Source Translation`进行查询。
 
+如有推荐的捐款基金会或十字会，请联系邮箱 woo0nise@gmail.com。 
+
 ![](.gitbook/assets/wx20200131-173347-2x%20%281%29.png)
 
 ### 赞赏记录
