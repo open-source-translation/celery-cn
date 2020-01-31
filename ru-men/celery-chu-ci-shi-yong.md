@@ -37,7 +37,7 @@ $ sudo apt-get install rabbitmq-server
 $ docker run -d -p 5462:5462 rabbitmq
 ```
 
-命令执行完毕之后，中间人（Broker）会在后台继续运行，准备输出一条 _Starting rabbitmq-server: SUCCESS_  的消息。
+命令执行完毕之后，中间人（Broker）会在后台继续运行，准备输出一条 _Starting rabbitmq-server: SUCCESS_ 的消息。
 
 如果您没有 Ubuntu 或 Debian ，你可以访问官方网站查看其他操作系统（如：Windows）的安装方式：
 
@@ -202,7 +202,7 @@ False
 
 Celery 像家用电器一样，不需要任何配置，开箱即用。它有一个输入和输出，输入端必须连接中间人（Broker），输出端可以连接到结果后端。如果仔细观察一些家用电器，会发现有很多到按钮，这就是配置。
 
-大多数情况下，使用默认的配置就可以满足，也可以按需配置。查看配置选项可以更加的熟悉 Celery 的配置信息，可以参考  [`配置和默认配置：Configuration and defaults`](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md) 章节阅读 Celery 的配置。
+大多数情况下，使用默认的配置就可以满足，也可以按需配置。查看配置选项可以更加的熟悉 Celery 的配置信息，可以参考 [`配置和默认配置：Configuration and defaults`](../yong-hu-zhi-nan/pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md) 章节阅读 Celery 的配置。
 
 可以直接在程序中进行配置，也可以通过配置模块进行专门配置。例如，通过 task\_serializer 选项可以指定序列化的方式：
 

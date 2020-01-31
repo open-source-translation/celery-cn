@@ -22,7 +22,7 @@
 
 * `T.delay(arg, kwarg=value)`
 
-  调用 apply\_async 的快捷方式（.delay\(_args, \*_kwargs\)等价于调用 .apply\_async\(args, kwargs\)）。
+  调用 apply\_async 的快捷方式（.delay\(\_args, \*\_kwargs\)等价于调用 .apply\_async\(args, kwargs\)）。
 
 * `T.apply_async((arg,), {'kwarg': value})`
 * `T.apply_async(countdown=10)`

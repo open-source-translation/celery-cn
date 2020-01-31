@@ -65,7 +65,7 @@ app.conf.result_backend = 'redis://localhost:7379/0'
 
 有关 Redis 保存结果的完整选项列表，请查阅 Redis后端配置。
 
-如果您使用的是 Redis 哨兵默认是，则需要使用 `result_backend_transport_options` 进行指定  master\_name：
+如果您使用的是 Redis 哨兵默认是，则需要使用 `result_backend_transport_options` 进行指定 master\_name：
 
 ```text
 app.conf.result_backend_transport_options = {'master_name': "mymaster"}

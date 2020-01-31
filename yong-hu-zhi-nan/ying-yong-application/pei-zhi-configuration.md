@@ -40,9 +40,9 @@
 
 ## config\_from\_object
 
-`config_from_object()` 可以从配置对象中进行加载配置。 
+`config_from_object()` 可以从配置对象中进行加载配置。
 
-加载的内容可以为配置模块、也可以为用于属性的对象。 
+加载的内容可以为配置模块、也可以为用于属性的对象。
 
 **注意**：`config_from_object()` 在进行调用时会恢复默认的配置，如果需要设置其他的配置，建议在调用完毕之后进行操作。
 
@@ -57,7 +57,7 @@ app = Celery()
 app.config_from_object('celeryconfig')
 ```
 
-其中 `celeryconfig` 模块内容如下： 
+其中 `celeryconfig` 模块内容如下：
 
 {% code title="celeryconfig.py" %}
 ```python
