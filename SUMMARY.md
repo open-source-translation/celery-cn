@@ -69,7 +69,7 @@
 * [教程：Tutorials](fu-lu/jiao-cheng-tutorials.md)
 * [常见问题FAQ：Frequently Asked Questions](fu-lu/chang-jian-wen-ti-faqfrequently-asked-questions.md)
 * [更新历史：Change history](fu-lu/geng-xin-li-shi-change-history.md)
-* [Celery 4.3.0的新功能：What’s new in Celery 4.3 \(rhubarb\)](fu-lu/celery-4.3.0-de-xin-gong-neng-whats-new-in-celery-4.3-rhubarb.md)
+* [Celery 4.4.0的新功能：What’s new in Celery 4.4 \(Cliffs\)](fu-lu/celery-4.3.0-de-xin-gong-neng-whats-new-in-celery-4.3-rhubarb.md)
 * [API：API Reference](fu-lu/api-api-reference.md)
 * [Celery 内部模块：Internals](fu-lu/celery-nei-bu-mo-kuai-internals.md)
 * [历史：History](fu-lu/li-shi-history.md)
