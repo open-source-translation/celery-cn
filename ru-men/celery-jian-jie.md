@@ -14,7 +14,7 @@ Celery 通过消息机制进行通信，通常使用中间人（Broker）作为�
 
 Celery 可以有多个职程（Worker）和中间人（Broker），用来提高Celery的高可用性以及横向扩展能力。
 
-Celery 是用 Python 编写的，但协议可以用任何语言实现。除了 Python 语言实现之外，还有Node.js的[node-celery](https://github.com/mher/node-celery)和php的[celery-php](https://github.com/gjedeer/celery-php)。
+Celery 是用 Python 编写的，但协议可以用任何语言实现。除了 Python 语言实现之外，还有Node.js的 [`node-celery`](https://github.com/mher/node-celery) 以及 [node-celery-ts](https://github.com/node-celery-ts/node-celery-ts) 和php的[celery-php](https://github.com/gjedeer/celery-php)。
 
 可以通过暴露 HTTP 的方式进行，任务交互以及其它语言的集成开发。
 
@@ -88,10 +88,15 @@ Celery 的每个部分几乎都可以自定义扩展和单独使用，例如自�
   * AMQP、 Redis
   * Memcached
   * SQLAlchemy、Django ORM
-  * Apache Cassandra、Elasticsearch
+  * Apache Cassandra, Elasticsearch, Riak
+  * MongoDB, CouchDB, Couchbase, ArangoDB
+  * Amazon DynamoDB, Amazon S3
+  * Microsoft Azure Block Blob, Microsoft Azure Cosmos DB
+  * File system
 * 并发
   * prefork \(multiprocessing\)
   * [Eventlet](http://eventlet.net/)、[gevent](http://www.gevent.org/)
+  * thread \(multithreaded\)
   * solo \(single threaded\)
 * 序列化
   * pickle、json、yaml、msgpack
@@ -116,7 +121,7 @@ Celery 的每个部分几乎都可以自定义扩展和单独使用，例如自�
 
 * 资源（内存）泄漏保护
 
---max-tasks-per-child 参数适用于可能会出现资源泄漏（例如：内存泄漏）的任务。更多......
+`--max-tasks-per-child` 参数适用于可能会出现资源泄漏（例如：内存泄漏）的任务。更多......
 
 * 时间和速率的限制
 
@@ -153,7 +158,7 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 * 查看一个列表中运行的职程（Worker）
 * 最佳的学习实战
 * 清空所有任务消息
-* 创建一个自定义任务的基类
+* [创建一个自定义任务的基类](../yong-hu-zhi-nan/ren-wu-tasks/zi-ding-yi-ren-wu-lei-custom-task-classes.md)
 * 查看职程（Worker）执行的任务
 * 为一组任务添加回调
 * 将任务迁移到新的中间人（Broker）

@@ -104,7 +104,7 @@ $ celery -A proj worker -l info
 
 默认的并发数为当前计算机的 CPU 数，可以通过设置 `celery worker-c` 项进行自定义设置并发数。没有推荐的并发数，因为最佳的并发数取决于很多因素，如果任务主要是 I/O 限制，可以进行增加并发数，经过测试，设置超过两倍的 CPU 数量效果不是很好，很有可能会降低性能。
 
-包括默认的 prefork 池，Celery 也支持在单个线程中使用 Eventlet、Gevent。（详情参阅：[`并发：Concurrency`](../yong-hu-zhi-nan/bing-fa-concurrency.md)）
+包括默认的 prefork 池，Celery 也支持在单个线程中使用 Eventlet、Gevent。（详情参阅：[`并发：Concurrency`](../yong-hu-zhi-nan/bing-fa-concurrency/)）
 
 * Events 选项设置为启用状态时， Celery 会开启监控事件来进行监视 职程（Worker）。一般情况用于监控程序，如 Flower 和 实时 Celery 监控，详情参阅 [`监控和管理手册：Monitoring and Management Guide`](../yong-hu-zhi-nan/jian-kong-he-guan-li-shou-ce-monitoring-and-management-guide.md)。
 * Queues 为职程（Worker）任务队列，可以告诉职程（Worker）同时从多个任务队列中进行消费。通常用于将任务消息路由到特定的职程（Worker）、提升服务质量、关注点分离、优先级排序的常用手段。详情参阅 [`路由任务：Routing Tasks`](../yong-hu-zhi-nan/lu-you-ren-wu-routing-tasks.md)。

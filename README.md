@@ -48,7 +48,3 @@ GIthub：[https://github.com/0nise](https://github.com/0nise)
 
 博客小站：[https://www.r4v3zn.com](https://www.j2ee.app/)
 
-## 招聘
-
-![](.gitbook/assets/wechatimg933.jpeg)
-

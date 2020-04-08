@@ -4,7 +4,7 @@
 
 Celery 中有一个 `celery.task`，可以通过继承的方式获取日志的一部分任务名称以及唯一ID。
 
-最好的做法是在模块顶部为素哟偶任务创建一个共有的日志记录器：
+最好的做法是在模块顶部为所有任务创建一个共有的日志记录器：
 
 ```python
 from celery.utils.log import get_task_logger
