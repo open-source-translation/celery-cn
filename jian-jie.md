@@ -1,5 +1,5 @@
 ---
-description: 此仓库为Celery中文翻译文档，翻译当前的版本为v4.3.0
+description: 此仓库为Celery中文翻译文档，翻译当前的版本为v4.4.0
 ---
 
 # 简介
