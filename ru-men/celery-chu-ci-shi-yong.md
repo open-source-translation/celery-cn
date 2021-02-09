@@ -210,7 +210,7 @@ Celery 像家用电器一样，不需要任何配置，开箱即用。它有一�
 app.conf.task_serializer = 'json'
 ```
 
-如果需要配置多个选项，可以通过 upate 进行配置：
+如果需要配置多个选项，可以通过 update 进行配置：
 
 ```python
 app.conf.update(
