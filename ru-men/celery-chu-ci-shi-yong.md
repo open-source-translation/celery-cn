@@ -122,7 +122,7 @@ $  celery worker --help
 也可以通过以下命令查看一些 Celery 帮助选项：
 
 ```bash
-$ celery help
+$ celery --help
 ```
 
 ## 调用任务
