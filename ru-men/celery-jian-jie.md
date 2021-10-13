@@ -94,10 +94,10 @@ Celery 的每个部分几乎都可以自定义扩展和单独使用，例如自�
   * Microsoft Azure Block Blob, Microsoft Azure Cosmos DB
   * File system
 * 并发
-  * prefork \(multiprocessing\)
-  * [Eventlet](http://eventlet.net/)、[gevent](http://www.gevent.org/)
-  * thread \(multithreaded\)
-  * solo \(single threaded\)
+  * prefork (multiprocessing)
+  * [Eventlet](http://eventlet.net)、[gevent](http://www.gevent.org)
+  * thread (multithreaded)
+  * solo (single threaded)
 * 序列化
   * pickle、json、yaml、msgpack
   * zlib、bzip2 compression
@@ -135,22 +135,22 @@ Celery 的每个部分几乎都可以自定义扩展和单独使用，例如自�
 
 Celery可以快速的集成一些常用的Web框架，详细如下：
 
-| Web框架 | 集成包 |
-| :--- | :--- |
-| [Pyramid](http://docs.pylonsproject.org/en/latest/docs/pyramid.html) | [pyramid\_celery](https://pypi.org/project/pyramid_celery/) |
-| [Pylons](http://pylonshq.com/) | [celery-pylons](https://pypi.python.org/pypi/celery-pylons/) |
-| [Flask](http://flask.pocoo.org/) | 不需要 |
-| [web2py](http://web2py.com/) | [web2py-celery](https://pypi.python.org/pypi/web2py-celery/) |
-| [Tornado](http://www.tornadoweb.org/) | [tornado-celery](https://pypi.python.org/pypi/tornado-celery/) |
-| [Tryton](http://www.tryton.org/) | [celery\_tryton](https://pypi.python.org/pypi/celery_tryton/) |
+| Web框架                                                                | 集成包                                                            |
+| -------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [Pyramid](http://docs.pylonsproject.org/en/latest/docs/pyramid.html) | [pyramid_celery](https://pypi.org/project/pyramid_celery/)     |
+| [Pylons](http://pylonshq.com)                                        | [celery-pylons](https://pypi.python.org/pypi/celery-pylons/)   |
+| [Flask](http://flask.pocoo.org)                                      | 不需要                                                            |
+| [web2py](http://web2py.com)                                          | [web2py-celery](https://pypi.python.org/pypi/web2py-celery/)   |
+| [Tornado](http://www.tornadoweb.org)                                 | [tornado-celery](https://pypi.python.org/pypi/tornado-celery/) |
+| [Tryton](http://www.tryton.org)                                      | [celery_tryton](https://pypi.python.org/pypi/celery_tryton/)   |
 
-针对 [Django](https://djangoproject.com/) ，请参考 Django 的初次使用。
+针对 [Django](https://djangoproject.com) ，请参考 Django 的初次使用。
 
-集成包并不是必须安全的，但使用它们可以更加快速和方便的开发，有时它们会在 fork\(2\) 中添加例如数据库关闭连接的回调。
+集成包并不是必须安全的，但使用它们可以更加快速和方便的开发，有时它们会在 fork(2) 中添加例如数据库关闭连接的回调。
 
 ## 快速跳转
 
-### 我想要 --&gt;
+### 我想要 -->
 
 * [获取任务执行返回值](../yong-hu-zhi-nan/ren-wu-tasks/zhuang-tai-states.md)
 * [查看任务存放的队列](../yong-hu-zhi-nan/ren-wu-tasks/ren-wu-qing-qiu-task-request.md)
@@ -177,7 +177,7 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 * 运行时修改职程（Worker）的队列
 * 获取当前执行的任务ID
 
-### 跳转 --&gt;
+### 跳转 -->
 
 * [中间人：Broker](zhong-jian-ren-brokers/)
 * [职程：Worker](../yong-hu-zhi-nan/zhi-cheng-worker-wen-dang-workers-guide/)
@@ -202,7 +202,7 @@ Celery可以快速的集成一些常用的Web框架，详细如下：
 
 使用pip进行安装
 
-```text
+```
 $ pip install -U Celery
 ```
 
@@ -221,41 +221,43 @@ $ pip install "celery[librabbitmq,redis,auth,msgpack]"
 
 #### 序列化
 
-* celery\[auth\]：使用auth保证程序的安全
-* celery\[msgpack\]：使用msgpack序列化
-* celery\[yaml\]：使用yaml序列化
+* celery\[auth]：使用auth保证程序的安全
+* celery\[msgpack]：使用msgpack序列化
+* celery\[yaml]：使用yaml序列化
 
 **并发**
 
-* celery\[eventlet\]：基于 [eventle](https://pypi.python.org/pypi/eventlet/\) 的并发池
-* celery\[gevent\]：基于 [gevent](https://pypi.python.org/pypi/gevent/) 的并发池
+* celery\[eventlet]：基于 [eventle](https://pypi.python.org/pypi/eventlet/) 的并发池
+* celery\[gevent]：基于 [gevent](https://pypi.python.org/pypi/gevent/) 的并发池
 
 **传输和后端**
 
-* celery\[librabbitmq\]：使用librabbitmq库
-* celery\[redis\]：使用Redis进行消息传输或后端结果存储
-* celery\[sqs\]：使用Amazon SQS进行消息传输（实验阶段）
-* celery\[tblib\]：使用 task\_remote\_tracebacks 的功能
-* celery\[memcache\]：使用Memcached作为后端结果存储（使用的是[pylibmc](https://pypi.python.org/pypi/pylibmc/)）
-* celery\[pymemcache\]：使用Memcached作为后端结果存储（纯Python实现）
-* celery\[cassandra\]：使用Apache Cassandra作为后端结果存储
-* celery\[couchbase\]：使用CouchBase作为后端结果存储
-* celery\[arangodb\]：使用ArangoDB作为后端结果存储
-* celery\[elasticsearch\]：使用ElasticSearch作为后端结果存储
-* celery\[riak\]：使用Riak作为后端结果存储
-* celery\[dynamodb\]：使用AWS DynamoDB作为后端结果存储
-* celery\[zookeeper\]：使用Zookeeper进行消息传输
-* celery\[sqlalchemy\]：使用SQLlchemy作为后端结果存储（支持）
-* celery\[pyro\]：使用Pyro4进行消息传输（实验阶段）
-* celery\[slmq\]：使用 SoftLayer Message Queue进行消息传输（实验阶段）
-* celery\[consul\]：使用Consul.io Key/Value进行存储传输消息或后端结果存储（实验阶段）
-* celery\[django\]：支持比较低的Django版本，不建议您在项目中使用它，它仅供参考
+* celery\[librabbitmq]：使用librabbitmq库
+* celery\[redis]：使用Redis进行消息传输或后端结果存储
+* celery\[sqs]：使用Amazon SQS进行消息传输（实验阶段）
+* celery\[tblib]：使用 task_remote_tracebacks 的功能
+* celery\[memcache]：使用Memcached作为后端结果存储（使用的是[pylibmc](https://pypi.python.org/pypi/pylibmc/)）
+* celery\[pymemcache]：使用Memcached作为后端结果存储（纯Python实现）
+* celery\[cassandra]：使用Apache Cassandra作为后端结果存储
+* celery\[couchbase]：使用CouchBase作为后端结果存储
+* celery\[arangodb]：使用ArangoDB作为后端结果存储
+* celery\[elasticsearch]：使用ElasticSearch作为后端结果存储
+* celery\[riak]：使用Riak作为后端结果存储
+* celery\[dynamodb]：使用AWS DynamoDB作为后端结果存储
+* celery\[zookeeper]：使用Zookeeper进行消息传输
+* celery\[sqlalchemy]：使用SQLlchemy作为后端结果存储（支持）
+* celery\[pyro]：使用Pyro4进行消息传输（实验阶段）
+* celery\[slmq]：使用 SoftLayer Message Queue进行消息传输（实验阶段）
+* celery\[consul]：使用Consul.io Key/Value进行存储传输消息或后端结果存储（实验阶段）
+* celery\[django]：支持比较低的Django版本，不建议您在项目中使用它，它仅供参考
 
 ### **下载源代码进行安装**
 
 从 pypi 下载最新版本的 Celery ：
 
-{% embed url="https://pypi.org/project/celery/" caption="PyPI Celery" %}
+{% embed url="https://pypi.org/project/celery/" %}
+PyPI Celery
+{% endembed %}
 
 您可以通过执行以下命令来进行安装
 
@@ -287,4 +289,3 @@ $ pip install https://github.com/celery/vine/zipball/master#egg=vine
 #### **git**
 
 请查阅“[贡献：Contributing](../fu-lu/gong-xian-contributing.md)”部分。
-

@@ -1,14 +1,14 @@
 # 路由任务：Routing Tasks
 
 {% hint style="info" %}
-并不是所有的传输中间件\(Broker\)都存在`topic`和`fanout` 等代理路由概念，请参阅 [transport comparison table](https://kombu.readthedocs.io/en/master/introduction.html#transport-comparison).
+并不是所有的传输中间件(Broker)都存在`topic`和`fanout` 等代理路由概念，请参阅 [transport comparison table](https://kombu.readthedocs.io/en/master/introduction.html#transport-comparison).
 {% endhint %}
 
 ## 基本用法
 
 ### **自动路由**
 
-最简单的路由方式是使用选项 `task_create_missing_queues` 进行设置\(默认情况下，此设置为打开状态\)。
+最简单的路由方式是使用选项 `task_create_missing_queues` 进行设置(默认情况下，此设置为打开状态)。
 
 如果启用了该参数，将会自动创建没有在 `task_queues` 选项中定义的命名队列。这样可以更加容易的执行简单的路由任务。
 
@@ -18,7 +18,7 @@
 task_routes = {'feed.tasks.import_feed': {'queue': 'feeds'}}
 ```
 
-启用这样的路由设置后，`import_feed` 的任务将会被路由到 `feeds` 队列中，而其他的任务将会被路由到默认的队列\(因为历史原因被命名为`celery`\)。
+启用这样的路由设置后，`import_feed` 的任务将会被路由到 `feeds` 队列中，而其他的任务将会被路由到默认的队列(因为历史原因被命名为`celery`)。
 
 另外，你还可以使用通配符，甚至正则表达式来匹配所有在 `feed.tasks` 命名空间内的所有任务:
 
@@ -151,13 +151,13 @@ app.conf.task_queues = (
 
 > See also:
 >
-> 除了如下的 [`Redis Message Priorities`，还有](http://docs.celeryproject.org/en/latest/userguide/routing.html#amqp-primer) [`Rabbits and Warrens` \(译者注: 此文地址已不可用, 找到此文的](http://blogs.digitar.com/jjww/2009/01/rabbits-and-warrens/)[备份地址](https://web.archive.org/web/20160303092138/http://blogs.digitar.com/jjww/2009/01/rabbits-and-warrens/)\)，一篇描述队列和交换机的优秀博客。除此之外还有 `CloudAMQP` 的教程，对于 `RabbitMQ` 的用户来说， \[RabbitMQ FAQ\]\(https://www.rabbitmq.com/faq.html\) 也可以作为一个有用的信息源。
+> 除了如下的 [`Redis Message Priorities`，还有](http://docs.celeryproject.org/en/latest/userguide/routing.html#amqp-primer) [`Rabbits and Warrens` (译者注: 此文地址已不可用, 找到此文的](http://blogs.digitar.com/jjww/2009/01/rabbits-and-warrens/)[备份地址](https://web.archive.org/web/20160303092138/http://blogs.digitar.com/jjww/2009/01/rabbits-and-warrens/))，一篇描述队列和交换机的优秀博客。除此之外还有 `CloudAMQP` 的教程，对于 `RabbitMQ` 的用户来说， \[RabbitMQ FAQ]\(https://www.rabbitmq.com/faq.html) 也可以作为一个有用的信息源。
 
 ## 特殊的路由选项
 
 ### **RabbitMQ 消息优先级**
 
-**支持的中间人\(Broker\)：**
+**支持的中间人(Broker)：**
 
 RabbitMQ
 
@@ -188,19 +188,19 @@ app.conf.task_default_priority = 5
 
 ### **Redis 消息优先级**
 
-**支持的中间人\(Broker\)：**
+**支持的中间人(Broker)：**
 
 Redis
 
-虽然 `Celery` 的 `Redis` 中间人\(Broker\) 支持了优先级的字段，但是 `Redis` 本身并没有优先级的概念。所以在尝试使用 `Redis` 来实现优先级之前，请阅读下方的说明，因为你可能遇到一些意想不到的行为。
+虽然 `Celery` 的 `Redis` 中间人(Broker) 支持了优先级的字段，但是 `Redis` 本身并没有优先级的概念。所以在尝试使用 `Redis` 来实现优先级之前，请阅读下方的说明，因为你可能遇到一些意想不到的行为。
 
-优先级的支持是通过为每个队列创建 `n` 个列表来实现的。也就是说即使存在 10\(0-9\) 个优先级别，在默认情况下也会被合并成 4 个级别来节省资源。也就是说一个名为 `celery` 的队列将会分成 4 个队列:
+优先级的支持是通过为每个队列创建 `n` 个列表来实现的。也就是说即使存在 10(0-9) 个优先级别，在默认情况下也会被合并成 4 个级别来节省资源。也就是说一个名为 `celery` 的队列将会分成 4 个队列:
 
 ```python
 ['celery0', 'celery3', 'celery6', 'celery9']
 ```
 
-如果你想要更多的优先级别，你可以通过设置中间人\(Broker\)参数 `priority_steps` 来实现：
+如果你想要更多的优先级别，你可以通过设置中间人(Broker)参数 `priority_steps` 来实现：
 
 ```python
 app.conf.broker_transport_options = {
@@ -214,7 +214,7 @@ app.conf.broker_transport_options = {
 
 ### **消息**
 
-一个消息由消息头和消息体组成。`Celery` 使用消息头来存储消息的内容类型以及内容的编码。内容类型通常是用来序列化消息的序列化格式，消息体包含要执行的任务的名称，任务ID\(UUID\)，执行任务的参数以及一些额外的元数据\(比如重试次数和ETA\(下次执行任务的时间\)\)。
+一个消息由消息头和消息体组成。`Celery` 使用消息头来存储消息的内容类型以及内容的编码。内容类型通常是用来序列化消息的序列化格式，消息体包含要执行的任务的名称，任务ID(UUID)，执行任务的参数以及一些额外的元数据(比如重试次数和ETA(下次执行任务的时间))。
 
 这是通过一个 `Python` 的字典来表示的示例任务消息：
 
@@ -246,7 +246,7 @@ app.conf.broker_transport_options = {
 2. 创建一个队列
 3. 绑定队列到交换机。
 
-为了使 [`task_queues`](http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_queues) 中的队列工作， `Celery` 将会自动创建所需要的实体\(除非队列的 _auto\_declare_ 选项被设置为 `False` \)。
+为了使 [`task_queues`](http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_queues) 中的队列工作， `Celery` 将会自动创建所需要的实体(除非队列的 _auto_declare_ 选项被设置为 `False` )。
 
 下方是一个包含三个队列的示例队列配置; 一个用于视频，一个用于图片，另一个用于其他消息的默认队列：
 
@@ -273,13 +273,13 @@ app.conf.task_default_routing_key = 'default'
 
 #### 主题交换机
 
-主题交换机通过以点分隔的单词和通配符来匹配路由键：`*`\(匹配单个单词\) `#`\(匹配零或多个单词\)。
+主题交换机通过以点分隔的单词和通配符来匹配路由键：`*`(匹配单个单词) `#`(匹配零或多个单词)。
 
 假如有如下路由键 `usa.news`，`usa.weather`，`norway.news` 和 `norway.weather`，可以通过绑定 `*.news` 来接收所有的新闻，绑定 `usa.#` 来接收与 `USA` 有关的所有消息，或绑定 `usa.weather` 来接收所有与 `USA` 天气有关的消息。
 
 ### 相关的API命令
 
-**exchange.declare\(exchange\_name, type, passive, durable, auto\_delete, internal\)**
+**exchange.declare(exchange_name, type, passive, durable, auto_delete, internal)**
 
 通过名称声明交换机
 
@@ -288,10 +288,10 @@ app.conf.task_default_routing_key = 'default'
 **关键字参数**
 
 * **passive** 被动意味着不会创建交换机，但是你可以通过这个参数来检查交换机是否被创建。
-* **durable** 交换机将被持久化\(也就是说，中间人\(Broker\)重启后，交换机仍然存在\)
-* **auto\_delete** 指定该参数意味着如果没有队列使用该交换机，那么交换机将被中间人\(Broker\)删除。
+* **durable** 交换机将被持久化(也就是说，中间人(Broker)重启后，交换机仍然存在)
+* **auto_delete** 指定该参数意味着如果没有队列使用该交换机，那么交换机将被中间人(Broker)删除。
 
-**queue.declare\(queue\_name, passive, durable, exclusive, auto\_delete\)**
+**queue.declare(queue_name, passive, durable, exclusive, auto_delete)**
 
 通过名称声明一个队列
 
@@ -301,21 +301,21 @@ app.conf.task_default_routing_key = 'default'
 
 * **exclusive** 专有队列只能通过当前的连接进行消费，专有队列也同时是自动删除的
 
-**queue.bind\(queue\_name, exchange\_name, routing\_key\)**
+**queue.bind(queue_name, exchange_name, routing_key)**
 
-通过路由键\(routing\_key\)将队列绑定到交换机
+通过路由键(routing_key)将队列绑定到交换机
 
 队列如果没有被绑定将不会接收消息，因为绑定是必须的
 
 参阅 [`amqp:Channel.queue_bind`](https://amqp.readthedocs.io/en/latest/reference/amqp.channel.html#amqp.channel.Channel.queue_bind)
 
-**queue.delete\(name. If\_unused=False, if\_empty=False\)**
+**queue.delete(name. If_unused=False, if_empty=False)**
 
 删除队列及其绑定
 
 参阅 [`amqp:Channel.queue_delete`](https://amqp.readthedocs.io/en/latest/reference/amqp.channel.html#amqp.channel.Channel.queue_delete)
 
-**exchange.delete\(name. If\_unused=False\)**
+**exchange.delete(name. If_unused=False)**
 
 删除交换机
 
@@ -329,7 +329,7 @@ app.conf.task_default_routing_key = 'default'
 
 `Celery` 自带了一个名为 `celery amqp` 的工具，用于通过命令行来操作 `AMQP API` 去管理任务，比如说创建或者删除队列或交换机，清理队列或发送消息。该工具也可以用于 非 `AMQP` 的中间人，但是不一定实现了所有的命令操作。
 
-你可以直接在```celery amqp`` 的命令里写参数，或者无参数启动命令模式：
+你可以直接在`` `celery amqp `` 的命令里写参数，或者无参数启动命令模式：
 
 ```bash
 $ celery -A proj amqp
@@ -360,7 +360,7 @@ ok.
 ok.
 ```
 
-现在消息已经发送出去，你可以去获取消息了。你可以在这里使用 `basic.get` 命令，该命令将会以同步轮询的方式去获取队列中的新消息\(这种方式对于维护任务来说是还可以的，但是对于服务来说，你需要使用 `basic.consume`命令来代替它\)
+现在消息已经发送出去，你可以去获取消息了。你可以在这里使用 `basic.get` 命令，该命令将会以同步轮询的方式去获取队列中的新消息(这种方式对于维护任务来说是还可以的，但是对于服务来说，你需要使用 `basic.consume`命令来代替它)
 
 从队列中弹出一条消息:
 
@@ -437,7 +437,7 @@ CELERY_QUEUES = (
 
 ### **指定任务目标**
 
-任务的目标是通过如下的\(按顺序\)的方式决定的:
+任务的目标是通过如下的(按顺序)的方式决定的:
 
 1. `Task.apply_async` 的路由参数
 2. 在任务本身定义的路由参数
@@ -465,7 +465,7 @@ def route_task(name, args, kwargs, options, task=None, **kw):
 {'queue': 'video', 'routing_key': 'video.compress'}
 ```
 
-变成 -&gt;
+变成 ->
 
 ```python
 {'queue': 'video',
@@ -486,7 +486,7 @@ task_routes = (route_task,)
 task_routes = ('myapp.routers.route_task',)
 ```
 
-对于类似上方示例的简单的任务名称-&gt;路由映射，你可以简单地将字典放置在 [`task_routes`](http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_routes) 中来过的同样的行为效果:
+对于类似上方示例的简单的任务名称->路由映射，你可以简单地将字典放置在 [`task_routes`](http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_routes) 中来过的同样的行为效果:
 
 ```python
 task_routes = {
@@ -501,7 +501,7 @@ task_routes = {
 
 你也可以将多个路由器定义在一个序列中：
 
-```text
+```
 task_routes = [
     route_task,
     {
@@ -534,13 +534,13 @@ task.apply_async(priority=0)
 
 #### **优先级顺序和集群响应**
 
-需要重视的是，因为职程\(worker\) 的预取机制，如果同一时间提交了一堆任务，那么它们的优先级顺序可能发生混乱。禁用职程的预取可以防止该问题，但是对于小而快的任务，这么做会导致达不到理想的性能。在大多数情况下，简单的将 _worker\_prefetch\_multiplier_ 参数减少到 1，是一个简单而清晰的方式来提升系统的灵敏性，并且不会存在禁用预取带来的成本。
+需要重视的是，因为职程(worker) 的预取机制，如果同一时间提交了一堆任务，那么它们的优先级顺序可能发生混乱。禁用职程的预取可以防止该问题，但是对于小而快的任务，这么做会导致达不到理想的性能。在大多数情况下，简单的将 _worker_prefetch_multiplier_ 参数减少到 1，是一个简单而清晰的方式来提升系统的灵敏性，并且不会存在禁用预取带来的成本。
 
 要注意的是优先级的顺序是按照值的反序来排列的：0 是最高优先级。
 
 ### **广播**
 
-`Celery` 也支持广播路由。下面是一个 _broadcast\_tasks_ 交换机的示例, 它将任务分发给所有连接到它的职程：
+`Celery` 也支持广播路由。下面是一个 _broadcast_tasks_ 交换机的示例, 它将任务分发给所有连接到它的职程：
 
 ```python
 from kombu.common import Broadcast
@@ -578,6 +578,4 @@ app.conf.beat_schedule = {
 注意 `Celery` 结果并没有定义如果有两个任务使用同一个任务 ID 时会发生什么。如果同一个人任务被派发到多于一个职程，该任务的状态历史将不被保留。
 
 在这种情况下设置 `task.ignore_result` 属性忽略任务结果将会是个好主意。
-
-
 

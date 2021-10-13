@@ -64,7 +64,7 @@ from __future__ import absolute_import
 
 在使用 Django 和 `project.myapp-style` 在 `INSTALLED_APPS` 命名时也会出现这种情况：
 
-```text
+```
 INSTALLED_APPS = ['project.myapp']
 ```
 
@@ -126,7 +126,7 @@ project/
                /tasks.py
 ```
 
-如果使用自动命名，每一个人都会生成一个名词，例如 `moduleA.tasks.taskA`、`moduleA.tasks.taskB`、`moduleB.tasks.test`等。可以通过重写 `app.gen_task_name()` 进行修改默认的所有任务名称中的 `tasks` 。基于刚刚的例子，稍微修改\(celery.py\)：
+如果使用自动命名，每一个人都会生成一个名词，例如 `moduleA.tasks.taskA`、`moduleA.tasks.taskB`、`moduleB.tasks.test`等。可以通过重写 `app.gen_task_name()` 进行修改默认的所有任务名称中的 `tasks` 。基于刚刚的例子，稍微修改(celery.py)：
 
 ```python
 from celery import Celery
@@ -148,4 +148,3 @@ app = MyCelery('main')
 
 需要确保 `app.gen_task_name()` 是一个函数，同样的输出和输出都必须相同。
 {% endhint %}
-

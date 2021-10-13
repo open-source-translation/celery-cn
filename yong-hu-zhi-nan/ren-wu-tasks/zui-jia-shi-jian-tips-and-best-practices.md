@@ -10,7 +10,7 @@ def mytask():
     something()
 ```
 
-可以使用 `task_ignore_result` 配置全局禁用结果。
+可以使用 `task_ignore_result `配置全局禁用结果。
 
 在调用`apply_async`和`delay`执行任务时, 通过传递`ignore_result`参数, 可以在每次执行的基础上设置开启/禁用任务结果。
 
@@ -28,9 +28,9 @@ result = mytask.apply_async(1, 2, ignore_result=False)
 print result.get() # -> 3
 ```
 
-默认情况下， 当配置了 `backend` ，任务将不会忽略结果\( `ignore_result=False` \)
+默认情况下， 当配置了 `backend `，任务将不会忽略结果( `ignore_result=False` )
 
-选项优先顺序如下\(从低到高\):
+选项优先顺序如下(从低到高):
 
 * 1.全局选项`task_ignore_result`
 * 2.任务配置`ignore_result`
@@ -114,4 +114,3 @@ def parse_page(url, page):
 def store_page_info(url, info):
     return PageInfo.objects.create(url, info)
 ```
-

@@ -8,13 +8,13 @@ Celery 可以跟踪任务当前的状态信息。状态信息包含成功任务�
 
 还有一些任务状态信息，例如 `FAILURE_STATES`、`READY_STATES`。
 
-客户端使用这些集合的成员关系来决定是否应该重新引发异常（PROPAGATE\_STATES），或者是否可以缓存状态\(如果任务准备好了，可以缓存状态\)。
+客户端使用这些集合的成员关系来决定是否应该重新引发异常（PROPAGATE_STATES），或者是否可以缓存状态(如果任务准备好了，可以缓存状态)。
 
 也可以阅读[`自定义状态`](zhuang-tai-states.md#zi-ding-yi-zhuang-tai)。
 
 ## 结果后端
 
-如果需要跟踪任务信息或返回值，需要提供一个 Celery 存储的结果后端，便于检索。有几个内置的结果后端可以考虑使用：SQLAlchemy/Django ORM、Memcached、RabbitMQ/QPid\(rpc\) 和 Redis，也可以自定义后端。
+如果需要跟踪任务信息或返回值，需要提供一个 Celery 存储的结果后端，便于检索。有几个内置的结果后端可以考虑使用：SQLAlchemy/Django ORM、Memcached、RabbitMQ/QPid(rpc) 和 Redis，也可以自定义后端。
 
 每一个后端适用于所有的情况，每一个后端都有优缺点，应该选择适合结果后端。
 
@@ -43,11 +43,11 @@ RPC 后端（`rpc://`）比较特殊，因为它实际上不存储状态信息�
 对于多数人来说，使用数据库保存任务状态信息是比较方便的，特别是 web 应用程序使用的数据库这一类，但也有一些限制。
 
 * 使用数据库轮询获取任务状态信息会导致数据库压力很大，应该设置轮询的间隔时间，例如 `result.get()`。
-* 有些数据库使用默认的事务隔离级别，不适合轮询表以进行更改。
+*   有些数据库使用默认的事务隔离级别，不适合轮询表以进行更改。
 
-  在 MySQL 中，默认的事务隔离级别是 `REPEATABLE-READ`，在提交当前事务之前，事务不会看到其他事务所做的更改。
+    在 MySQL 中，默认的事务隔离级别是 `REPEATABLE-READ`，在提交当前事务之前，事务不会看到其他事务所做的更改。
 
-  建议将其更改为 `READ-COMMITTED` 级别。
+    建议将其更改为 `READ-COMMITTED` 级别。
 
 ## 内置状态
 
@@ -145,4 +145,3 @@ class HttpError(Exception):
 
         super(HttpError, self).__init__(status_code, headers, body)
 ```
-

@@ -84,4 +84,3 @@ def requeues(self):
 ## Retry
 
 重试异常由任务引发。方法来告诉职程（Worker）任务正在重试。
-

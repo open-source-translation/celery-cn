@@ -17,7 +17,7 @@ def add(x, y):
     return x + y
 ```
 
-Celery 使用的是 Python 标准的日志库，详情文档可以在这里找到。 也可以使用 print\(\) ,所有标准 out/-err 都会被重定向到写入到日志系统中（可以关闭该功能，详情参阅 worker\_redirect\_stdouts）。
+Celery 使用的是 Python 标准的日志库，详情文档可以在这里找到。 也可以使用 print() ,所有标准 out/-err 都会被重定向到写入到日志系统中（可以关闭该功能，详情参阅 worker_redirect_stdouts）。
 
 {% hint style="info" %}
 ## Note：
@@ -104,7 +104,7 @@ TypeError: add() takes exactly 2 arguments (1 given)
 
 _4.0 新版本功能_
 
-使用 task\_protocol 2 或更高版本的时（自 4.0 开始为默认值），可以重写位置参数和关键字参数在日志中的表现方式，并且可以使用 `argsrepr` 和 `kwargsrepr` 调用参数监控事件：
+使用 task_protocol 2 或更高版本的时（自 4.0 开始为默认值），可以重写位置参数和关键字参数在日志中的表现方式，并且可以使用 `argsrepr` 和 `kwargsrepr` 调用参数监控事件：
 
 ```python
 >>> add.apply_async((2, 3), argsrepr='(<secret-x>, <secret-y>)')
@@ -119,4 +119,3 @@ _4.0 新版本功能_
 
 任何能够从中间人（Broker）中读取任务消息或以其他方式拦截任务消息的人都可以访问敏感信息。 如果消息中包含敏感信息，应该针对该敏感信息进行加密，在本案例中使用性用卡号对实际的号码进行加密，并且进行安全存储，然后在任务中进行检索解密。
 {% endhint %}
-

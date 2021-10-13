@@ -20,7 +20,7 @@ class Scheduler(object):
         self.app = app
 ```
 
-在celery内部实现中，使用 celery.app\_or\_default\(\) 函数使得模块级别的 API 也能正常使用：
+在celery内部实现中，使用 celery.app_or_default() 函数使得模块级别的 API 也能正常使用：
 
 ```python
 from celery.app import app_or_default
@@ -30,7 +30,7 @@ class Scheduler(object):
         self.app = app_or_default(app)
 ```
 
-在开发环境中，可以通过设置 CELERY\_TRACE\_APP 环境变量在应用实例链被打破时抛出一个异常：
+在开发环境中，可以通过设置 CELERY_TRACE_APP 环境变量在应用实例链被打破时抛出一个异常：
 
 ```bash
 $ CELERY_TRACE_APP=1 celery worker -l info
@@ -78,4 +78,3 @@ def hello(to):
     return 'hello {0}'.format(to)
 ```
 {% endhint %}
-

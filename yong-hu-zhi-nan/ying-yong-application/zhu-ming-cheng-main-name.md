@@ -65,6 +65,5 @@ tasks.add
 {% hint style="info" %}
 ## See one see （可以看一看）
 
-[任务：Tasks](https://app.gitbook.com/@open-source-translation/s/celery/~/edit/drafts/-LkHOQZTEvY7SK2wkQc-/yong-hu-zhi-nan/ren-wu-tasks) 章节中 Names。
+[任务：Tasks](https://app.gitbook.com/@open-source-translation/s/celery/\~/edit/drafts/-LkHOQZTEvY7SK2wkQc-/yong-hu-zhi-nan/ren-wu-tasks) 章节中 Names。
 {% endhint %}
-

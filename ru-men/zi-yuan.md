@@ -8,7 +8,7 @@
 
 ### IRC
 
-快来 IRC 聊聊吧，`#celery` 在 [Freenode ](https://freenode.net/)中。
+快来 IRC 聊聊吧，`#celery` 在 [Freenode ](https://freenode.net)中。
 
 ## BUG 跟踪
 
@@ -29,6 +29,4 @@ Celery 的源代码托管在GitHub上：[https://github.com/celery/celery](https
 ## 许可证
 
 Celery 是根据 BSD 许可证开源，完整的 `LICENSE` 请参考 GIthub 中许可证信息。
-
-
 

@@ -17,4 +17,3 @@
 如果命名中含有子字符串，将会进行过滤：
 
  `API`、`TOKEN`、`KEY`、`SECRET`、`PASS`、`SIGNATURE`、`DATABASE`
-

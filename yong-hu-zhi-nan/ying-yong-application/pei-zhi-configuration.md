@@ -29,8 +29,8 @@
 配置对象由多个字典组成，按以下顺序进行查询:
 
 1. 在运行时所做的更改。
-2. 配置模块\(如果有的话\)
-3. 默认配置\(celery.app.defaults\) 也通过 `app.add_defaults()` 进行配置新的默认配置。
+2. 配置模块(如果有的话)
+3. 默认配置(celery.app.defaults) 也通过 `app.add_defaults()` 进行配置新的默认配置。
 
 {% hint style="info" %}
 ## See one see （可以看一看）
@@ -38,7 +38,7 @@
 详情请参阅，[`配置和默认配置：Configuration and defaults`](../pei-zhi-he-mo-ren-pei-zhi-configuration-and-defaults.md)。
 {% endhint %}
 
-## config\_from\_object
+## config_from_object
 
 `config_from_object()` 可以从配置对象中进行加载配置。
 
@@ -103,7 +103,7 @@ app.config_from_object(Config)
 #   app.config_from_object('module:Config')
 ```
 
-## config\_from\_envvar
+## config_from_envvar
 
 `app.config_from_envvar()` 可以从环境变量获取信息进行配置， 例如，从名称为 `CELERY_CONFIG_MODULE` 的环境变量中加载配置：
 
@@ -123,4 +123,3 @@ app.config_from_envvar('CELERY_CONFIG_MODULE')
 ```bash
 $ CELERY_CONFIG_MODULE="celeryconfig.prod" celery worker -l info
 ```
-

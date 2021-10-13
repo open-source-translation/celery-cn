@@ -76,4 +76,3 @@ class MyTask(celery.Task):
 def add(x, y):
     raise KeyError()
 ```
-

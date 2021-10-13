@@ -1,6 +1,6 @@
-# Celery 4.4.0的新功能：What’s new in Celery 4.4 \(Cliffs\)
+# Celery 4.4.0的新功能：What’s new in Celery 4.4 (Cliffs)
 
-作者: Asif Saif Uddin \(auvipy at gmail.com\)
+作者: Asif Saif Uddin (auvipy at gmail.com)
 
 `Celery` 是一个用于处理大批量的消息的简单，灵活并且可靠的分布式程序框架，并且提供了以 `Python` 编写的用于维护一个分布式系统必要的工具。
 
@@ -24,7 +24,7 @@
 
 `Celery 4.4` 是第一个支持 Python 3.8 和 PyPy36-7.2 的版本.
 
-在我们开始对 `Celery 5`\(我们下一代的任务执行平台\)的工作时，在 Celery 5 的稳定版本出现之前，至少会有另一个 4.x 版本，并且会获得至少一年的支持, 具体取决于社区的需求和支持。
+在我们开始对 `Celery 5`(我们下一代的任务执行平台)的工作时，在 Celery 5 的稳定版本出现之前，至少会有另一个 4.x 版本，并且会获得至少一年的支持, 具体取决于社区的需求和支持。
 
 我们也针对减少贡献的冲突更新了贡献工具。
 
@@ -34,7 +34,7 @@ _— Asif Saif Uddin_
 
 > **注意:**
 >
->  这里是从 `git` 的提交历史中自动生成的，因此遗憾的是并不包含那些为更重要的事情\(如回答邮件列表里的问题\)提供了帮助的人。
+>  这里是从 `git` 的提交历史中自动生成的，因此遗憾的是并不包含那些为更重要的事情(如回答邮件列表里的问题)提供了帮助的人。
 
 ### 从 Celery 4.3 升级
 
@@ -51,9 +51,9 @@ _— Asif Saif Uddin_
 * CPython 3.6
 * CPython 3.7
 * CPython 3.8
-* PyPy2.7 7.2 \(pypy2\)
-* PyPy3.5 7.1 \(pypy3\)
-* PyPy3.6 7.2 \(pypy3\)
+* PyPy2.7 7.2 (pypy2)
+* PyPy3.5 7.1 (pypy3)
+* PyPy3.6 7.2 (pypy3)
 
 #### **停止支持 Python 3.4**
 
@@ -105,7 +105,7 @@ DynamoDB 结果存储已经得到了 TTL 的支持。将 boto3 的版本提升�
 
 这之前的线程任务池是实验性的功能，此外它还基于已经过时的软件包 [threadpool](https://pypi.org/project/threadpool/)。
 
-你可以通过设置 [worker\_pool](http://docs.celeryproject.org/en/stable/userguide/configuration.html#std:setting-worker_pool) 为 `threads` 或者在 celery 职称命令行里传递 `–pool threads` 参数来使用新的线程任务池。
+你可以通过设置 [worker_pool](http://docs.celeryproject.org/en/stable/userguide/configuration.html#std:setting-worker_pool) 为 `threads` 或者在 celery 职称命令行里传递 `–pool threads` 参数来使用新的线程任务池。
 
 #### **结果存储**
 
@@ -123,7 +123,7 @@ DynamoDB 结果存储已经得到了 TTL 的支持。将 boto3 的版本提升�
 
 现在你可以通过 URL 选项为 MongoDB 指定 `authSource` 和 `authMethod`。下方的 URL 就是这样做的：
 
-```text
+```
 mongodb://user:password@example.com/?authSource=the_database&authMechanism=SCRAM-SHA-256
 ```
 
@@ -135,7 +135,7 @@ mongodb://user:password@example.com/?authSource=the_database&authMechanism=SCRAM
 
 你可以在基于类的任务中使用 `autoretry_for`，`retry_kwargs`，`retry_backoff_max`和 `retry_jitter`属性：
 
-```text
+```
 class BaseTaskWithRetry(Task):
   autoretry_for = (TypeError,)
   retry_kwargs = {'max_retries': 5}
@@ -156,7 +156,7 @@ class BaseTaskWithRetry(Task):
 
 如下方式之前用来将两个组合并为一个。 现在他们将正确的一个接一个的执行：
 
-```text
+```
 >>> result = group(add.si(1, 2), add.si(1, 2)) | group(tsum.s(), tsum.s()).delay()
 >>> result.get()
 [6, 6]
@@ -164,6 +164,4 @@ class BaseTaskWithRetry(Task):
 
 
 
-  
-
-
+\

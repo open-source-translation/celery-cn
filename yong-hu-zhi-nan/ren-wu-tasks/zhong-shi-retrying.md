@@ -28,23 +28,22 @@ def send_twitter_status(self, oauth, tweet):
 
 任务装饰器的 `bind` 参数将允许访问 `self`（任务类型实例）。
 
- `exc` 参数主要用传递日志和存储任务结果时的使用的异常信息。`exception` 和 `traceback` 都将在任务状态中可用\(如果启用了结果后端\)。
+ `exc` 参数主要用传递日志和存储任务结果时的使用的异常信息。`exception` 和 `traceback` 都将在任务状态中可用(如果启用了结果后端)。
 
 任务如果有一个 `max_retries` 值，超出了重试的最大次数，则会重新引发当前的异常信息，但如果：
 
-* `exc` 参数没有设置
+*   `exc` 参数没有设置
 
-    该情况会引发 `MaxRetriesExceededError` 异常
+      该情况会引发 `MaxRetriesExceededError` 异常
+*   没有异常
 
-* 没有异常
+      如果没有初始异常来重新引发exc参数，可以使用：
 
-    如果没有初始异常来重新引发exc参数，可以使用：
+    ```python
+      self.retry(exc=Twitter.LoginError())
+    ```
 
-  ```python
-    self.retry(exc=Twitter.LoginError())
-  ```
-
-    设置 `exc` 参数值
+      设置 `exc` 参数值
 
 ## 自定义重试延迟
 
@@ -118,23 +117,18 @@ def x():
 
 默认情况下，`exponential backoff` 会随机引入 jitter，最大延迟限制在10分钟，可以通过下面的选项进行自定义配置。
 
-* Task.autoretry\_for
+*   Task.autoretry_for
 
-    异常类的列表或元组，如果任务在执行的过程中引发异常，任务将自动重试。默认情况下不会自动重试任何异常。
+      异常类的列表或元组，如果任务在执行的过程中引发异常，任务将自动重试。默认情况下不会自动重试任何异常。
+*   Task.retry_kwargs
 
-* Task.retry\_kwargs
+      字典类型，自定义配置自动重试参数。注意，如果使用下面的 `exponential backoff` 选项是，`countdown` 任务选项将由 Celery 的自动重试系统决定，字典中包含 `countdown` 会被忽略。
+*   Task.retry_backoff
 
-    字典类型，自定义配置自动重试参数。注意，如果使用下面的 `exponential backoff` 选项是，`countdown` 任务选项将由 Celery 的自动重试系统决定，字典中包含 `countdown` 会被忽略。
+      一个布尔值或一个数字。如果将此选项设置为True，则自动重试将按照 `exponential backoff` 规则延迟。第一次重试延迟 1 秒，第二次重试延迟 2 秒，第三次延迟 4 秒，第四次延迟 8 秒，以此类推。（如果启用了 `retry_jitter` 会修改延迟值）。如果该选项设置为数字，则作为延迟因子，例如，该选项设置为 3，那么第一次重试将延迟 3 秒，第二次将延迟 6 秒，第三次延迟 12 秒，第四次延迟 24秒，以此类推。默认情况下，该选项设置为 False，自动重试不会延迟。
+*   Task.retry_backoff_max
 
-* Task.retry\_backoff
+      一个数字，如果启动了 `retry_backoff`，该选项在任务自动重试之间设置以秒为单位的最大延迟。默认情况，该选项默认值为 600，即 10分钟。
+*   Task.retry_jitter
 
-    一个布尔值或一个数字。如果将此选项设置为True，则自动重试将按照 `exponential backoff` 规则延迟。第一次重试延迟 1 秒，第二次重试延迟 2 秒，第三次延迟 4 秒，第四次延迟 8 秒，以此类推。（如果启用了 `retry_jitter` 会修改延迟值）。如果该选项设置为数字，则作为延迟因子，例如，该选项设置为 3，那么第一次重试将延迟 3 秒，第二次将延迟 6 秒，第三次延迟 12 秒，第四次延迟 24秒，以此类推。默认情况下，该选项设置为 False，自动重试不会延迟。
-
-* Task.retry\_backoff\_max
-
-    一个数字，如果启动了 `retry_backoff`，该选项在任务自动重试之间设置以秒为单位的最大延迟。默认情况，该选项默认值为 600，即 10分钟。
-
-* Task.retry\_jitter
-
-    一个布尔值，Jitter 用于随机性引入指数回退延迟，防止队列中所有任务同时执行，如果该选项设置为 True，则将 `retry_backoff` 计算的延迟作为最大值，实际的延迟值为一个介于 0 和最大值之间的一个随机数。默认情况下，该选项为 True。
-
+      一个布尔值，Jitter 用于随机性引入指数回退延迟，防止队列中所有任务同时执行，如果该选项设置为 True，则将 `retry_backoff` 计算的延迟作为最大值，实际的延迟值为一个介于 0 和最大值之间的一个随机数。默认情况下，该选项为 True。

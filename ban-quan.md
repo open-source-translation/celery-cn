@@ -16,5 +16,3 @@ _版权所有©2009-2016，Ask Solem。_
 虽然本文档是基于 [Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/legalcode) 提供的，但是Celery是根据 [BSD License](https://opensource.org/licenses/BSD-3-Clause) 进行开源的。
 {% endhint %}
 
-
-

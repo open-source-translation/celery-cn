@@ -4,7 +4,7 @@
 
 RabbitMQ 是默认的中间人（Broker），只需要配置连接的URL即可，不需要安装额外的的配置以及初始化配置信息
 
-```text
+```
 broker_url = 'amqp://myuser:mypassword@localhost:5672/myvhost'
 ```
 
@@ -41,21 +41,21 @@ $ sudo rabbitmqctl set_permissions -p myvhost myuser ".*" ".*" ".*"
 
 使用Mac OS的 [Homebrew](https://github.com/Homebrew/brew) 安装RabbitMQ最为简单。
 
-首先按照 [Homebrew文档](https://docs.brew.sh/) 提示安装 [Homebrew](https://github.com/Homebrew/brew) ：
+首先按照 [Homebrew文档](https://docs.brew.sh) 提示安装 [Homebrew](https://github.com/Homebrew/brew) ：
 
 ```bash
 $ sudo ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-然后通过 **brew** 进行安装 RabbitMQ ：
+然后通过 **brew **进行安装 RabbitMQ ：
 
 ```aspnet
 $ brew install rabbitmq
 ```
 
-使用 **brew** 安装 RabbitMQ 之后需要，将以下代码添加到环境变量（bash\_profile或/etc/profile）中，方便针对中间人（Broker）的管理：
+使用 **brew **安装 RabbitMQ 之后需要，将以下代码添加到环境变量（bash_profile或/etc/profile）中，方便针对中间人（Broker）的管理：
 
-```text
+```
 PATH=$PATH:/usr/local/sbin
 ```
 
@@ -63,7 +63,7 @@ PATH=$PATH:/usr/local/sbin
 
 如果您使用的 DHCP 随机分配的主机名称，需要重新永久化配置主机名称。因为 RabbitMQ 是使用主机名与各个节点进行通信的。
 
-可以使用 **scutil** 命令进行永久配置主机名
+可以使用 **scutil **命令进行永久配置主机名
 
 ```bash
 $ sudo scutil --set HostName myhost.local
@@ -71,7 +71,7 @@ $ sudo scutil --set HostName myhost.local
 
 然后将主机名添加到 /etc/hosts 中，以便进行解析
 
-```text
+```
 127.0.0.1    localhost myhost myhost.local
 ```
 
@@ -107,13 +107,11 @@ $ sudo rabbitmqctl-server
 $ sudo rabbitmqctl-server -detached
 ```
 
-永远不要通过 **kill** 命令来进行停止 RabbitMQ 运行，使用 `rabbitmqctl` 命令来进行停止 RabbitMQ ：
+永远不要通过 **kill **命令来进行停止 RabbitMQ 运行，使用 `rabbitmqctl` 命令来进行停止 RabbitMQ ：
 
 ```bash
 $ sudo rabbitmqctl stop
 ```
 
 当你服务已经在运行的时候，您可以继续查看 [RabbitMQ配置](shi-yong-rabbitmq.md#pei-zhi-rabbitmq)。
-
-
 

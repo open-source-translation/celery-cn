@@ -36,15 +36,15 @@ def task_sent_handler(sender=None, headers=None, body=None, **kwargs):
     ))
 ```
 
-信号使用与 `django.core.dispatch` 相同的实现，所以在默认情况下，其他的关键字参数\(如 singal\) 将被传递到所有的信号处理函数里。
+信号使用与 `django.core.dispatch` 相同的实现，所以在默认情况下，其他的关键字参数(如 singal) 将被传递到所有的信号处理函数里。
 
-信号处理的最佳实践是接受任意的关键字参数\(如, \*\*kwargs\)。这种方式使得新的 `Celery` 版本可以在不影响用户代码的情况下添加可选参数。
+信号处理的最佳实践是接受任意的关键字参数(如, \*\*kwargs)。这种方式使得新的 `Celery` 版本可以在不影响用户代码的情况下添加可选参数。
 
 ## 信号
 
 ### 任务信号
 
-#### **before\_task\_publish**
+#### **before_task_publish**
 
 在 3.1 版本引入
 
@@ -54,10 +54,9 @@ def task_sent_handler(sender=None, headers=None, body=None, **kwargs):
 
 提供的参数:
 
-* body
+*   body
 
-  任务消息体
+    任务消息体
 
-  这是一个包含任务消息字段的映射，有关定义的可能字段的参考，请参阅 [Version 2](https://docs.celeryproject.org/en/stable/internals/protocol.html#message-protocol-task-v2)  和 [Version 1](https://docs.celeryproject.org/en/stable/internals/protocol.html#message-protocol-task-v1)。
-
-* 
+    这是一个包含任务消息字段的映射，有关定义的可能字段的参考，请参阅 [Version 2](https://docs.celeryproject.org/en/stable/internals/protocol.html#message-protocol-task-v2)  和 [Version 1](https://docs.celeryproject.org/en/stable/internals/protocol.html#message-protocol-task-v1)。
+*

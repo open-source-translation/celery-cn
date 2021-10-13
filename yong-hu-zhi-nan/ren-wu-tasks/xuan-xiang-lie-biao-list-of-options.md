@@ -18,7 +18,7 @@
 
 详情查阅 [`任务请求章节：Task Request`](ren-wu-qing-qiu-task-request.md) 章节。
 
-### Task.max\_retries
+### Task.max_retries
 
 当前任务调用 `self` 或使用 `autoretry_for` 参数时才会启用。
 
@@ -48,19 +48,18 @@ def get_foo():
 
 错误类型：
 
-* 预期错误（在 Task.throws）
+*   预期错误（在 Task.throws）
 
-    记录 `INFO` 信息，但回溯排除。
+      记录 `INFO` 信息，但回溯排除。
+*   非预期错误
 
-* 非预期错误
+      记录 `ERROR` 信息，可回溯。
 
-    记录 `ERROR` 信息，可回溯。
-
-### Task.default\_retry\_delay
+### Task.default_retry_delay
 
 默认重试任务休眠事件（以秒为单位）。可以为 `int`，也可以为 `float` 类型，默认情况为 3 分钟。
 
-### Task.rate\_limit
+### Task.rate_limit
 
 限制指定任务类型的速率（限制在指定时间内运行的任务数量）。当速率限制生效时，任务仍然会完成，但是可能需要一些时间才能开始。
 
@@ -74,19 +73,19 @@ def get_foo():
 
 注意，该速率限制为每一个职程（Worker）实例的限制，并非全局速率限制。配置全局速率限制（例如，API每秒最多请求的次数），必须制定队列。
 
-### Task.time\_limit
+### Task.time_limit
 
 该任务的硬时间限制（以秒为单位），如果没有设置职程（Worker）时，使用默认值。
 
-### Task.soft\_time\_limit
+### Task.soft_time_limit
 
 该任务的软时间限制（以秒为单位），如果没有设置职程（Worker）时，使用默认值。
 
-### Task.ignore\_result
+### Task.ignore_result
 
 不存储任务状态信息，如果配置该选项 `AsyncResult` 将失效，无法进行检测任务情况以及返回内容。
 
-### Task.store\_errors\_even\_if\_ignored
+### Task.store_errors_even_if_ignored
 
 如果设置为 `True` ，即使任务被忽略，也会存储错误信息。
 
@@ -108,7 +107,7 @@ def get_foo():
 
 结果后端的实例，用于任务结果后端，默认为 `app.backend`，可以通过 `result_backend` 进行配置。
 
-### Task.acks\_late
+### Task.acks_late
 
 如果设置为 `True`，任务执行后（而不是执行前，默认为执行前）才会确认该任务的消息。
 
@@ -116,11 +115,11 @@ def get_foo():
 
 可以通过 `task_acks_late` 参数来进行全局配置。
 
-### Task.track\_started
+### Task.track_started
 
 如果设置为 `True`，当职程（Worker）执行任务时，任务状态为 `stared`。默认为 `False`，因为在正常情况下是不需要该颗粒度级别的。任务要么挂起、完成要么等待重试。如果有长时间运行的任务吗，并且需要报告任当任务状态时，`stared`比较有用。
 
-任务执行的职程（Worker）和进程 id 可以通过状态的元数据中进行查看（例如：result.info\['pid'\]）。
+任务执行的职程（Worker）和进程 id 可以通过状态的元数据中进行查看（例如：result.info\['pid']）。
 
 可以通过 `task_track_started` 进行全局配置。
 
@@ -129,6 +128,4 @@ def get_foo():
 
 任务的 API 接口
 {% endhint %}
-
-
 
